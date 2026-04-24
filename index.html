@@ -1304,13 +1304,32 @@ function autoStartTimer(checkbox) {
   var item = checkbox.closest('.check-item');
   if (!item) return;
 
-  // Case 1: Set completed → start the rest timer right after it
+  // Case 1: Set completed inside exercise card
   var setTracker = item.closest('.set-tracker');
   if (setTracker) {
     var next = item.nextElementSibling;
+    // If there's a rest row after this set, start that timer (rest between sets)
     if (next && next.classList.contains('set-rest')) {
       var btn = next.querySelector('.timer-btn');
       if (btn) btn.click();
+      return;
+    }
+    // Last set of exercise — start rest timer before next exercise
+    var card = setTracker.closest('.exercise-card');
+    if (card) {
+      var restTag = card.querySelector('.tag.rest');
+      var restSecs = restTag ? parseSeconds(restTag.textContent) : 0;
+      if (restSecs > 0) {
+        var nextCard = card.nextElementSibling;
+        while (nextCard && !nextCard.classList.contains('exercise-card')) {
+          nextCard = nextCard.nextElementSibling;
+        }
+        if (nextCard) {
+          var nextName = nextCard.querySelector('.ex-name');
+          var label = 'Rest before ' + (nextName ? nextName.textContent : 'next exercise');
+          startTimer(restSecs, label);
+        }
+      }
     }
     return;
   }
