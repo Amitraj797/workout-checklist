@@ -90,7 +90,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
 .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .img-modal.active { display: flex; }
-.img-modal img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 12px; background: #fff; }
+.img-modal img { max-width: 98vw; max-height: 95vh; object-fit: contain; border-radius: 12px; background: #fff; padding: 10px; }
 
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0; }
 .tracker { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 500px; }
@@ -136,6 +136,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   .cover { padding: 24px 16px; }
   .cover h1 { font-size: 22px; }
   .day-header { font-size: 15px; padding: 14px 16px; }
+  .ex-images { flex-direction: column; align-items: center; }
   .ex-images { flex-direction: column; align-items: center; }
   .ex-img-wrap { max-width: 220px; }
   .exercise-card { padding: 10px; }
@@ -238,17 +239,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header warmup">Warm-Up (8-10 min)</div>
     <div class="checklist">
       <div class="check-item"><input type="checkbox"><span>Brisk treadmill walk (slight incline) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arm_Circles/0.jpg" alt="Arm circles" loading="lazy"><span>Arm circles (forward + backward) - 15 each direction<br><small class="breathing-hint">Breathe naturally, exhale on each full rotation</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Pull_Apart/0.jpg" alt="Band pull-aparts" loading="lazy"><span>Band pull-aparts - 15 reps<br><small class="breathing-hint">Exhale: pull band apart | Inhale: return to start</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps<br><small class="breathing-hint">Exhale: slide arms up | Inhale: slide arms down</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Downward_Facing_Balance/0.jpg" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps<br><small class="breathing-hint">Exhale: push up from floor | Inhale: transition into downward dog</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/3uj0Ozg.gif" alt="Arm circles" loading="lazy"><span>Arm circles (forward + backward) - 15 each direction<br><small class="breathing-hint">Breathe naturally, exhale on each full rotation</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/sTfvVsG.gif" alt="Band pull-aparts" loading="lazy"><span>Band pull-aparts - 15 reps<br><small class="breathing-hint">Exhale: pull band apart | Inhale: return to start</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps<br><small class="breathing-hint">Exhale: slide arms up | Inhale: slide arms down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/01qpYSe.gif" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps<br><small class="breathing-hint">Exhale: push up from floor | Inhale: transition into downward dog</small></span></div>
     </div>
 
     <div class="sub-header muscle">Chest (4 exercises)</div>
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB flat bench press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press/0.jpg" alt="DB flat bench press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Bench_Press/0.jpg" alt="Machine chest press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/SpYC0Kp.gif" alt="DB flat bench press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/DOoWcnA.gif" alt="Machine chest press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine chest press</div>
       <div class="ex-note">Neutral grip option. Floor press if collarbone discomfort.</div>
       <div class="ex-breathing">Inhale: lower dumbbells to chest | Exhale: press dumbbells up</div>
@@ -263,7 +264,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB press (30 deg)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg" alt="Incline DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Incline_Chest_Press/0.jpg" alt="Incline machine press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ns0SIbU.gif" alt="Incline DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/jHAnWmT.gif" alt="Incline machine press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Incline machine press</div>
       <div class="ex-note">Light weight - don't press above shoulder height.</div>
       <div class="ex-breathing">Inhale: lower dumbbells to upper chest | Exhale: press up</div>
@@ -278,7 +279,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable crossover (high-to-low)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crossover/0.jpg" alt="Cable crossover" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Dumbbell_Flyes/0.jpg" alt="Decline DB fly" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/UKWTJWR.gif" alt="Cable crossover" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/xXm4nYq.gif" alt="Decline DB fly" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Decline DB fly</div>
       <div class="ex-note">Targets LOWER chest. Squeeze at bottom.</div>
       <div class="ex-breathing">Inhale: open arms wide | Exhale: squeeze arms together at bottom</div>
@@ -293,7 +294,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">DB floor press</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Floor_Press/0.jpg" alt="DB floor press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_-_Close_Triceps_Position/0.jpg" alt="Push-ups" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/7gdLIXa.gif" alt="DB floor press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Push-ups" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Push-ups (knees if needed)</div>
       <div class="ex-note">Shorter ROM = safest for collarbone.</div>
       <div class="ex-breathing">Inhale: lower dumbbells until elbows touch floor | Exhale: press up</div>
@@ -310,7 +311,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable rope pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_Rope_Attachment/0.jpg" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_V-Bar_Attachment/0.jpg" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/dU605di.gif" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/gAwDzB3.gif" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> V-bar pushdowns</div>
       <div class="ex-note">Elbows pinned to sides. Low elbow stress.</div>
       <div class="ex-breathing">Inhale: let rope rise slowly | Exhale: push rope down and spread at bottom</div>
@@ -325,7 +326,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Overhead cable extension (rope)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg" alt="Overhead cable extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_One_Arm_Tricep_Extension/0.jpg" alt="Single-arm cable pushdown" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/2IxROQ1.gif" alt="Overhead cable extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/qRZ5S1N.gif" alt="Single-arm cable pushdown" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Single-arm cable pushdown</div>
       <div class="ex-note">Controlled movement. Stop if elbow aches.</div>
       <div class="ex-breathing">Inhale: lower rope behind head | Exhale: extend arms overhead</div>
@@ -340,7 +341,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Machine dip (assisted)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dip_Machine/0.jpg" alt="Machine dip" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Dips/0.jpg" alt="Bench dip" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/BRImeP8.gif" alt="Machine dip" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/RrLske5.gif" alt="Bench dip" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Bench dip (partial ROM)</div>
       <div class="ex-note">Machine provides stability. No full dips for 4 weeks.</div>
       <div class="ex-breathing">Inhale: lower body down | Exhale: push body up</div>
@@ -360,10 +361,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
     <div class="checklist">
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Behind_Head_Chest_Stretch/0.jpg" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: lean in to deepen the stretch</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_Circles/0.jpg" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps<br><small class="breathing-hint">Inhale: arch back (cow) | Exhale: round spine (cat)</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/QoHIhPl.gif" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: lean in to deepen the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2zNKRUB.gif" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/JbC2iaV.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps<br><small class="breathing-hint">Inhale: arch back (cow) | Exhale: round spine (cat)</small></span></div>
       <div class="check-item"><input type="checkbox"><span>Deep breathing (diaphragmatic) - 1 min<br><small class="breathing-hint">Inhale 4s through nose (belly rises) | Exhale 6s through mouth (belly falls)</small></span></div>
     </div>
     <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
@@ -381,17 +382,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header warmup">Warm-Up (8-10 min)</div>
     <div class="checklist">
       <div class="check-item"><input type="checkbox"><span>Stationary bike (easy pace) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Bodyweight squats" loading="lazy"><span>Bodyweight squats - 15 reps<br><small class="breathing-hint">Inhale: squat down | Exhale: stand up</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg" alt="Leg swings" loading="lazy"><span>Leg swings (front-back + side-side) - 10 each leg, each direction<br><small class="breathing-hint">Breathe naturally, exhale on each forward swing</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Glute_Bridge/0.jpg" alt="Glute bridges" loading="lazy"><span>Glute bridges - 15 reps<br><small class="breathing-hint">Exhale: lift hips up and squeeze | Inhale: lower hips down</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_Circles/0.jpg" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction, each foot<br><small class="breathing-hint">Breathe naturally, steady and relaxed</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/wfotm7S.gif" alt="Bodyweight squats" loading="lazy"><span>Bodyweight squats - 15 reps<br><small class="breathing-hint">Inhale: squat down | Exhale: stand up</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Leg swings" loading="lazy"><span>Leg swings (front-back + side-side) - 10 each leg, each direction<br><small class="breathing-hint">Breathe naturally, exhale on each forward swing</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/u0cNiij.gif" alt="Glute bridges" loading="lazy"><span>Glute bridges - 15 reps<br><small class="breathing-hint">Exhale: lift hips up and squeeze | Inhale: lower hips down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uL9CsKm.gif" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction, each foot<br><small class="breathing-hint">Breathe naturally, steady and relaxed</small></span></div>
     </div>
 
     <div class="sub-header muscle">Legs - Quads + Glutes + Hamstrings (4 exercises)</div>
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Goblet squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Goblet squat" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg" alt="Leg press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/yn8yg1r.gif" alt="Goblet squat" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/10Z2DXU.gif" alt="Leg press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Leg press machine</div>
       <div class="ex-note">Hold DB at chest. Depth over weight.</div>
       <div class="ex-breathing">Inhale: squat down slowly | Exhale: drive up through heels</div>
@@ -406,7 +407,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Leg extension machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Extensions/0.jpg" alt="Leg extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg" alt="Walking lunges" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/my33uHU.gif" alt="Leg extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Walking lunges" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Walking lunges (BW or light DB)</div>
       <div class="ex-note">Squeeze at top for 1 second.</div>
       <div class="ex-breathing">Exhale: extend legs up | Inhale: lower weight slowly</div>
@@ -421,7 +422,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Lying leg curl machine</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Leg_Curls/0.jpg" alt="Lying leg curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Leg_Curl/0.jpg" alt="Seated leg curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/17lJ1kr.gif" alt="Lying leg curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/Zg3XY7P.gif" alt="Seated leg curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated leg curl machine</div>
       <div class="ex-note">Controlled tempo: 2s up, 3s down.</div>
       <div class="ex-breathing">Exhale: curl heels toward glutes | Inhale: lower slowly</div>
@@ -436,7 +437,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Standing calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Calf_Raises/0.jpg" alt="Standing calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Calf_Raise/0.jpg" alt="DB calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ykUOVze.gif" alt="Standing calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/dPmaUaU.gif" alt="DB calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB standing calf raise</div>
       <div class="ex-note">Full stretch at bottom, pause at top.</div>
       <div class="ex-breathing">Exhale: rise up on toes | Inhale: lower heels slowly</div>
@@ -455,7 +456,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine shoulder press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Shoulder_Press/0.jpg" alt="Machine shoulder press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Kettlebell_Press/0.jpg" alt="Seated DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/PzQanLE.gif" alt="Machine shoulder press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/znQUdHY.gif" alt="Seated DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated DB press (light)</div>
       <div class="ex-note">Machine = stable for collarbone. No barbell overhead.</div>
       <div class="ex-breathing">Inhale: lower handles to shoulder level | Exhale: press overhead</div>
@@ -470,7 +471,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable lateral raise</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Shoulder_Press/0.jpg" alt="Cable lateral raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg" alt="DB lateral raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/goJ6ezq.gif" alt="Cable lateral raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/DsgkuIt.gif" alt="DB lateral raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB lateral raise (light)</div>
       <div class="ex-note">Light weight, control the negative.</div>
       <div class="ex-breathing">Exhale: raise arm out to side | Inhale: lower slowly</div>
@@ -487,7 +488,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Dead bug</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dead_Bug/0.jpg" alt="Dead bug" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Crunch/0.jpg" alt="Reverse crunch" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/iny3m5y.gif" alt="Dead bug" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/nCU1Ekp.gif" alt="Reverse crunch" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse crunch</div>
       <div class="ex-note">Great for deep core activation. No spinal stress.</div>
       <div class="ex-breathing">Exhale: extend opposite arm and leg out | Inhale: return to start</div>
@@ -502,7 +503,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable Pallof press</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press/0.jpg" alt="Cable Pallof press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press_With_Rotation/0.jpg" alt="Banded Pallof press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/9pa4H5m.gif" alt="Cable Pallof press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/G7PXMlT.gif" alt="Banded Pallof press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Banded Pallof press</div>
       <div class="ex-note">Anti-rotation. Builds core stability.</div>
       <div class="ex-breathing">Exhale: press cable straight out | Inhale: bring hands back to chest</div>
@@ -522,11 +523,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
     <div class="checklist">
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/All_Fours_Quad_Stretch/0.jpg" alt="Standing quad stretch" loading="lazy"><span>Standing quad stretch - 30s each side<br><small class="breathing-hint">Inhale: stand tall | Exhale: pull heel closer to glute</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Stretch_Hands_Against_Wall/0.jpg" alt="Calf stretch" loading="lazy"><span>Calf stretch against wall - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: press heel into floor to deepen</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Floor_Hamstring_Stretch/0.jpg" alt="Seated hamstring stretch" loading="lazy"><span>Seated hamstring stretch - 30s each side<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Deep squat hold" loading="lazy"><span>Deep squat hold (no weight) - 30s<br><small class="breathing-hint">Breathe deeply, exhale to sink hips lower</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_Circles/0.jpg" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction<br><small class="breathing-hint">Breathe naturally, steady and relaxed</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/tFGKm99.gif" alt="Standing quad stretch" loading="lazy"><span>Standing quad stretch - 30s each side<br><small class="breathing-hint">Inhale: stand tall | Exhale: pull heel closer to glute</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/17bqEXD.gif" alt="Calf stretch" loading="lazy"><span>Calf stretch against wall - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: press heel into floor to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/yRYyfdA.gif" alt="Seated hamstring stretch" loading="lazy"><span>Seated hamstring stretch - 30s each side<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/wfotm7S.gif" alt="Deep squat hold" loading="lazy"><span>Deep squat hold (no weight) - 30s<br><small class="breathing-hint">Breathe deeply, exhale to sink hips lower</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uL9CsKm.gif" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction<br><small class="breathing-hint">Breathe naturally, steady and relaxed</small></span></div>
     </div>
     <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
   </div>
@@ -543,17 +544,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header warmup">Warm-Up (8-10 min)</div>
     <div class="checklist">
       <div class="check-item"><input type="checkbox"><span>Rowing machine (easy pace) - 5 min<br><small class="breathing-hint">Exhale: pull handle to chest | Inhale: extend arms forward</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Round_The_World_Shoulder_Stretch/0.jpg" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps<br><small class="breathing-hint">Exhale: arms go overhead and behind | Inhale: return to front</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps<br><small class="breathing-hint">Exhale: protract (push shoulder blades apart) | Inhale: retract</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/External_Rotation_with_Band/0.jpg" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm<br><small class="breathing-hint">Exhale: rotate arm outward | Inhale: return to start</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps<br><small class="breathing-hint">Inhale: arch back, look up (cow) | Exhale: round spine, tuck chin (cat)</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/VtTbiP3.gif" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps<br><small class="breathing-hint">Exhale: arms go overhead and behind | Inhale: return to front</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps<br><small class="breathing-hint">Exhale: protract (push shoulder blades apart) | Inhale: retract</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/FWdVhcW.gif" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm<br><small class="breathing-hint">Exhale: rotate arm outward | Inhale: return to start</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/qBcKorM.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps<br><small class="breathing-hint">Inhale: arch back, look up (cow) | Exhale: round spine, tuck chin (cat)</small></span></div>
     </div>
 
     <div class="sub-header muscle">Back (4 exercises)</div>
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Front_Lat_Pulldown/0.jpg" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Assisted_Pull-Up/0.jpg" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rkg41Fb.gif" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/r1XNRYB.gif" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
       <div class="ex-note">No wide grip - protect collarbone. Squeeze shoulder blades.</div>
       <div class="ex-breathing">Exhale: pull bar down to upper chest | Inhale: let bar rise slowly</div>
@@ -568,7 +569,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Seated cable row (neutral grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Seated cable row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Machine row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Seated cable row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Machine row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine row</div>
       <div class="ex-note">Neutral grip = low elbow stress. Pull to lower chest.</div>
       <div class="ex-breathing">Exhale: pull handle to lower chest | Inhale: extend arms forward</div>
@@ -583,7 +584,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">DB single-arm row</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg" alt="DB single-arm row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Incline_Row/0.jpg" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/C0MA9bC.gif" alt="DB single-arm row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/7vG5o25.gif" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Chest-supported DB row</div>
       <div class="ex-note">Support on bench. Start light on right arm.</div>
       <div class="ex-breathing">Exhale: pull dumbbell to hip | Inhale: lower dumbbell slowly</div>
@@ -598,7 +599,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ZfyAGhK.gif" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
       <div class="ex-note">Pull to forehead. Great for posture + rear delts.</div>
       <div class="ex-breathing">Exhale: pull rope to forehead, rotate hands out | Inhale: return slowly</div>
@@ -615,7 +616,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB hammer curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Curls/0.jpg" alt="DB hammer curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hammer_Curls_-_Rope_Attachment/0.jpg" alt="Cable rope hammer curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/IGtBdNT.gif" alt="DB hammer curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/HPlPoQA.gif" alt="Cable rope hammer curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable rope hammer curls</div>
       <div class="ex-note">Neutral grip = safest for right elbow. No swinging.</div>
       <div class="ex-breathing">Exhale: curl dumbbells up | Inhale: lower slowly</div>
@@ -630,7 +631,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Curl/0.jpg" alt="Incline DB curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Preacher_Curls/0.jpg" alt="Machine preacher curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/F3xgbjF.gif" alt="Incline DB curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ye84CTU.gif" alt="Machine preacher curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine preacher curl</div>
       <div class="ex-note">Light weight, full stretch. Skip if elbow pain.</div>
       <div class="ex-breathing">Exhale: curl dumbbells up | Inhale: lower with full stretch</div>
@@ -645,7 +646,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable EZ-bar curl</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Biceps_Cable_Curl/0.jpg" alt="Cable EZ-bar curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Concentration_Curls/0.jpg" alt="Concentration curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/G08RZcQ.gif" alt="Cable EZ-bar curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/gvsWLQw.gif" alt="Concentration curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Concentration curls</div>
       <div class="ex-note">Constant cable tension is joint-friendly.</div>
       <div class="ex-breathing">Exhale: curl bar up | Inhale: lower bar slowly</div>
@@ -665,11 +666,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
     <div class="checklist">
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s<br><small class="breathing-hint">Inhale: lengthen body | Exhale: sink into the stretch</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Round_The_World_Shoulder_Stretch/0.jpg" alt="Tricep overhead stretch" loading="lazy"><span>Tricep overhead stretch - 30s each side<br><small class="breathing-hint">Inhale: reach tall | Exhale: pull elbow deeper behind head</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Childs_Pose/0.jpg" alt="Child's pose" loading="lazy"><span>Child's pose - 45s<br><small class="breathing-hint">Inhale: expand ribcage into back | Exhale: sink hips deeper toward heels</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chin_To_Chest_Stretch/0.jpg" alt="Neck stretches" loading="lazy"><span>Neck stretches (side tilt + rotation) - 20s each direction<br><small class="breathing-hint">Inhale: return to center | Exhale: tilt head gently to side</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s<br><small class="breathing-hint">Inhale: lengthen body | Exhale: sink into the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/Z5YStHW.gif" alt="Tricep overhead stretch" loading="lazy"><span>Tricep overhead stretch - 30s each side<br><small class="breathing-hint">Inhale: reach tall | Exhale: pull elbow deeper behind head</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/bWlZvXh.gif" alt="Child's pose" loading="lazy"><span>Child's pose - 45s<br><small class="breathing-hint">Inhale: expand ribcage into back | Exhale: sink hips deeper toward heels</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/oQRJYkC.gif" alt="Neck stretches" loading="lazy"><span>Neck stretches (side tilt + rotation) - 20s each direction<br><small class="breathing-hint">Inhale: return to center | Exhale: tilt head gently to side</small></span></div>
     </div>
     <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
   </div>
@@ -688,15 +689,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
       <div class="check-item"><input type="checkbox"><span>Brisk treadmill walk (slight incline) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
       <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arm_Circles/0.jpg" alt="Arm circles" loading="lazy"><span>Arm circles (forward + backward) - 15 each direction<br><small class="breathing-hint">Breathe naturally, exhale on each full rotation</small></span></div>
       <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Pull_Apart/0.jpg" alt="Band pull-aparts" loading="lazy"><span>Band pull-aparts - 15 reps<br><small class="breathing-hint">Exhale: pull band apart | Inhale: return to start</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps<br><small class="breathing-hint">Exhale: slide arms up | Inhale: slide arms down</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Downward_Facing_Balance/0.jpg" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps<br><small class="breathing-hint">Exhale: push up from floor | Inhale: transition into downward dog</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps<br><small class="breathing-hint">Exhale: slide arms up | Inhale: slide arms down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/01qpYSe.gif" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps<br><small class="breathing-hint">Exhale: push up from floor | Inhale: transition into downward dog</small></span></div>
     </div>
 
     <div class="sub-header muscle">Chest (4 exercises - Volume)</div>
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine chest press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Bench_Press/0.jpg" alt="Machine chest press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press/0.jpg" alt="DB flat bench press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/DOoWcnA.gif" alt="Machine chest press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/SpYC0Kp.gif" alt="DB flat bench press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB flat bench press</div>
       <div class="ex-note">Machine = controlled movement for volume day.</div>
       <div class="ex-breathing">Inhale: let handles come back to chest | Exhale: press forward</div>
@@ -711,7 +712,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline machine press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Incline_Chest_Press/0.jpg" alt="Incline machine press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg" alt="Incline DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/o17Jfkt.gif" alt="Incline machine press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ns0SIbU.gif" alt="Incline DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Incline DB press (30 deg)</div>
       <div class="ex-note">Focus on squeeze, not weight.</div>
       <div class="ex-breathing">Inhale: lower handles to upper chest | Exhale: press up</div>
@@ -726,7 +727,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Pec deck machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butterfly/0.jpg" alt="Pec deck machine" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crossover/0.jpg" alt="Cable crossover low-to-high" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/v3xmPAR.gif" alt="Pec deck machine" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/FVmZVhk.gif" alt="Cable crossover low-to-high" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable crossover (low-to-high)</div>
       <div class="ex-note">Isolation focus. Full stretch and squeeze.</div>
       <div class="ex-breathing">Inhale: open arms wide | Exhale: squeeze arms together</div>
@@ -741,7 +742,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Push-ups (knees if needed)</div><div class="ex-meta"><span class="tag sets">3 x AMRAP</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_-_Close_Triceps_Position/0.jpg" alt="Push-ups" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Floor_Press/0.jpg" alt="DB floor press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Push-ups" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/RxayqAZ.gif" alt="DB floor press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB floor press</div>
       <div class="ex-note">Burnout set. Go to failure safely.</div>
       <div class="ex-breathing">Inhale: lower chest to floor | Exhale: push up</div>
@@ -758,7 +759,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">V-bar pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_V-Bar_Attachment/0.jpg" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_Rope_Attachment/0.jpg" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/gAwDzB3.gif" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/dU605di.gif" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable rope pushdowns</div>
       <div class="ex-note">Higher reps, focus on squeeze.</div>
       <div class="ex-breathing">Inhale: let bar rise slowly | Exhale: push bar down</div>
@@ -773,7 +774,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">DB kickbacks</div><div class="ex-meta"><span class="tag sets">3 x 12 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tricep_Dumbbell_Kickback/0.jpg" alt="DB kickbacks" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_-_Close_Triceps_Position/0.jpg" alt="Close-grip push-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/W6PxUkg.gif" alt="DB kickbacks" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Close-grip push-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Close-grip push-up</div>
       <div class="ex-note">Light weight, full extension.</div>
       <div class="ex-breathing">Exhale: extend arm back fully | Inhale: lower dumbbell</div>
@@ -788,7 +789,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Overhead DB extension (2-hand)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg" alt="Overhead DB extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg" alt="Overhead cable extension" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/2IxROQ1.gif" alt="Overhead DB extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/NN8nSNT.gif" alt="Overhead cable extension" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Overhead cable extension</div>
       <div class="ex-note">Light weight. Skip if elbow pain.</div>
       <div class="ex-breathing">Inhale: lower dumbbell behind head | Exhale: extend arms up</div>
@@ -808,10 +809,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
     <div class="checklist">
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Behind_Head_Chest_Stretch/0.jpg" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: lean in to deepen the stretch</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_Circles/0.jpg" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps<br><small class="breathing-hint">Inhale: arch back (cow) | Exhale: round spine (cat)</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/QoHIhPl.gif" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: lean in to deepen the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2zNKRUB.gif" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/qBcKorM.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps<br><small class="breathing-hint">Inhale: arch back (cow) | Exhale: round spine (cat)</small></span></div>
       <div class="check-item"><input type="checkbox"><span>Deep breathing (diaphragmatic) - 1 min<br><small class="breathing-hint">Inhale 4s through nose (belly rises) | Exhale 6s through mouth (belly falls)</small></span></div>
     </div>
     <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
@@ -829,17 +830,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header warmup">Warm-Up (8-10 min)</div>
     <div class="checklist">
       <div class="check-item"><input type="checkbox"><span>Treadmill walk (moderate incline) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Hip_Adductions/0.jpg" alt="Banded lateral walks" loading="lazy"><span>Banded lateral walks - 15 each direction<br><small class="breathing-hint">Breathe naturally, steady pace throughout</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Leg_Glute_Bridge/0.jpg" alt="Single-leg glute bridge" loading="lazy"><span>Single-leg glute bridge - 10 each side<br><small class="breathing-hint">Exhale: lift hips and squeeze glute | Inhale: lower hips</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inchworm/0.jpg" alt="Inchworms" loading="lazy"><span>Inchworms - 8 reps<br><small class="breathing-hint">Exhale: walk hands out to plank | Inhale: walk hands back to feet</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Good_Morning/0.jpg" alt="Good mornings" loading="lazy"><span>Bodyweight good mornings - 10 reps<br><small class="breathing-hint">Inhale: hinge forward at hips | Exhale: stand back up</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/c8f5cSY.gif" alt="Banded lateral walks" loading="lazy"><span>Banded lateral walks - 15 each direction<br><small class="breathing-hint">Breathe naturally, steady pace throughout</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/rmEukuS.gif" alt="Single-leg glute bridge" loading="lazy"><span>Single-leg glute bridge - 10 each side<br><small class="breathing-hint">Exhale: lift hips and squeeze glute | Inhale: lower hips</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/ZgsNQ6d.gif" alt="Inchworms" loading="lazy"><span>Inchworms - 8 reps<br><small class="breathing-hint">Exhale: walk hands out to plank | Inhale: walk hands back to feet</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/XlZ4lAC.gif" alt="Good mornings" loading="lazy"><span>Bodyweight good mornings - 10 reps<br><small class="breathing-hint">Inhale: hinge forward at hips | Exhale: stand back up</small></span></div>
     </div>
 
     <div class="sub-header muscle">Legs - Hamstrings + Glutes (5 exercises)</div>
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Romanian deadlift (DBs)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/0.jpg" alt="Romanian deadlift" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Good_Morning_Pull_Through/0.jpg" alt="Cable pull-through" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rR0LJzx.gif" alt="Romanian deadlift" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/OM46QHm.gif" alt="Cable pull-through" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable pull-through</div>
       <div class="ex-note">DBs = easier grip for right elbow. Hinge at hips.</div>
       <div class="ex-breathing">Inhale: hinge hips back, lower dumbbells | Exhale: drive hips forward, stand up</div>
@@ -854,7 +855,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Hip thrust (barbell/Smith)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 90s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Hip_Thrust/0.jpg" alt="Hip thrust" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Glute_Bridge/0.jpg" alt="Glute bridge" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/SNFfUff.gif" alt="Hip thrust" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/qKBpF7I.gif" alt="Glute bridge" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Glute bridge (DB on hips)</div>
       <div class="ex-note">Pad the bar. Full glute squeeze at top.</div>
       <div class="ex-breathing">Exhale: thrust hips up and squeeze glutes | Inhale: lower hips down</div>
@@ -869,7 +870,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable hip abduction</div><div class="ex-meta"><span class="tag sets">3 x 15 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Hip_Adductions/0.jpg" alt="Cable hip abduction" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Monster_Walk/0.jpg" alt="Monster walk" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/CHpahtl.gif" alt="Cable hip abduction" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/O95afRA.gif" alt="Monster walk" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Monster walk (banded)</div>
       <div class="ex-note">Targets GLUTE MED/MIN. Key for hip stability.</div>
       <div class="ex-breathing">Exhale: lift leg out to side | Inhale: return leg slowly</div>
@@ -884,7 +885,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Walking lunges (BW or light DB)</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg" alt="Walking lunges" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Rear_Lunge/0.jpg" alt="Reverse lunge" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Walking lunges" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/SSsBDwB.gif" alt="Reverse lunge" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse lunge</div>
       <div class="ex-note">Bodyweight if grip bothers elbow.</div>
       <div class="ex-breathing">Inhale: step forward and lower into lunge | Exhale: drive up to next step</div>
@@ -899,7 +900,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Seated calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Calf_Raise/0.jpg" alt="Seated calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Press_On_The_Leg_Press_Machine/0.jpg" alt="Leg press calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/bOOdeyc.gif" alt="Seated calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ykHcWme.gif" alt="Leg press calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Leg press calf raise</div>
       <div class="ex-note">Targets soleus. Slow and controlled.</div>
       <div class="ex-breathing">Exhale: rise up on toes | Inhale: lower heels slowly</div>
@@ -918,7 +919,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Seated DB press (light)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Kettlebell_Press/0.jpg" alt="Seated DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Shoulder_Press/0.jpg" alt="Machine shoulder press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/znQUdHY.gif" alt="Seated DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/PzQanLE.gif" alt="Machine shoulder press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine shoulder press</div>
       <div class="ex-note">Lighter than Tuesday, higher reps.</div>
       <div class="ex-breathing">Inhale: lower dumbbells to shoulder level | Exhale: press overhead</div>
@@ -933,7 +934,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Rear delt cable fly</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg" alt="Rear delt cable fly" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Bent-Over_Rear_Delt_Raise/0.jpg" alt="Seated rear delt raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ZfyAGhK.gif" alt="Rear delt cable fly" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/mu5Guxt.gif" alt="Seated rear delt raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated rear delt raise</div>
       <div class="ex-note">Balances shoulder. Rear delts often neglected.</div>
       <div class="ex-breathing">Exhale: pull cables apart and back | Inhale: return slowly</div>
@@ -950,7 +951,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Hanging knee raise</div><div class="ex-meta"><span class="tag sets">3 x 10</span><span class="tag rest">Rest: 45s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg" alt="Hanging knee raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flat_Bench_Lying_Leg_Raise/0.jpg" alt="Captain's chair knee raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/I3tsCnC.gif" alt="Hanging knee raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/WhuFnR7.gif" alt="Captain's chair knee raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Captain's chair knee raise</div>
       <div class="ex-note">Controlled - no swinging.</div>
       <div class="ex-breathing">Exhale: raise knees toward chest | Inhale: lower legs slowly</div>
@@ -965,7 +966,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable crunch (kneeling)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 45s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg" alt="Cable crunch" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ab_Crunch_Machine/0.jpg" alt="Ab crunch machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/WW95auq.gif" alt="Cable crunch" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/Wgaz7pm.gif" alt="Ab crunch machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Ab crunch machine</div>
       <div class="ex-note">Targets UPPER ABS. Squeeze at bottom.</div>
       <div class="ex-breathing">Exhale: crunch down, curl spine | Inhale: return to start slowly</div>
@@ -985,11 +986,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
     <div class="checklist">
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg-Up_Hamstring_Stretch/0.jpg" alt="Standing hamstring stretch" loading="lazy"><span>Standing hamstring stretch (foot on bench) - 30s each side<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper over leg</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Hip_Flexor/0.jpg" alt="Pigeon pose" loading="lazy"><span>Pigeon pose (hip flexor/glute) - 30s each side<br><small class="breathing-hint">Inhale: lift chest | Exhale: fold forward and sink deeper</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butterfly/0.jpg" alt="Seated butterfly stretch" loading="lazy"><span>Seated butterfly stretch - 30s<br><small class="breathing-hint">Inhale: sit tall | Exhale: gently press knees toward floor</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hip_Flexors/0.jpg" alt="Hip flexor lunge stretch" loading="lazy"><span>Hip flexor lunge stretch - 30s each side<br><small class="breathing-hint">Inhale: stand tall in lunge | Exhale: sink hips forward and down</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Downward_Facing_Balance/0.jpg" alt="Downward dog" loading="lazy"><span>Downward dog - 30s<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: press heels toward floor</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/99rWm7w.gif" alt="Standing hamstring stretch" loading="lazy"><span>Standing hamstring stretch (foot on bench) - 30s each side<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper over leg</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/tFGKm99.gif" alt="Pigeon pose" loading="lazy"><span>Pigeon pose (hip flexor/glute) - 30s each side<br><small class="breathing-hint">Inhale: lift chest | Exhale: fold forward and sink deeper</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/bWlZvXh.gif" alt="Seated butterfly stretch" loading="lazy"><span>Seated butterfly stretch - 30s<br><small class="breathing-hint">Inhale: sit tall | Exhale: gently press knees toward floor</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2LQkNPW.gif" alt="Hip flexor lunge stretch" loading="lazy"><span>Hip flexor lunge stretch - 30s each side<br><small class="breathing-hint">Inhale: stand tall in lunge | Exhale: sink hips forward and down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/01qpYSe.gif" alt="Downward dog" loading="lazy"><span>Downward dog - 30s<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: press heels toward floor</small></span></div>
     </div>
     <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
   </div>
@@ -1006,17 +1007,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header warmup">Warm-Up (8 min)</div>
     <div class="checklist">
       <div class="check-item"><input type="checkbox"><span>Jump rope (or pretend) - 3 min<br><small class="breathing-hint">Breathe naturally, steady rhythm through nose</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Round_The_World_Shoulder_Stretch/0.jpg" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps<br><small class="breathing-hint">Exhale: arms go overhead and behind | Inhale: return to front</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps<br><small class="breathing-hint">Exhale: protract (push shoulder blades apart) | Inhale: retract</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/External_Rotation_with_Band/0.jpg" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm<br><small class="breathing-hint">Exhale: rotate arm outward | Inhale: return to start</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps<br><small class="breathing-hint">Inhale: arch back, look up (cow) | Exhale: round spine, tuck chin (cat)</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/VtTbiP3.gif" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps<br><small class="breathing-hint">Exhale: arms go overhead and behind | Inhale: return to front</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps<br><small class="breathing-hint">Exhale: protract (push shoulder blades apart) | Inhale: retract</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/FWdVhcW.gif" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm<br><small class="breathing-hint">Exhale: rotate arm outward | Inhale: return to start</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/qBcKorM.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps<br><small class="breathing-hint">Inhale: arch back, look up (cow) | Exhale: round spine, tuck chin (cat)</small></span></div>
     </div>
 
     <div class="sub-header muscle">Back (4 exercises - Volume)</div>
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Chest-supported DB row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Incline_Row/0.jpg" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg" alt="DB single-arm row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/7vG5o25.gif" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/C0MA9bC.gif" alt="DB single-arm row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB single-arm row</div>
       <div class="ex-note">Chest support eliminates momentum.</div>
       <div class="ex-breathing">Exhale: pull dumbbells up to sides | Inhale: lower slowly</div>
@@ -1031,7 +1032,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Machine row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Machine row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Seated cable row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Machine row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Seated cable row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated cable row (neutral grip)</div>
       <div class="ex-note">Higher reps, focus on contraction.</div>
       <div class="ex-breathing">Exhale: pull handle to lower chest | Inhale: extend arms forward</div>
@@ -1046,7 +1047,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Front_Lat_Pulldown/0.jpg" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Assisted_Pull-Up/0.jpg" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rkg41Fb.gif" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/r1XNRYB.gif" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
       <div class="ex-note">Lighter weight, slow negative.</div>
       <div class="ex-breathing">Exhale: pull bar down to upper chest | Inhale: let bar rise slowly</div>
@@ -1061,7 +1062,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ZfyAGhK.gif" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
       <div class="ex-note">Rear delt + posture work.</div>
       <div class="ex-breathing">Exhale: pull rope to forehead, rotate hands out | Inhale: return slowly</div>
@@ -1078,7 +1079,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable curl (EZ-bar)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Biceps_Cable_Curl/0.jpg" alt="Cable curl EZ-bar" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_One-Arm_Dumbbell_Curl_Over_Incline_Bench/0.jpg" alt="DB standing curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/YwnI4ja.gif" alt="Cable curl EZ-bar" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/3s4NnTh.gif" alt="DB standing curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB standing curl</div>
       <div class="ex-note">Constant tension. Don't hyperextend elbow.</div>
       <div class="ex-breathing">Exhale: curl bar up | Inhale: lower bar slowly</div>
@@ -1093,7 +1094,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Spider curls (incline bench)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spider_Curl/0.jpg" alt="Spider curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Curl/0.jpg" alt="Preacher curl machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/2kattbR.gif" alt="Spider curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/qOgPVf6.gif" alt="Preacher curl machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Preacher curl machine</div>
       <div class="ex-note">Strict form, no momentum.</div>
       <div class="ex-breathing">Exhale: curl dumbbells up | Inhale: lower with control</div>
@@ -1108,7 +1109,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="exercise-card">
       <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable hammer curl (rope)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
-      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hammer_Curls_-_Rope_Attachment/0.jpg" alt="Cable hammer curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cross_Body_Hammer_Curl/0.jpg" alt="DB cross-body hammer curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/HPlPoQA.gif" alt="Cable hammer curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/Qyk5J3p.gif" alt="DB cross-body hammer curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB cross-body hammer curl</div>
       <div class="ex-note">Neutral grip = elbow-safe.</div>
       <div class="ex-breathing">Exhale: curl rope up | Inhale: lower slowly</div>
@@ -1128,10 +1129,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="sub-header cooldown">Post-Workout Stretching (7 min)</div>
     <div class="checklist">
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s<br><small class="breathing-hint">Inhale: lengthen body | Exhale: sink into the stretch</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_Circles/0.jpg" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
-      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Floor_Hamstring_Stretch/0.jpg" alt="Seated forward fold" loading="lazy"><span>Seated forward fold - 30s<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s<br><small class="breathing-hint">Inhale: lengthen body | Exhale: sink into the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2zNKRUB.gif" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/yRYyfdA.gif" alt="Seated forward fold" loading="lazy"><span>Seated forward fold - 30s<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper</small></span></div>
       <div class="check-item"><input type="checkbox"><span>Foam roll - upper back - 2 min<br><small class="breathing-hint">Breathe deeply, exhale on tender spots to release tension</small></span></div>
       <div class="check-item"><input type="checkbox"><span>Deep breathing (box breathing) - 1 min<br><small class="breathing-hint">Inhale 4s | Hold 4s | Exhale 4s | Hold 4s - repeat</small></span></div>
     </div>
