@@ -1380,6 +1380,10 @@ document.addEventListener('change', function(e) {
 
 document.addEventListener('click', function(e) {
   if (e.target.tagName === 'IMG') return;
+  if (e.target.type === 'number') return;
+  if (e.target.tagName === 'LABEL') return;
+  if (e.target.tagName === 'BUTTON') return;
+  if (e.target.closest('.set-inputs')) return;
   var item = e.target.closest('.check-item');
   if (!item) return;
   if (e.target.type === 'checkbox') return;
