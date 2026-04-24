@@ -124,6 +124,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .set-inputs input[type="number"]:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
 .set-inputs input[type="number"]::placeholder { color: #c0c7d0; font-size: 11px; }
 .set-prev { font-size: 10px; color: #7c3aed; font-weight: 600; margin-left: auto; white-space: nowrap; }
+.export-bar { display: flex; gap: 8px; justify-content: center; margin: 0 0 16px; flex-wrap: wrap; }
+.export-btn { background: linear-gradient(135deg,#1e3c78,#2d6cdf); color: #fff; border: none; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.export-btn:active { opacity: 0.85; }
+.export-btn.secondary { background: linear-gradient(135deg,#065f46,#1a8a4a); }
+.export-btn.danger { background: linear-gradient(135deg,#991b1b,#c0392b); }
 
 .floating-timer { position: fixed; bottom: 20px; right: 20px; background: #1e293b; color: #fff; border-radius: 16px; padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9998; display: none; flex-direction: column; align-items: center; gap: 6px; min-width: 180px; }
 .floating-timer.active { display: flex; }
@@ -1741,6 +1746,139 @@ function archiveCycleIfNeeded() {
 archiveCycleIfNeeded();
 injectOverloadInputs();
 addWeekBanner();
+
+function exportCSV() {
+  var weekNum = getWeekNumber();
+  var cycleWeek = getCycleWeek();
+  var cycleNum = Math.floor((weekNum - 1) / 3) + 1;
+  var data = loadOverloadData();
+  var rows = [['Day', 'Exercise', 'Set', 'Weight (kg)', 'Reps', 'RIR', 'Week', 'Cycle']];
+
+  var dayNames = {
+    'day-mon': 'Monday', 'day-tue': 'Tuesday', 'day-wed': 'Wednesday',
+    'day-thu': 'Thursday', 'day-fri': 'Friday', 'day-sat': 'Saturday'
+  };
+
+  var cards = document.querySelectorAll('.exercise-card');
+  for (var c = 0; c < cards.length; c++) {
+    var card = cards[c];
+    var section = card.closest('.day-section');
+    var dayId = section ? section.id : '';
+    var dayName = dayNames[dayId] || dayId;
+    var exName = card.querySelector('.ex-name');
+    var name = exName ? exName.textContent.trim() : '';
+    var exKey = buildExerciseKey(card);
+    var sets = card.querySelectorAll('.set-tracker .check-item');
+    for (var s = 0; s < sets.length; s++) {
+      var setKey = exKey + '::set' + (s + 1);
+      var w = data[setKey + '::weight'];
+      var r = data[setKey + '::reps'];
+      var ri = data[setKey + '::rir'];
+      if (w !== undefined || r !== undefined || ri !== undefined) {
+        rows.push([dayName, name, 'Set ' + (s+1), w || '', r || '', ri || '', weekNum, cycleNum]);
+      }
+    }
+  }
+
+  if (rows.length === 1) {
+    alert('No workout data to export yet. Enter some weights/reps first!');
+    return;
+  }
+
+  var csv = rows.map(function(r) {
+    return r.map(function(v) {
+      return '"' + String(v).replace(/"/g, '""') + '"';
+    }).join(',');
+  }).join('\n');
+
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'workout_week' + weekNum + '_cycle' + cycleNum + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportFullHistory() {
+  var data = loadOverloadData();
+  var history = loadOverloadHistory();
+  var weekNum = getWeekNumber();
+
+  var dayNames = {
+    'day-mon': 'Monday', 'day-tue': 'Tuesday', 'day-wed': 'Wednesday',
+    'day-thu': 'Thursday', 'day-fri': 'Friday', 'day-sat': 'Saturday'
+  };
+
+  var rows = [['Day', 'Exercise', 'Set', 'Cycle', 'Weight (kg)', 'Reps', 'RIR']];
+
+  var cards = document.querySelectorAll('.exercise-card');
+  for (var c = 0; c < cards.length; c++) {
+    var card = cards[c];
+    var section = card.closest('.day-section');
+    var dayId = section ? section.id : '';
+    var dayName = dayNames[dayId] || dayId;
+    var exName = card.querySelector('.ex-name');
+    var name = exName ? exName.textContent.trim() : '';
+    var exKey = buildExerciseKey(card);
+    var sets = card.querySelectorAll('.set-tracker .check-item');
+
+    var exHistory = history[exKey] || {};
+    var cycleKeys = Object.keys(exHistory).sort();
+    for (var ck = 0; ck < cycleKeys.length; ck++) {
+      var cycleData = exHistory[cycleKeys[ck]];
+      var cycleLabel = cycleKeys[ck].replace('cycle', 'Cycle ');
+      for (var s = 0; s < sets.length; s++) {
+        var sd = cycleData['set' + (s + 1)];
+        if (sd) {
+          rows.push([dayName, name, 'Set ' + (s+1), cycleLabel, sd.weight || '', sd.reps || '', sd.rir || '']);
+        }
+      }
+    }
+
+    var currentCycle = Math.floor((weekNum - 1) / 3) + 1;
+    for (var s2 = 0; s2 < sets.length; s2++) {
+      var setKey = exKey + '::set' + (s2 + 1);
+      var w = data[setKey + '::weight'];
+      var r = data[setKey + '::reps'];
+      var ri = data[setKey + '::rir'];
+      if (w !== undefined || r !== undefined || ri !== undefined) {
+        rows.push([dayName, name, 'Set ' + (s2+1), 'Cycle ' + currentCycle + ' (current)', w || '', r || '', ri || '']);
+      }
+    }
+  }
+
+  if (rows.length === 1) {
+    alert('No workout data to export yet!');
+    return;
+  }
+
+  var csv = rows.map(function(r) {
+    return r.map(function(v) {
+      return '"' + String(v).replace(/"/g, '""') + '"';
+    }).join(',');
+  }).join('\n');
+
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'workout_full_history.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function addExportButtons() {
+  var bar = document.createElement('div');
+  bar.className = 'export-bar';
+  bar.innerHTML = '<button class="export-btn" onclick="exportCSV()">&#128229; Export This Week</button>' +
+    '<button class="export-btn secondary" onclick="exportFullHistory()">&#128202; Export All History</button>';
+  var container = document.querySelector('.container');
+  var firstSection = container.querySelector('.day-section');
+  container.insertBefore(bar, firstSection);
+}
+
+addExportButtons();
 
 function injectTimerButtons() {
   // Cooldown / stretch / cardio checklist items that mention time (skip warm-ups)
