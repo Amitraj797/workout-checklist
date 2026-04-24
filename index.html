@@ -1299,12 +1299,50 @@ function loadState() {
   } catch(e) {}
 }
 
+function autoStartTimer(checkbox) {
+  if (!checkbox.checked) return;
+  var item = checkbox.closest('.check-item');
+  if (!item) return;
+
+  // Case 1: Set completed → start the rest timer right after it
+  var setTracker = item.closest('.set-tracker');
+  if (setTracker) {
+    var next = item.nextElementSibling;
+    if (next && next.classList.contains('set-rest')) {
+      var btn = next.querySelector('.timer-btn');
+      if (btn) btn.click();
+    }
+    return;
+  }
+
+  // Case 2: Cooldown/stretch/cardio item → find its own timer or next item's timer
+  var ownBtn = item.querySelector('.timer-btn');
+  if (ownBtn) {
+    ownBtn.click();
+    return;
+  }
+  // If this item has no timer, check the next check-item sibling
+  var checklist = item.closest('.checklist');
+  if (checklist) {
+    var next = item.nextElementSibling;
+    while (next) {
+      if (next.classList.contains('check-item')) {
+        var nextBtn = next.querySelector('.timer-btn');
+        if (nextBtn) { nextBtn.click(); return; }
+        break;
+      }
+      next = next.nextElementSibling;
+    }
+  }
+}
+
 document.addEventListener('change', function(e) {
   if (e.target && e.target.type === 'checkbox') {
     updateCheckedClass(e.target);
     var section = e.target.closest('.day-section[id]');
     if (section) updateProgress(section);
     saveState();
+    autoStartTimer(e.target);
   }
 }, false);
 
@@ -1320,6 +1358,7 @@ document.addEventListener('click', function(e) {
     var section = item.closest('.day-section[id]');
     if (section) updateProgress(section);
     saveState();
+    autoStartTimer(cb);
   }
 }, false);
 
