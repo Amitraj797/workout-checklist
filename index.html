@@ -1470,10 +1470,12 @@ function parseSeconds(text) {
 }
 
 function injectTimerButtons() {
-  // Warm-up / cooldown / stretch checklist items that mention time
+  // Cooldown / stretch / cardio checklist items that mention time (skip warm-ups)
   var checkItems = document.querySelectorAll('.checklist .check-item span');
   for (var i = 0; i < checkItems.length; i++) {
     var span = checkItems[i];
+    var prev = span.closest('.checklist').previousElementSibling;
+    if (prev && prev.classList.contains('warmup')) continue;
     var text = span.textContent || '';
     var secs = parseSeconds(text);
     if (secs > 0) {
