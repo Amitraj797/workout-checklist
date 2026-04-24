@@ -65,7 +65,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
 .ex-images { display: flex; gap: 8px; margin: 10px 0; justify-content: center; }
 .ex-img-wrap { text-align: center; flex: 1; max-width: 140px; }
-.ex-img-wrap img { width: 100%; height: 120px; object-fit: contain; background: #fff; border: 2px solid var(--border); border-radius: 8px; }
+.ex-img-wrap img { width: 100%; height: 160px; object-fit: contain; background: #fff; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; }
 .ex-img-wrap.alt img { border-color: #fed7aa; }
 .img-label { display: block; font-size: 10px; font-weight: 600; margin-top: 2px; color: var(--muted); }
 .ex-img-wrap.alt .img-label { color: var(--warning); }
@@ -80,7 +80,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .check-item span { flex: 1; }
 .check-item.checked span { text-decoration: line-through; color: var(--muted); }
 
-.ref-img { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); flex-shrink: 0; pointer-events: none; }
+.ref-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 2px solid var(--border); flex-shrink: 0; cursor: pointer; pointer-events: auto; }
+
+.img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.img-modal.active { display: flex; }
+.img-modal img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 12px; background: #fff; }
 
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0; }
 .tracker { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 500px; }
@@ -107,13 +111,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   .cover h1 { font-size: 22px; }
   .day-header { font-size: 15px; padding: 14px 16px; }
   .ex-images { flex-direction: column; align-items: center; }
-  .ex-img-wrap { max-width: 180px; }
+  .ex-img-wrap { max-width: 220px; }
   .exercise-card { padding: 10px; }
   .tracker { font-size: 11px; }
   .check-item { padding: 12px 0; font-size: 14px; }
   .check-item input[type="checkbox"] { width: 22px; height: 22px; min-width: 22px; min-height: 22px; }
   .sub-header { font-size: 14px; }
-  .ref-img { width: 36px; height: 36px; }
+  .ref-img { width: 54px; height: 54px; }
+  .ex-img-wrap img { height: 180px; }
 }
 
 @media print {
@@ -999,6 +1004,31 @@ function initProgress() {
 loadState();
 initProgress();
 expandToday();
+
+// Image modal - tap any image to see it full screen
+var modal = document.getElementById('imgModal');
+var modalImg = document.getElementById('imgModalImg');
+var imgTapped = false;
+
+document.addEventListener('click', function(e) {
+  var img = e.target;
+  if (img.tagName === 'IMG' && (img.classList.contains('ref-img') || img.closest('.ex-img-wrap'))) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    imgTapped = true;
+    modalImg.src = img.src;
+    modal.classList.add('active');
+  }
+}, true);
+
+modal.addEventListener('click', function() {
+  modal.classList.remove('active');
+  modalImg.src = '';
+});
 </script>
+
+<div id="imgModal" class="img-modal" role="dialog">
+  <img id="imgModalImg" src="" alt="Exercise reference">
+</div>
 </body>
 </html>
