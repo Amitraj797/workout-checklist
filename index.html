@@ -111,6 +111,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .reset-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 11px; padding: 4px 12px; border-radius: 6px; cursor: pointer; margin: 8px 0; }
 .reset-btn:hover { background: #fef2f2; color: var(--danger); border-color: var(--danger); }
 
+.timer-btn { display: inline-block; background: #0ea5e9; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 12px; cursor: pointer; margin-left: 6px; border: none; vertical-align: middle; line-height: 20px; }
+.timer-btn:active { background: #0284c7; }
+.set-rest .timer-btn { background: #7c3aed; }
+.set-rest .timer-btn:active { background: #6d28d9; }
+
+.floating-timer { position: fixed; bottom: 20px; right: 20px; background: #1e293b; color: #fff; border-radius: 16px; padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9998; display: none; flex-direction: column; align-items: center; gap: 6px; min-width: 180px; }
+.floating-timer.active { display: flex; }
+.timer-label { font-size: 11px; color: #94a3b8; text-align: center; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.timer-display { font-size: 36px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: 2px; }
+.timer-display.warning { color: #f59e0b; }
+.timer-display.done { color: #22c55e; }
+.timer-controls { display: flex; gap: 8px; }
+.timer-controls button { border: none; border-radius: 8px; padding: 6px 16px; font-size: 13px; font-weight: 700; cursor: pointer; }
+.timer-play { background: #22c55e; color: #fff; }
+.timer-play:active { background: #16a34a; }
+.timer-pause { background: #f59e0b; color: #fff; }
+.timer-pause:active { background: #d97706; }
+.timer-stop { background: #ef4444; color: #fff; }
+.timer-stop:active { background: #dc2626; }
+
 @media (max-width: 480px) {
   .container { padding: 8px; }
   .cover { padding: 24px 16px; }
@@ -1188,6 +1208,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   <img id="imgModalImg" src="" alt="Exercise reference">
 </div>
 
+<div id="floatingTimer" class="floating-timer">
+  <div class="timer-label" id="timerLabel">Timer</div>
+  <div class="timer-display" id="timerDisplay">0:00</div>
+  <div class="timer-controls">
+    <button class="timer-play" id="timerPlayBtn" onclick="timerToggle()">Start</button>
+    <button class="timer-stop" onclick="timerStop()">Close</button>
+  </div>
+</div>
+
 <script>
 function toggle(header) {
   var content = header.nextElementSibling;
@@ -1297,9 +1326,9 @@ document.addEventListener('click', function(e) {
 function expandToday() {
   var days = ['day-sun','day-mon','day-tue','day-wed','day-thu','day-fri','day-sat'];
   var today = days[new Date().getDay()];
-  var sections = document.querySelectorAll('.day-section[id]');
-  for (var i = 0; i < sections.length; i++) {
-    var section = sections[i];
+  var allSections = document.querySelectorAll('.day-section');
+  for (var i = 0; i < allSections.length; i++) {
+    var section = allSections[i];
     var header = section.querySelector('.day-header');
     var content = section.querySelector('.day-content');
     if (section.id === today) {
@@ -1340,6 +1369,158 @@ modal.addEventListener('click', function() {
   modal.classList.remove('active');
   modalImg.src = '';
 }, false);
+
+// === FLOATING TIMER ===
+var timerInterval = null;
+var timerSeconds = 0;
+var timerRunning = false;
+var timerTarget = 0;
+var timerWidget = document.getElementById('floatingTimer');
+var timerDisplay = document.getElementById('timerDisplay');
+var timerLabel = document.getElementById('timerLabel');
+var timerPlayBtn = document.getElementById('timerPlayBtn');
+var timerAudio = null;
+
+function startTimer(seconds, label) {
+  clearInterval(timerInterval);
+  timerTarget = seconds;
+  timerSeconds = seconds;
+  timerRunning = true;
+  timerLabel.textContent = label || 'Timer';
+  timerPlayBtn.textContent = 'Pause';
+  timerPlayBtn.className = 'timer-pause';
+  timerDisplay.className = 'timer-display';
+  timerWidget.classList.add('active');
+  renderTimer();
+  timerInterval = setInterval(tickTimer, 1000);
+}
+
+function tickTimer() {
+  if (!timerRunning) return;
+  timerSeconds--;
+  renderTimer();
+  if (timerSeconds <= 5 && timerSeconds > 0) {
+    timerDisplay.className = 'timer-display warning';
+  }
+  if (timerSeconds <= 0) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerDisplay.className = 'timer-display done';
+    timerDisplay.textContent = 'DONE!';
+    timerPlayBtn.textContent = 'Restart';
+    timerPlayBtn.className = 'timer-play';
+    try {
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var o = ac.createOscillator();
+      var g = ac.createGain();
+      o.connect(g); g.connect(ac.destination);
+      o.frequency.value = 800;
+      g.gain.value = 0.3;
+      o.start(); o.stop(ac.currentTime + 0.3);
+      setTimeout(function() {
+        var o2 = ac.createOscillator();
+        var g2 = ac.createGain();
+        o2.connect(g2); g2.connect(ac.destination);
+        o2.frequency.value = 1000;
+        g2.gain.value = 0.3;
+        o2.start(); o2.stop(ac.currentTime + 0.3);
+      }, 350);
+    } catch(e) {}
+  }
+}
+
+function renderTimer() {
+  var m = Math.floor(timerSeconds / 60);
+  var s = timerSeconds % 60;
+  timerDisplay.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function timerToggle() {
+  if (timerDisplay.textContent === 'DONE!') {
+    startTimer(timerTarget, timerLabel.textContent);
+    return;
+  }
+  if (timerRunning) {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    timerPlayBtn.textContent = 'Start';
+    timerPlayBtn.className = 'timer-play';
+  } else {
+    timerRunning = true;
+    timerPlayBtn.textContent = 'Pause';
+    timerPlayBtn.className = 'timer-pause';
+    timerInterval = setInterval(tickTimer, 1000);
+  }
+}
+
+function timerStop() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 0;
+  timerWidget.classList.remove('active');
+}
+
+function parseSeconds(text) {
+  var m;
+  m = text.match(/(\d+)\s*min/);
+  if (m) return parseInt(m[1]) * 60;
+  m = text.match(/(\d+)\s*s/);
+  if (m) return parseInt(m[1]);
+  return 0;
+}
+
+function injectTimerButtons() {
+  // Warm-up / cooldown / stretch checklist items that mention time
+  var checkItems = document.querySelectorAll('.checklist .check-item span');
+  for (var i = 0; i < checkItems.length; i++) {
+    var span = checkItems[i];
+    var text = span.textContent || '';
+    var secs = parseSeconds(text);
+    if (secs > 0) {
+      var btn = document.createElement('button');
+      btn.className = 'timer-btn';
+      btn.textContent = secs >= 60 ? Math.floor(secs/60) + 'm' : secs + 's';
+      btn.setAttribute('data-seconds', secs);
+      var labelText = text.split('\n')[0].trim();
+      if (labelText.length > 40) labelText = labelText.substring(0, 40) + '...';
+      btn.setAttribute('data-label', labelText);
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        startTimer(parseInt(this.getAttribute('data-seconds')), this.getAttribute('data-label'));
+      }, false);
+      var breathing = span.querySelector('.breathing-hint');
+      if (breathing) {
+        span.insertBefore(btn, breathing);
+      } else {
+        span.appendChild(btn);
+      }
+    }
+  }
+
+  // Set rest indicators
+  var restItems = document.querySelectorAll('.set-rest');
+  for (var j = 0; j < restItems.length; j++) {
+    var rest = restItems[j];
+    var restText = rest.textContent || '';
+    var restSecs = parseSeconds(restText);
+    if (restSecs > 0) {
+      var rbtn = document.createElement('button');
+      rbtn.className = 'timer-btn';
+      rbtn.textContent = restSecs + 's';
+      rbtn.setAttribute('data-seconds', restSecs);
+      rbtn.setAttribute('data-label', 'Rest between sets');
+      rbtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        startTimer(parseInt(this.getAttribute('data-seconds')), this.getAttribute('data-label'));
+      }, false);
+      rest.appendChild(rbtn);
+    }
+  }
+}
+
+injectTimerButtons();
 </script>
 
 </body>
