@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6-Day Workout Plan - 2x/Week</title>
+<style>
+:root {
+  --primary: #1e3c78;
+  --accent: #2d6cdf;
+  --success: #1a8a4a;
+  --warning: #c45a20;
+  --danger: #c0392b;
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #e2e8f0;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 0; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 800px; margin: 0 auto; padding: 16px; }
+
+.cover { background: linear-gradient(135deg, #1e3c78 0%, #2d6cdf 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 0 0 24px 24px; margin-bottom: 20px; }
+.cover h1 { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+.cover p { font-size: 14px; opacity: 0.85; }
+.cover .badges { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.cover .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+
+.profile-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+.profile-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.profile-table td:first-child { font-weight: 600; width: 40%; color: var(--muted); }
+
+.day-section { background: var(--card); border-radius: var(--radius); margin: 16px 0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.day-header { padding: 16px 20px; font-size: 18px; font-weight: 700; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.day-header .arrow { transition: transform 0.3s; font-size: 14px; }
+.day-header.collapsed .arrow { transform: rotate(-90deg); }
+.day-content { padding: 0 16px 16px; }
+.day-content.hidden { display: none; }
+
+.day-mon .day-header { background: #1e3c78; }
+.day-tue .day-header { background: #1a6b3a; }
+.day-wed .day-header { background: #7c3aed; }
+.day-thu .day-header { background: #b45309; }
+.day-fri .day-header { background: #be185d; }
+.day-sat .day-header { background: #0f766e; }
+.day-sun .day-header { background: #64748b; }
+
+.sub-header { font-size: 15px; font-weight: 700; margin: 16px 0 8px; padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; }
+.sub-header.warmup { background: #ecfdf5; color: #065f46; }
+.sub-header.muscle { background: #eff6ff; color: #1e3a8a; }
+.sub-header.cardio { background: #fef2f2; color: #991b1b; }
+.sub-header.cooldown { background: #f5f3ff; color: #5b21b6; }
+
+.exercise-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 8px 0; }
+.ex-header { display: flex; align-items: flex-start; gap: 10px; }
+.ex-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.ex-info { flex: 1; }
+.ex-name { font-weight: 700; font-size: 14px; }
+.ex-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.tag { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+.tag.sets { background: #d1fae5; color: #065f46; }
+.tag.rest { background: #f3f4f6; color: #6b7280; }
+
+.ex-images { display: flex; gap: 8px; margin: 10px 0; justify-content: center; }
+.ex-img-wrap { text-align: center; flex: 1; max-width: 140px; }
+.ex-img-wrap img { width: 100%; height: 120px; object-fit: contain; background: #fff; border: 2px solid var(--border); border-radius: 8px; }
+.ex-img-wrap.alt img { border-color: #fed7aa; }
+.img-label { display: block; font-size: 10px; font-weight: 600; margin-top: 2px; color: var(--muted); }
+.ex-img-wrap.alt .img-label { color: var(--warning); }
+
+.ex-alt { font-size: 12px; color: var(--warning); margin: 4px 0; }
+.ex-note { font-size: 11px; color: var(--danger); font-style: italic; }
+
+.checklist { margin: 8px 0; }
+.check-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 13px; cursor: pointer; border-bottom: 1px solid #f1f5f9; -webkit-tap-highlight-color: transparent; }
+.check-item:last-child { border-bottom: none; }
+.check-item input[type="checkbox"] { -webkit-appearance: checkbox; appearance: checkbox; margin: 0; width: 20px; height: 20px; min-width: 20px; min-height: 20px; accent-color: var(--success); flex-shrink: 0; cursor: pointer; touch-action: manipulation; }
+.check-item span { flex: 1; }
+.check-item.checked span { text-decoration: line-through; color: var(--muted); }
+
+.ref-img { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); flex-shrink: 0; pointer-events: none; }
+
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0; }
+.tracker { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 500px; }
+.tracker th { background: var(--primary); color: white; padding: 6px 8px; text-align: center; font-size: 11px; position: sticky; top: 0; }
+.tracker td { border: 1px solid var(--border); padding: 6px 8px; text-align: center; min-width: 48px; }
+.tracker td:first-child { text-align: left; font-weight: 600; font-size: 11px; min-width: 120px; background: #f8fafc; }
+.tracker td[contenteditable]:focus { background: #eff6ff; outline: 2px solid var(--accent); }
+
+.info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+.info-table th { background: var(--primary); color: white; padding: 8px; text-align: left; font-size: 12px; }
+.info-table td { padding: 8px; border-bottom: 1px solid var(--border); }
+.info-table tr:nth-child(even) td { background: #f8fafc; }
+
+.progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; margin: 8px 0; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--success); border-radius: 3px; transition: width 0.3s; }
+.progress-text { font-size: 11px; color: var(--muted); text-align: right; }
+
+.reset-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 11px; padding: 4px 12px; border-radius: 6px; cursor: pointer; margin: 8px 0; }
+.reset-btn:hover { background: #fef2f2; color: var(--danger); border-color: var(--danger); }
+
+@media (max-width: 480px) {
+  .container { padding: 8px; }
+  .cover { padding: 24px 16px; }
+  .cover h1 { font-size: 22px; }
+  .day-header { font-size: 15px; padding: 14px 16px; }
+  .ex-images { flex-direction: column; align-items: center; }
+  .ex-img-wrap { max-width: 180px; }
+  .exercise-card { padding: 10px; }
+  .tracker { font-size: 11px; }
+  .check-item { padding: 12px 0; font-size: 14px; }
+  .check-item input[type="checkbox"] { width: 22px; height: 22px; min-width: 22px; min-height: 22px; }
+  .sub-header { font-size: 14px; }
+  .ref-img { width: 36px; height: 36px; }
+}
+
+@media print {
+  .day-content.hidden { display: block !important; }
+  .day-header .arrow { display: none; }
+  .exercise-card { break-inside: avoid; }
+  .reset-btn { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>6-DAY WORKOUT PLAN</h1>
+  <p>2x/Week Per Muscle &middot; 2 Muscles Per Day</p>
+  <div class="badges">
+    <span class="badge">Injury-Aware</span>
+    <span class="badge">2x Frequency</span>
+    <span class="badge">Every Exercise Has an Alternate</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- PROFILE -->
+<div class="day-section">
+  <div class="day-header" style="background:#374151" onclick="toggle(this)">Profile & Overview <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="profile-table">
+      <tr><td>Age / Sex</td><td>32 / Male</td></tr>
+      <tr><td>Weight / Height</td><td>66 kg / 165 cm</td></tr>
+      <tr><td>BMI / Body Fat</td><td>23.4 / 33.1%</td></tr>
+      <tr><td>Goal</td><td>Fat loss + Muscle gain + Fitness + Flexibility</td></tr>
+      <tr><td>Injuries</td><td>Right elbow (healed), Left clavicle (healed)</td></tr>
+      <tr><td>Equipment</td><td>Full Gym</td></tr>
+      <tr><td>Schedule</td><td>Mon-Sat training, Sunday rest</td></tr>
+    </table>
+
+    <div class="sub-header muscle">Weekly Split</div>
+    <table class="info-table">
+      <tr><th>Day</th><th>Muscle 1</th><th>Muscle 2</th><th>Time</th></tr>
+      <tr><td>Monday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
+      <tr><td>Tuesday</td><td>Legs (Quad)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
+      <tr><td>Wednesday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
+      <tr><td>Thursday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
+      <tr><td>Friday</td><td>Legs (Ham/Glute)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
+      <tr><td>Saturday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
+      <tr><td>Sunday</td><td colspan="3">REST / Active Recovery</td></tr>
+    </table>
+
+    <div class="sub-header muscle">Training Approach</div>
+    <table class="info-table">
+      <tr><th>Days</th><th>Focus</th><th>Reps</th><th>Rest</th></tr>
+      <tr><td>Mon / Wed</td><td>Strength (heavier)</td><td>10-12</td><td>90s</td></tr>
+      <tr><td>Thu / Sat</td><td>Volume (lighter)</td><td>12-15</td><td>60s</td></tr>
+      <tr><td>Tue</td><td>Quad-focused legs</td><td>10-15</td><td>60-90s</td></tr>
+      <tr><td>Fri</td><td>Ham/Glute-focused legs</td><td>10-15</td><td>60-90s</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- INJURY RULES -->
+<div class="day-section">
+  <div class="day-header" style="background:#c0392b" onclick="toggle(this)">Injury Safety Rules <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <div class="sub-header" style="background:#fef2f2;color:#991b1b">Right Elbow (Healed Fracture)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Use neutral/hammer grip on all curls and presses</span></div>
+      <div class="check-item"><input type="checkbox"><span>No skull crushers, no heavy barbell curls</span></div>
+      <div class="check-item"><input type="checkbox"><span>Wear an elbow sleeve on upper body days</span></div>
+      <div class="check-item"><input type="checkbox"><span>Stop any exercise causing sharp elbow pain - switch to alternate</span></div>
+    </div>
+    <div class="sub-header" style="background:#fef2f2;color:#991b1b">Left Clavicle (Healed Fracture)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Dumbbells only for chest pressing (never barbell)</span></div>
+      <div class="check-item"><input type="checkbox"><span>Machine shoulder press only - no barbell overhead press</span></div>
+      <div class="check-item"><input type="checkbox"><span>No wide-grip pulldowns or dips for weeks 1-4</span></div>
+      <div class="check-item"><input type="checkbox"><span>If collarbone discomfort on bench - switch to floor press</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MONDAY ==================== -->
+<div class="day-section day-mon" id="day-mon">
+  <div class="day-header" onclick="toggle(this)">Monday - Chest + Triceps (Strength) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Brisk treadmill walk (slight incline) - 5 min</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arm_Circles/0.jpg" alt="Arm circles" loading="lazy"><span>Arm circles (forward + backward) - 15 each direction</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Pull_Apart/0.jpg" alt="Band pull-aparts" loading="lazy"><span>Band pull-aparts - 15 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Downward_Facing_Balance/0.jpg" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps</span></div>
+    </div>
+
+    <div class="sub-header muscle">Chest (4 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB flat bench press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press/0.jpg" alt="DB flat bench press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Bench_Press/0.jpg" alt="Machine chest press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine chest press</div>
+      <div class="ex-note">Neutral grip option. Floor press if collarbone discomfort.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB press (30 deg)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg" alt="Incline DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Incline_Chest_Press/0.jpg" alt="Incline machine press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Incline machine press</div>
+      <div class="ex-note">Light weight - don't press above shoulder height.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable crossover (high-to-low)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crossover/0.jpg" alt="Cable crossover" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Dumbbell_Flyes/0.jpg" alt="Decline DB fly" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Decline DB fly</div>
+      <div class="ex-note">Targets LOWER chest. Squeeze at bottom.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">DB floor press</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Floor_Press/0.jpg" alt="DB floor press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_-_Close_Triceps_Position/0.jpg" alt="Push-ups" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Push-ups (knees if needed)</div>
+      <div class="ex-note">Shorter ROM = safest for collarbone.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Triceps (3 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable rope pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_Rope_Attachment/0.jpg" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_V-Bar_Attachment/0.jpg" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> V-bar pushdowns</div>
+      <div class="ex-note">Elbows pinned to sides. Low elbow stress.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Overhead cable extension (rope)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg" alt="Overhead cable extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_One_Arm_Tricep_Extension/0.jpg" alt="Single-arm cable pushdown" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Single-arm cable pushdown</div>
+      <div class="ex-note">Controlled movement. Stop if elbow aches.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Machine dip (assisted)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dip_Machine/0.jpg" alt="Machine dip" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Dips/0.jpg" alt="Bench dip" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Bench dip (partial ROM)</div>
+      <div class="ex-note">Machine provides stability. No full dips for 4 weeks.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 10-12% incline, 5.5 km/h, 10 min | HR: 130-145 BPM</span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Behind_Head_Chest_Stretch/0.jpg" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_Circles/0.jpg" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><span>Deep breathing (diaphragmatic) - 1 min</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== TUESDAY ==================== -->
+<div class="day-section day-tue" id="day-tue">
+  <div class="day-header" onclick="toggle(this)">Tuesday - Legs (Quad) + Shoulders + Abs <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Stationary bike (easy pace) - 5 min</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Bodyweight squats" loading="lazy"><span>Bodyweight squats - 15 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg" alt="Leg swings" loading="lazy"><span>Leg swings (front-back + side-side) - 10 each leg, each direction</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Glute_Bridge/0.jpg" alt="Glute bridges" loading="lazy"><span>Glute bridges - 15 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_Circles/0.jpg" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction, each foot</span></div>
+    </div>
+
+    <div class="sub-header muscle">Legs - Quads + Glutes + Hamstrings (4 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Goblet squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Goblet squat" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg" alt="Leg press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Leg press machine</div>
+      <div class="ex-note">Hold DB at chest. Depth over weight.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Leg extension machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Extensions/0.jpg" alt="Leg extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg" alt="Walking lunges" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Walking lunges (BW or light DB)</div>
+      <div class="ex-note">Squeeze at top for 1 second.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Lying leg curl machine</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Leg_Curls/0.jpg" alt="Lying leg curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Leg_Curl/0.jpg" alt="Seated leg curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated leg curl machine</div>
+      <div class="ex-note">Controlled tempo: 2s up, 3s down.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Standing calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Calf_Raises/0.jpg" alt="Standing calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Calf_Raise/0.jpg" alt="DB calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB standing calf raise</div>
+      <div class="ex-note">Full stretch at bottom, pause at top.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Shoulders (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine shoulder press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Shoulder_Press/0.jpg" alt="Machine shoulder press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Kettlebell_Press/0.jpg" alt="Seated DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated DB press (light)</div>
+      <div class="ex-note">Machine = stable for collarbone. No barbell overhead.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable lateral raise</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Shoulder_Press/0.jpg" alt="Cable lateral raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg" alt="DB lateral raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB lateral raise (light)</div>
+      <div class="ex-note">Light weight, control the negative.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Abs (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Dead bug</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dead_Bug/0.jpg" alt="Dead bug" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Crunch/0.jpg" alt="Reverse crunch" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse crunch</div>
+      <div class="ex-note">Great for deep core activation. No spinal stress.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable Pallof press</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press/0.jpg" alt="Cable Pallof press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press_With_Rotation/0.jpg" alt="Banded Pallof press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Banded Pallof press</div>
+      <div class="ex-note">Anti-rotation. Builds core stability.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 12% incline, 5.5 km/h, 10 min | Great quad/glute finisher + fat burn</span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/All_Fours_Quad_Stretch/0.jpg" alt="Standing quad stretch" loading="lazy"><span>Standing quad stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Stretch_Hands_Against_Wall/0.jpg" alt="Calf stretch" loading="lazy"><span>Calf stretch against wall - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Floor_Hamstring_Stretch/0.jpg" alt="Seated hamstring stretch" loading="lazy"><span>Seated hamstring stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg" alt="Deep squat hold" loading="lazy"><span>Deep squat hold (no weight) - 30s</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ankle_Circles/0.jpg" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== WEDNESDAY ==================== -->
+<div class="day-section day-wed" id="day-wed">
+  <div class="day-header" onclick="toggle(this)">Wednesday - Back + Biceps (Strength) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Rowing machine (easy pace) - 5 min</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Round_The_World_Shoulder_Stretch/0.jpg" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/External_Rotation_with_Band/0.jpg" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps</span></div>
+    </div>
+
+    <div class="sub-header muscle">Back (4 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Front_Lat_Pulldown/0.jpg" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Assisted_Pull-Up/0.jpg" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
+      <div class="ex-note">No wide grip - protect collarbone. Squeeze shoulder blades.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Seated cable row (neutral grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Seated cable row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Machine row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine row</div>
+      <div class="ex-note">Neutral grip = low elbow stress. Pull to lower chest.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">DB single-arm row</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg" alt="DB single-arm row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Incline_Row/0.jpg" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Chest-supported DB row</div>
+      <div class="ex-note">Support on bench. Start light on right arm.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
+      <div class="ex-note">Pull to forehead. Great for posture + rear delts.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Biceps (3 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB hammer curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hammer_Curls/0.jpg" alt="DB hammer curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hammer_Curls_-_Rope_Attachment/0.jpg" alt="Cable rope hammer curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable rope hammer curls</div>
+      <div class="ex-note">Neutral grip = safest for right elbow. No swinging.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Curl/0.jpg" alt="Incline DB curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Preacher_Curls/0.jpg" alt="Machine preacher curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine preacher curl</div>
+      <div class="ex-note">Light weight, full stretch. Skip if elbow pain.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable EZ-bar curl</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Biceps_Cable_Curl/0.jpg" alt="Cable EZ-bar curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Concentration_Curls/0.jpg" alt="Concentration curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Concentration curls</div>
+      <div class="ex-note">Constant cable tension is joint-friendly.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (12 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Elliptical</strong> (moderate pace) - 12 min | RPE 5-6/10. Low impact. Light grip.</span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Round_The_World_Shoulder_Stretch/0.jpg" alt="Tricep overhead stretch" loading="lazy"><span>Tricep overhead stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Childs_Pose/0.jpg" alt="Child's pose" loading="lazy"><span>Child's pose - 45s</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chin_To_Chest_Stretch/0.jpg" alt="Neck stretches" loading="lazy"><span>Neck stretches (side tilt + rotation) - 20s each direction</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== THURSDAY ==================== -->
+<div class="day-section day-thu" id="day-thu">
+  <div class="day-header" onclick="toggle(this)">Thursday - Chest + Triceps (Volume) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Brisk treadmill walk (slight incline) - 5 min</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arm_Circles/0.jpg" alt="Arm circles" loading="lazy"><span>Arm circles (forward + backward) - 15 each direction</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Pull_Apart/0.jpg" alt="Band pull-aparts" loading="lazy"><span>Band pull-aparts - 15 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Downward_Facing_Balance/0.jpg" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps</span></div>
+    </div>
+
+    <div class="sub-header muscle">Chest (4 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine chest press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Machine_Bench_Press/0.jpg" alt="Machine chest press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press/0.jpg" alt="DB flat bench press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB flat bench press</div>
+      <div class="ex-note">Machine = controlled movement for volume day.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline machine press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Incline_Chest_Press/0.jpg" alt="Incline machine press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg" alt="Incline DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Incline DB press (30 deg)</div>
+      <div class="ex-note">Focus on squeeze, not weight.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Pec deck machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butterfly/0.jpg" alt="Pec deck machine" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crossover/0.jpg" alt="Cable crossover low-to-high" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable crossover (low-to-high)</div>
+      <div class="ex-note">Isolation focus. Full stretch and squeeze.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Push-ups (knees if needed)</div><div class="ex-meta"><span class="tag sets">3 x AMRAP</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_-_Close_Triceps_Position/0.jpg" alt="Push-ups" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Floor_Press/0.jpg" alt="DB floor press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB floor press</div>
+      <div class="ex-note">Burnout set. Go to failure safely.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Triceps (3 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">V-bar pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_V-Bar_Attachment/0.jpg" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown_-_Rope_Attachment/0.jpg" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable rope pushdowns</div>
+      <div class="ex-note">Higher reps, focus on squeeze.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">DB kickbacks</div><div class="ex-meta"><span class="tag sets">3 x 12 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tricep_Dumbbell_Kickback/0.jpg" alt="DB kickbacks" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_-_Close_Triceps_Position/0.jpg" alt="Close-grip push-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Close-grip push-up</div>
+      <div class="ex-note">Light weight, full extension.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Overhead DB extension (2-hand)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg" alt="Overhead DB extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg" alt="Overhead cable extension" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Overhead cable extension</div>
+      <div class="ex-note">Light weight. Skip if elbow pain.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 10-12% incline, 5.5 km/h, 10 min | HR: 130-145 BPM</span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Behind_Head_Chest_Stretch/0.jpg" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_Circles/0.jpg" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><span>Deep breathing (diaphragmatic) - 1 min</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== FRIDAY ==================== -->
+<div class="day-section day-fri" id="day-fri">
+  <div class="day-header" onclick="toggle(this)">Friday - Legs (Ham/Glute) + Shoulders + Abs <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Treadmill walk (moderate incline) - 5 min</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Hip_Adductions/0.jpg" alt="Banded lateral walks" loading="lazy"><span>Banded lateral walks - 15 each direction</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Leg_Glute_Bridge/0.jpg" alt="Single-leg glute bridge" loading="lazy"><span>Single-leg glute bridge - 10 each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inchworm/0.jpg" alt="Inchworms" loading="lazy"><span>Inchworms - 8 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Good_Morning/0.jpg" alt="Good mornings" loading="lazy"><span>Bodyweight good mornings - 10 reps</span></div>
+    </div>
+
+    <div class="sub-header muscle">Legs - Hamstrings + Glutes (5 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Romanian deadlift (DBs)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/0.jpg" alt="Romanian deadlift" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Good_Morning_Pull_Through/0.jpg" alt="Cable pull-through" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable pull-through</div>
+      <div class="ex-note">DBs = easier grip for right elbow. Hinge at hips.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Hip thrust (barbell/Smith)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Hip_Thrust/0.jpg" alt="Hip thrust" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Glute_Bridge/0.jpg" alt="Glute bridge" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Glute bridge (DB on hips)</div>
+      <div class="ex-note">Pad the bar. Full glute squeeze at top.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable hip abduction</div><div class="ex-meta"><span class="tag sets">3 x 15 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Hip_Adductions/0.jpg" alt="Cable hip abduction" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Monster_Walk/0.jpg" alt="Monster walk" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Monster walk (banded)</div>
+      <div class="ex-note">Targets GLUTE MED/MIN. Key for hip stability.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Walking lunges (BW or light DB)</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg" alt="Walking lunges" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Rear_Lunge/0.jpg" alt="Reverse lunge" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse lunge</div>
+      <div class="ex-note">Bodyweight if grip bothers elbow.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Seated calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Calf_Raise/0.jpg" alt="Seated calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Calf_Press_On_The_Leg_Press_Machine/0.jpg" alt="Leg press calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Leg press calf raise</div>
+      <div class="ex-note">Targets soleus. Slow and controlled.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Shoulders (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Seated DB press (light)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternating_Kettlebell_Press/0.jpg" alt="Seated DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Shoulder_Press/0.jpg" alt="Machine shoulder press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine shoulder press</div>
+      <div class="ex-note">Lighter than Tuesday, higher reps.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Rear delt cable fly</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg" alt="Rear delt cable fly" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Bent-Over_Rear_Delt_Raise/0.jpg" alt="Seated rear delt raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated rear delt raise</div>
+      <div class="ex-note">Balances shoulder. Rear delts often neglected.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Abs (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Hanging knee raise</div><div class="ex-meta"><span class="tag sets">3 x 10</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg" alt="Hanging knee raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flat_Bench_Lying_Leg_Raise/0.jpg" alt="Captain's chair knee raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Captain's chair knee raise</div>
+      <div class="ex-note">Controlled - no swinging.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable crunch (kneeling)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg" alt="Cable crunch" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ab_Crunch_Machine/0.jpg" alt="Ab crunch machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Ab crunch machine</div>
+      <div class="ex-note">Targets UPPER ABS. Squeeze at bottom.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Stairclimber</strong> (moderate pace) - 10 min | RPE 5-6. Great glute/hamstring finisher.</span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg-Up_Hamstring_Stretch/0.jpg" alt="Standing hamstring stretch" loading="lazy"><span>Standing hamstring stretch (foot on bench) - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kneeling_Hip_Flexor/0.jpg" alt="Pigeon pose" loading="lazy"><span>Pigeon pose (hip flexor/glute) - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Butterfly/0.jpg" alt="Seated butterfly stretch" loading="lazy"><span>Seated butterfly stretch - 30s</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Hip_Flexors/0.jpg" alt="Hip flexor lunge stretch" loading="lazy"><span>Hip flexor lunge stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Downward_Facing_Balance/0.jpg" alt="Downward dog" loading="lazy"><span>Downward dog - 30s</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== SATURDAY ==================== -->
+<div class="day-section day-sat" id="day-sat">
+  <div class="day-header" onclick="toggle(this)">Saturday - Back + Biceps (Volume) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Jump rope (or pretend) - 3 min</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Round_The_World_Shoulder_Stretch/0.jpg" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Scapular_Pull-Up/0.jpg" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/External_Rotation_with_Band/0.jpg" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cat_Stretch/0.jpg" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps</span></div>
+    </div>
+
+    <div class="sub-header muscle">Back (4 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Chest-supported DB row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Incline_Row/0.jpg" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Dumbbell_Row/0.jpg" alt="DB single-arm row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB single-arm row</div>
+      <div class="ex-note">Chest support eliminates momentum.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Machine row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Machine row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg" alt="Seated cable row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated cable row (neutral grip)</div>
+      <div class="ex-note">Higher reps, focus on contraction.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Front_Lat_Pulldown/0.jpg" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Assisted_Pull-Up/0.jpg" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
+      <div class="ex-note">Lighter weight, slow negative.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
+      <div class="ex-note">Rear delt + posture work.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header muscle">Biceps (3 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable curl (EZ-bar)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Biceps_Cable_Curl/0.jpg" alt="Cable curl EZ-bar" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_One-Arm_Dumbbell_Curl_Over_Incline_Bench/0.jpg" alt="DB standing curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB standing curl</div>
+      <div class="ex-note">Constant tension. Don't hyperextend elbow.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Spider curls (incline bench)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spider_Curl/0.jpg" alt="Spider curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Curl/0.jpg" alt="Preacher curl machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Preacher curl machine</div>
+      <div class="ex-note">Strict form, no momentum.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable hammer curl (rope)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hammer_Curls_-_Rope_Attachment/0.jpg" alt="Cable hammer curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cross_Body_Hammer_Curl/0.jpg" alt="DB cross-body hammer curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB cross-body hammer curl</div>
+      <div class="ex-note">Neutral grip = elbow-safe.</div>
+      <div class="check-item" style="margin-top:8px"><input type="checkbox"><span>Completed</span></div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 10% incline, 6 km/h, 10 min | Light finish to end the week.</span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Shoulder_Stretch/0.jpg" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Elbow_Circles/0.jpg" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position</span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Floor_Hamstring_Stretch/0.jpg" alt="Seated forward fold" loading="lazy"><span>Seated forward fold - 30s</span></div>
+      <div class="check-item"><input type="checkbox"><span>Foam roll - upper back - 2 min</span></div>
+      <div class="check-item"><input type="checkbox"><span>Deep breathing (box breathing) - 1 min</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== SUNDAY ==================== -->
+<div class="day-section day-sun" id="day-sun">
+  <div class="day-header" onclick="toggle(this)">Sunday - Rest & Active Recovery <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Walk 20-30 min at easy pace (outdoors preferred)</span></div>
+      <div class="check-item"><input type="checkbox"><span>Foam roll any sore areas - 5-10 min</span></div>
+      <div class="check-item"><input type="checkbox"><span>Stretch - repeat any cool-down stretches that felt good during the week</span></div>
+      <div class="check-item"><input type="checkbox"><span>Hydrate - 3+ liters of water</span></div>
+      <div class="check-item"><input type="checkbox"><span>Sleep - aim for 7-8 hours</span></div>
+      <div class="check-item"><input type="checkbox"><span>No gym work</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- PROGRESSIVE OVERLOAD -->
+<div class="day-section">
+  <div class="day-header" style="background:#374151" onclick="toggle(this)">Progressive Overload (Weeks 1-8) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="info-table">
+      <tr><th>Weeks</th><th>What to Do</th></tr>
+      <tr><td>1-2</td><td>Learn all movements. Light weights (RPE 5-6). Focus 100% on form.</td></tr>
+      <tr><td>3-4</td><td>Increase weight by ~2 kg per DB exercise, ~5 kg per machine.</td></tr>
+      <tr><td>5-6</td><td>Add 1 set to compound lifts (to 4 sets). Increase planks to 40-45s.</td></tr>
+      <tr><td>7-8</td><td>Increase weight again. Reduce rest by 10-15s. Add 2 min to cardio.</td></tr>
+      <tr><td>Every 4 wks</td><td>Deload week - drop weights 40%, keep all movements.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- NUTRITION -->
+<div class="day-section">
+  <div class="day-header" style="background:#374151" onclick="toggle(this)">Nutrition Guidelines <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="info-table">
+      <tr><th>Macro</th><th>Daily Target</th><th>Notes</th></tr>
+      <tr><td>Calories</td><td>1,700-1,850 kcal</td><td>Slight deficit (~300-400 below maintenance)</td></tr>
+      <tr><td>Protein</td><td>120-130g</td><td>Critical for muscle growth + fat loss (~2g/kg)</td></tr>
+      <tr><td>Carbs</td><td>150-180g</td><td>Fuel workouts. Prioritize around training.</td></tr>
+      <tr><td>Fats</td><td>45-55g</td><td>Don't go below 40g - hormone health</td></tr>
+      <tr><td>Water</td><td>3-3.5 liters</td><td>More on training days</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- WARNING SIGNS -->
+<div class="day-section">
+  <div class="day-header" style="background:#c0392b" onclick="toggle(this)">When to Stop & Switch to Alternate <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="info-table">
+      <tr><th>Warning Sign</th><th>Action</th></tr>
+      <tr><td>Sharp pain at right elbow</td><td>Stop immediately - use the alternate exercise</td></tr>
+      <tr><td>Collarbone ache during press</td><td>Switch to floor press or machine variant</td></tr>
+      <tr><td>Joint clicking with pain</td><td>Stop that exercise for the day</td></tr>
+      <tr><td>Numbness/tingling in arm/hand</td><td>Stop workout, consult doctor if persists</td></tr>
+      <tr><td>Muscle soreness (DOMS)</td><td>Normal - continue with lighter weight</td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// Toggle day sections open/close
+function toggle(header) {
+  var content = header.nextElementSibling;
+  header.classList.toggle('collapsed');
+  content.classList.toggle('hidden');
+}
+
+// Update strikethrough class on a check-item
+function updateCheckedClass(checkbox) {
+  var item = checkbox.closest('.check-item');
+  if (item) {
+    if (checkbox.checked) {
+      item.classList.add('checked');
+    } else {
+      item.classList.remove('checked');
+    }
+  }
+}
+
+// Update progress bar for a day section
+function updateProgress(section) {
+  var checkboxes = section.querySelectorAll('.day-content input[type="checkbox"]');
+  var checked = 0;
+  for (var i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) checked++;
+  }
+  var total = checkboxes.length;
+  var bar = section.querySelector('.progress-fill');
+  var text = section.querySelector('.progress-text');
+  if (bar && text) {
+    bar.style.width = total ? (checked / total * 100) + '%' : '0%';
+    text.textContent = checked + ' / ' + total + ' completed';
+  }
+}
+
+// Reset all checkboxes in a day
+function resetDay(btn) {
+  var section = btn.closest('.day-section');
+  var checkboxes = section.querySelectorAll('input[type="checkbox"]');
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = false;
+    updateCheckedClass(checkboxes[i]);
+  }
+  updateProgress(section);
+  saveState();
+}
+
+// Save checkbox state to localStorage
+function saveState() {
+  var state = {};
+  var sections = document.querySelectorAll('.day-section[id]');
+  for (var s = 0; s < sections.length; s++) {
+    var section = sections[s];
+    var id = section.id;
+    var checks = [];
+    var cbs = section.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < cbs.length; i++) {
+      checks.push(cbs[i].checked);
+    }
+    state[id] = checks;
+  }
+  try { localStorage.setItem('workout-checklist-v2', JSON.stringify(state)); } catch(e) {}
+}
+
+// Load checkbox state from localStorage
+function loadState() {
+  try {
+    var state = JSON.parse(localStorage.getItem('workout-checklist-v2'));
+    if (!state) return;
+    var sections = document.querySelectorAll('.day-section[id]');
+    for (var s = 0; s < sections.length; s++) {
+      var section = sections[s];
+      var id = section.id;
+      if (state[id]) {
+        var checkboxes = section.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < state[id].length; i++) {
+          if (checkboxes[i]) {
+            checkboxes[i].checked = state[id][i];
+            updateCheckedClass(checkboxes[i]);
+          }
+        }
+        updateProgress(section);
+      }
+    }
+  } catch(e) {}
+}
+
+// Handle checkbox changes via event delegation
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.type === 'checkbox') {
+    updateCheckedClass(e.target);
+    var section = e.target.closest('.day-section[id]');
+    if (section) updateProgress(section);
+    saveState();
+  }
+}, false);
+
+// iOS fix: tapping on a label/check-item should toggle the checkbox
+// This handles the case where iOS doesn't propagate the tap to the checkbox
+document.addEventListener('click', function(e) {
+  var item = e.target.closest('.check-item');
+  if (!item) return;
+  // If the click was directly on the checkbox, let it handle itself
+  if (e.target.type === 'checkbox') return;
+  var cb = item.querySelector('input[type="checkbox"]');
+  if (cb) {
+    cb.checked = !cb.checked;
+    updateCheckedClass(cb);
+    var section = item.closest('.day-section[id]');
+    if (section) updateProgress(section);
+    saveState();
+  }
+}, false);
+
+// Auto-expand today's workout, collapse others
+function expandToday() {
+  var days = ['day-sun','day-mon','day-tue','day-wed','day-thu','day-fri','day-sat'];
+  var today = days[new Date().getDay()];
+  var sections = document.querySelectorAll('.day-section[id]');
+  for (var i = 0; i < sections.length; i++) {
+    var section = sections[i];
+    var header = section.querySelector('.day-header');
+    var content = section.querySelector('.day-content');
+    if (section.id === today) {
+      header.classList.remove('collapsed');
+      content.classList.remove('hidden');
+    } else {
+      header.classList.add('collapsed');
+      content.classList.add('hidden');
+    }
+  }
+}
+
+// Initialize progress counts on load
+function initProgress() {
+  var sections = document.querySelectorAll('.day-section[id]');
+  for (var i = 0; i < sections.length; i++) {
+    updateProgress(sections[i]);
+  }
+}
+
+loadState();
+initProgress();
+expandToday();
+</script>
+</body>
+</html>
