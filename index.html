@@ -64,7 +64,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .tag.rest { background: #f3f4f6; color: #6b7280; }
 
 .ex-images { display: flex; gap: 8px; margin: 10px 0; justify-content: center; }
-.ex-img-wrap { text-align: center; flex: 1; max-width: 140px; }
+.ex-img-wrap { text-align: center; flex: 1; max-width: 180px; }
 .ex-img-wrap img { width: 100%; height: 160px; object-fit: contain; background: #fff; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; }
 .ex-img-wrap.alt img { border-color: #fed7aa; }
 .img-label { display: block; font-size: 10px; font-weight: 600; margin-top: 2px; color: var(--muted); }
@@ -859,6 +859,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
 </div><!-- /container -->
 
+<div id="imgModal" class="img-modal" role="dialog">
+  <img id="imgModalImg" src="" alt="Exercise reference">
+</div>
+
 <script>
 // Toggle day sections open/close
 function toggle(header) {
@@ -957,12 +961,12 @@ document.addEventListener('change', function(e) {
   }
 }, false);
 
-// iOS fix: tapping on a label/check-item should toggle the checkbox
-// This handles the case where iOS doesn't propagate the tap to the checkbox
+// iOS fix: tapping on a check-item should toggle the checkbox
 document.addEventListener('click', function(e) {
+  // Skip if an image was tapped
+  if (e.target.tagName === 'IMG') return;
   var item = e.target.closest('.check-item');
   if (!item) return;
-  // If the click was directly on the checkbox, let it handle itself
   if (e.target.type === 'checkbox') return;
   var cb = item.querySelector('input[type="checkbox"]');
   if (cb) {
@@ -1008,27 +1012,22 @@ expandToday();
 // Image modal - tap any image to see it full screen
 var modal = document.getElementById('imgModal');
 var modalImg = document.getElementById('imgModalImg');
-var imgTapped = false;
 
-document.addEventListener('click', function(e) {
-  var img = e.target;
-  if (img.tagName === 'IMG' && (img.classList.contains('ref-img') || img.closest('.ex-img-wrap'))) {
-    e.stopImmediatePropagation();
+var allImages = document.querySelectorAll('.ref-img, .ex-img-wrap img');
+for (var i = 0; i < allImages.length; i++) {
+  allImages[i].addEventListener('click', function(e) {
+    e.stopPropagation();
     e.preventDefault();
-    imgTapped = true;
-    modalImg.src = img.src;
+    modalImg.src = this.src;
     modal.classList.add('active');
-  }
-}, true);
+  }, false);
+}
 
 modal.addEventListener('click', function() {
   modal.classList.remove('active');
   modalImg.src = '';
-});
+}, false);
 </script>
 
-<div id="imgModal" class="img-modal" role="dialog">
-  <img id="imgModalImg" src="" alt="Exercise reference">
-</div>
 </body>
 </html>
