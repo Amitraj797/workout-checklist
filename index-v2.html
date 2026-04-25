@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6-Day Workout Plan v2 - 2x/Week (Elbow-Safe)</title>
+<style>
+:root {
+  --primary: #1e3c78;
+  --accent: #2d6cdf;
+  --success: #1a8a4a;
+  --warning: #c45a20;
+  --danger: #c0392b;
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #e2e8f0;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 0; -webkit-tap-highlight-color: transparent; }
+.container { max-width: 800px; margin: 0 auto; padding: 16px; }
+
+.cover { background: linear-gradient(135deg, #1e3c78 0%, #2d6cdf 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 0 0 24px 24px; margin-bottom: 20px; }
+.cover h1 { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+.cover p { font-size: 14px; opacity: 0.85; }
+.cover .badges { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.cover .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+
+.profile-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+.profile-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.profile-table td:first-child { font-weight: 600; width: 40%; color: var(--muted); }
+
+.day-section { background: var(--card); border-radius: var(--radius); margin: 16px 0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.day-header { padding: 16px 20px; font-size: 18px; font-weight: 700; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.day-header .arrow { transition: transform 0.3s; font-size: 14px; }
+.day-header.collapsed .arrow { transform: rotate(-90deg); }
+.day-content { padding: 0 16px 16px; }
+.day-content.hidden { display: none; }
+
+.day-mon .day-header { background: #1e3c78; }
+.day-tue .day-header { background: #1a6b3a; }
+.day-wed .day-header { background: #7c3aed; }
+.day-thu .day-header { background: #b45309; }
+.day-fri .day-header { background: #be185d; }
+.day-sat .day-header { background: #0f766e; }
+.day-sun .day-header { background: #64748b; }
+
+.sub-header { font-size: 15px; font-weight: 700; margin: 16px 0 8px; padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; }
+.sub-header.warmup { background: #ecfdf5; color: #065f46; }
+.sub-header.muscle { background: #eff6ff; color: #1e3a8a; }
+.sub-header.cardio { background: #fef2f2; color: #991b1b; }
+.sub-header.cooldown { background: #f5f3ff; color: #5b21b6; }
+
+.exercise-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 8px 0; }
+.ex-header { display: flex; align-items: flex-start; gap: 10px; }
+.ex-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.ex-info { flex: 1; }
+.ex-name { font-weight: 700; font-size: 14px; }
+.ex-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.tag { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+.tag.sets { background: #d1fae5; color: #065f46; }
+.tag.rest { background: #f3f4f6; color: #6b7280; }
+
+.ex-images { display: flex; gap: 8px; margin: 10px 0; justify-content: center; }
+.ex-img-wrap { text-align: center; flex: 1; max-width: 180px; }
+.ex-img-wrap img { width: 100%; height: 160px; object-fit: contain; background: #fff; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; }
+.ex-img-wrap.alt img { border-color: #fed7aa; }
+.img-label { display: block; font-size: 10px; font-weight: 600; margin-top: 2px; color: var(--muted); }
+.ex-img-wrap.alt .img-label { color: var(--warning); }
+
+.ex-alt { font-size: 12px; color: var(--warning); margin: 4px 0; }
+.ex-note { font-size: 11px; color: var(--danger); font-style: italic; }
+
+.ex-breathing { font-size: 12px; color: #0369a1; background: #f0f9ff; padding: 6px 10px; border-radius: 6px; margin: 8px 0 4px; border-left: 3px solid #0ea5e9; }
+.breathing-hint { display: block; font-size: 11px; color: #0369a1; margin-top: 2px; font-style: italic; }
+
+.set-tracker { margin: 8px 0 0; padding: 8px; background: #fff; border: 1px solid var(--border); border-radius: 8px; }
+.set-rest { font-size: 11px; color: #7c3aed; padding: 2px 0 2px 30px; font-weight: 600; }
+
+.checklist { margin: 8px 0; }
+.check-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 13px; cursor: pointer; border-bottom: 1px solid #f1f5f9; -webkit-tap-highlight-color: transparent; }
+.check-item:last-child { border-bottom: none; }
+.check-item input[type="checkbox"] { -webkit-appearance: checkbox; appearance: checkbox; margin: 0; width: 20px; height: 20px; min-width: 20px; min-height: 20px; accent-color: var(--success); flex-shrink: 0; cursor: pointer; touch-action: manipulation; }
+.check-item span { flex: 1; }
+.check-item.checked span { text-decoration: line-through; color: var(--muted); }
+
+.ref-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 2px solid var(--border); flex-shrink: 0; cursor: pointer; pointer-events: auto; }
+
+.img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.img-modal.active { display: flex; }
+.img-modal img { max-width: 98vw; max-height: 95vh; object-fit: contain; border-radius: 12px; background: #fff; padding: 10px; }
+
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0; }
+.tracker { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 500px; }
+.tracker th { background: var(--primary); color: white; padding: 6px 8px; text-align: center; font-size: 11px; position: sticky; top: 0; }
+.tracker td { border: 1px solid var(--border); padding: 6px 8px; text-align: center; min-width: 48px; }
+.tracker td:first-child { text-align: left; font-weight: 600; font-size: 11px; min-width: 120px; background: #f8fafc; }
+.tracker td[contenteditable]:focus { background: #eff6ff; outline: 2px solid var(--accent); }
+
+.info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+.info-table th { background: var(--primary); color: white; padding: 8px; text-align: left; font-size: 12px; }
+.info-table td { padding: 8px; border-bottom: 1px solid var(--border); }
+.info-table tr:nth-child(even) td { background: #f8fafc; }
+
+.progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; margin: 8px 0; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--success); border-radius: 3px; transition: width 0.3s; }
+.progress-text { font-size: 11px; color: var(--muted); text-align: right; }
+
+.reset-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 11px; padding: 4px 12px; border-radius: 6px; cursor: pointer; margin: 8px 0; }
+.reset-btn:hover { background: #fef2f2; color: var(--danger); border-color: var(--danger); }
+
+.timer-btn { display: inline-block; background: #0ea5e9; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 12px; cursor: pointer; margin-left: 6px; border: none; vertical-align: middle; line-height: 20px; }
+.timer-btn:active { background: #0284c7; }
+.set-rest .timer-btn { background: #7c3aed; }
+.set-rest .timer-btn:active { background: #6d28d9; }
+
+.set-inputs { display: flex; gap: 6px; margin-top: 6px; align-items: center; flex-wrap: wrap; }
+.set-inputs label { font-size: 10px; color: var(--muted); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.set-inputs input[type="number"] { width: 52px; padding: 4px 2px; font-size: 12px; border: 1px solid var(--border); border-radius: 6px; text-align: center; background: #fff; -moz-appearance: textfield; }
+.set-inputs input[type="number"]::-webkit-inner-spin-button,
+.set-inputs input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.set-inputs input[type="number"]:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+.set-inputs input[type="number"]::placeholder { color: #c0c7d0; font-size: 11px; }
+.set-prev { font-size: 10px; color: #7c3aed; font-weight: 600; margin-left: auto; white-space: nowrap; }
+.export-bar { display: flex; gap: 8px; justify-content: center; margin: 0 0 16px; flex-wrap: wrap; }
+.export-btn { background: linear-gradient(135deg,#1e3c78,#2d6cdf); color: #fff; border: none; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.export-btn:active { opacity: 0.85; }
+.export-btn.secondary { background: linear-gradient(135deg,#065f46,#1a8a4a); }
+.export-btn.danger { background: linear-gradient(135deg,#991b1b,#c0392b); }
+
+.floating-timer { position: fixed; bottom: 20px; right: 20px; background: #1e293b; color: #fff; border-radius: 16px; padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9998; display: none; flex-direction: column; align-items: center; gap: 6px; min-width: 180px; }
+.floating-timer.active { display: flex; }
+.timer-label { font-size: 11px; color: #94a3b8; text-align: center; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.timer-display { font-size: 36px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: 2px; }
+.timer-display.warning { color: #f59e0b; }
+.timer-display.done { color: #22c55e; }
+.timer-controls { display: flex; gap: 8px; }
+.timer-controls button { border: none; border-radius: 8px; padding: 6px 16px; font-size: 13px; font-weight: 700; cursor: pointer; }
+.timer-play { background: #22c55e; color: #fff; }
+.timer-play:active { background: #16a34a; }
+.timer-pause { background: #f59e0b; color: #fff; }
+.timer-pause:active { background: #d97706; }
+.timer-stop { background: #ef4444; color: #fff; }
+.timer-stop:active { background: #dc2626; }
+
+@media (max-width: 480px) {
+  .container { padding: 8px; }
+  .cover { padding: 24px 16px; }
+  .cover h1 { font-size: 22px; }
+  .day-header { font-size: 15px; padding: 14px 16px; }
+  .ex-images { flex-direction: column; align-items: center; }
+  .ex-images { flex-direction: column; align-items: center; }
+  .ex-img-wrap { max-width: 220px; }
+  .exercise-card { padding: 10px; }
+  .tracker { font-size: 11px; }
+  .check-item { padding: 12px 0; font-size: 14px; }
+  .check-item input[type="checkbox"] { width: 22px; height: 22px; min-width: 22px; min-height: 22px; }
+  .sub-header { font-size: 14px; }
+  .ref-img { width: 54px; height: 54px; }
+  .ex-img-wrap img { height: 180px; }
+  .set-inputs { gap: 4px; }
+  .set-inputs input[type="number"] { width: 46px; font-size: 11px; }
+  .set-prev { font-size: 9px; }
+}
+
+@media print {
+  .day-content.hidden { display: block !important; }
+  .day-header .arrow { display: none; }
+  .exercise-card { break-inside: avoid; }
+  .reset-btn { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>6-DAY WORKOUT PLAN <small style="font-size:14px;background:rgba(255,255,255,0.2);padding:2px 10px;border-radius:8px;">v2</small></h1>
+  <p>2x/Week Per Muscle &middot; 2 Muscles Per Day &middot; Elbow-Safe Edition</p>
+  <div class="badges">
+    <span class="badge">Injury-Aware</span>
+    <span class="badge">2x Frequency</span>
+    <span class="badge">Every Exercise Has an Alternate</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- PROFILE -->
+<div class="day-section">
+  <div class="day-header" style="background:#374151" onclick="toggle(this)">Profile & Overview <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="profile-table">
+      <tr><td>Age / Sex</td><td>32 / Male</td></tr>
+      <tr><td>Weight / Height</td><td>66 kg / 165 cm</td></tr>
+      <tr><td>BMI / Body Fat</td><td>23.4 / 33.1%</td></tr>
+      <tr><td>Goal</td><td>Fat loss + Muscle gain + Fitness + Flexibility</td></tr>
+      <tr><td>Injuries</td><td>Right elbow (healed), Left clavicle (healed)</td></tr>
+      <tr><td>Equipment</td><td>Full Gym</td></tr>
+      <tr><td>Schedule</td><td>Mon-Sat training, Sunday rest</td></tr>
+    </table>
+
+    <div class="sub-header muscle">Weekly Split</div>
+    <table class="info-table">
+      <tr><th>Day</th><th>Muscle 1</th><th>Muscle 2</th><th>Time</th></tr>
+      <tr><td>Monday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
+      <tr><td>Tuesday</td><td>Legs (Quad)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
+      <tr><td>Wednesday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
+      <tr><td>Thursday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
+      <tr><td>Friday</td><td>Legs (Ham/Glute)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
+      <tr><td>Saturday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
+      <tr><td>Sunday</td><td colspan="3">REST / Active Recovery</td></tr>
+    </table>
+
+    <div class="sub-header muscle">Training Approach</div>
+    <table class="info-table">
+      <tr><th>Days</th><th>Focus</th><th>Reps</th><th>Rest</th></tr>
+      <tr><td>Mon / Wed</td><td>Strength (heavier)</td><td>10-12</td><td>90s</td></tr>
+      <tr><td>Thu / Sat</td><td>Volume (lighter)</td><td>12-15</td><td>60s</td></tr>
+      <tr><td>Tue</td><td>Quad-focused legs</td><td>10-15</td><td>60-90s</td></tr>
+      <tr><td>Fri</td><td>Ham/Glute-focused legs</td><td>10-15</td><td>60-90s</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- INJURY RULES -->
+<div class="day-section">
+  <div class="day-header" style="background:#c0392b" onclick="toggle(this)">Injury Safety Rules <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <div class="sub-header" style="background:#fef2f2;color:#991b1b">Right Elbow (Healed Fracture)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Use neutral/hammer grip on all curls and presses</span></div>
+      <div class="check-item"><input type="checkbox"><span>No skull crushers, no heavy barbell curls</span></div>
+      <div class="check-item"><input type="checkbox"><span>Wear an elbow sleeve on upper body days</span></div>
+      <div class="check-item"><input type="checkbox"><span>Stop any exercise causing sharp elbow pain - switch to alternate</span></div>
+    </div>
+    <div class="sub-header" style="background:#fef2f2;color:#991b1b">Left Clavicle (Healed Fracture)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Dumbbells only for chest pressing (never barbell)</span></div>
+      <div class="check-item"><input type="checkbox"><span>Machine shoulder press only - no barbell overhead press</span></div>
+      <div class="check-item"><input type="checkbox"><span>No wide-grip pulldowns or dips for weeks 1-4</span></div>
+      <div class="check-item"><input type="checkbox"><span>If collarbone discomfort on bench - switch to floor press</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MONDAY ==================== -->
+<div class="day-section day-mon" id="day-mon">
+  <div class="day-header" onclick="toggle(this)">Monday - Chest + Triceps (Strength) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Brisk treadmill walk (slight incline) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/3uj0Ozg.gif" alt="Arm circles" loading="lazy"><span>Arm circles (forward + backward) - 15 each direction<br><small class="breathing-hint">Breathe naturally, exhale on each full rotation</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/sTfvVsG.gif" alt="Band pull-aparts" loading="lazy"><span>Band pull-aparts - 15 reps<br><small class="breathing-hint">Exhale: pull band apart | Inhale: return to start</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps<br><small class="breathing-hint">Exhale: slide arms up | Inhale: slide arms down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/01qpYSe.gif" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps<br><small class="breathing-hint">Exhale: push up from floor | Inhale: transition into downward dog</small></span></div>
+    </div>
+
+    <div class="sub-header muscle">Chest (4 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB flat bench press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/SpYC0Kp.gif" alt="DB flat bench press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/DOoWcnA.gif" alt="Machine chest press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine chest press</div>
+      <div class="ex-note">Neutral grip option. Floor press if collarbone discomfort.</div>
+      <div class="ex-breathing">Inhale: lower dumbbells to chest | Exhale: press dumbbells up</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB press (30 deg)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ns0SIbU.gif" alt="Incline DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/jHAnWmT.gif" alt="Incline machine press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Incline machine press</div>
+      <div class="ex-note">Light weight - don't press above shoulder height.</div>
+      <div class="ex-breathing">Inhale: lower dumbbells to upper chest | Exhale: press up</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable crossover (high-to-low)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/UKWTJWR.gif" alt="Cable crossover" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/xXm4nYq.gif" alt="Decline DB fly" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Decline DB fly</div>
+      <div class="ex-note">Targets LOWER chest. Squeeze at bottom.</div>
+      <div class="ex-breathing">Inhale: open arms wide | Exhale: squeeze arms together at bottom</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">DB floor press</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/7gdLIXa.gif" alt="DB floor press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Push-ups" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Push-ups (knees if needed)</div>
+      <div class="ex-note">Shorter ROM = safest for collarbone.</div>
+      <div class="ex-breathing">Inhale: lower dumbbells until elbows touch floor | Exhale: press up</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Triceps (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable rope pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/dU605di.gif" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/gAwDzB3.gif" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> V-bar pushdowns</div>
+      <div class="ex-note">Elbows pinned to sides. Low elbow stress.</div>
+      <div class="ex-breathing">Inhale: let rope rise slowly | Exhale: push rope down and spread at bottom</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Overhead cable extension (rope)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/2IxROQ1.gif" alt="Overhead cable extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/qRZ5S1N.gif" alt="Single-arm cable pushdown" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Single-arm cable pushdown</div>
+      <div class="ex-note">Controlled movement. Stop if elbow aches.</div>
+      <div class="ex-breathing">Inhale: lower rope behind head | Exhale: extend arms overhead</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 10-12% incline, 5.5 km/h, 10 min | HR: 130-145 BPM<br><small class="breathing-hint">Breathe through nose, steady rhythm. Exhale through mouth if pace feels hard.</small></span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/QoHIhPl.gif" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: lean in to deepen the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2zNKRUB.gif" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/JbC2iaV.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps<br><small class="breathing-hint">Inhale: arch back (cow) | Exhale: round spine (cat)</small></span></div>
+      <div class="check-item"><input type="checkbox"><span>Deep breathing (diaphragmatic) - 1 min<br><small class="breathing-hint">Inhale 4s through nose (belly rises) | Exhale 6s through mouth (belly falls)</small></span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== TUESDAY ==================== -->
+<div class="day-section day-tue" id="day-tue">
+  <div class="day-header" onclick="toggle(this)">Tuesday - Legs (Quad) + Shoulders + Abs <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Stationary bike (easy pace) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/wfotm7S.gif" alt="Bodyweight squats" loading="lazy"><span>Bodyweight squats - 15 reps<br><small class="breathing-hint">Inhale: squat down | Exhale: stand up</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Leg swings" loading="lazy"><span>Leg swings (front-back + side-side) - 10 each leg, each direction<br><small class="breathing-hint">Breathe naturally, exhale on each forward swing</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/u0cNiij.gif" alt="Glute bridges" loading="lazy"><span>Glute bridges - 15 reps<br><small class="breathing-hint">Exhale: lift hips up and squeeze | Inhale: lower hips down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uL9CsKm.gif" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction, each foot<br><small class="breathing-hint">Breathe naturally, steady and relaxed</small></span></div>
+    </div>
+
+    <div class="sub-header muscle">Legs - Quads + Glutes + Hamstrings (5 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Goblet squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/wfotm7S.gif" alt="Goblet squat" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/10Z2DXU.gif" alt="Leg press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Leg press machine</div>
+      <div class="ex-note">Hold DB at chest. Depth over weight.</div>
+      <div class="ex-breathing">Inhale: squat down slowly | Exhale: drive up through heels</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Bulgarian split squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12 each leg</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/qx4fgX7.gif" alt="Bulgarian split squat" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/RRWFUcw.gif" alt="DB lunges" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Walking lunges (DB)</div>
+      <div class="ex-note">Rear foot on bench. Keep torso upright. Go deep for glute activation.</div>
+      <div class="ex-breathing">Inhale: lower into lunge | Exhale: drive up through front heel</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps each leg</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps each leg</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps each leg</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Leg extension machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/my33uHU.gif" alt="Leg extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Walking lunges" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Walking lunges (BW or light DB)</div>
+      <div class="ex-note">Squeeze at top for 1 second.</div>
+      <div class="ex-breathing">Exhale: extend legs up | Inhale: lower weight slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Lying leg curl machine</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/17lJ1kr.gif" alt="Lying leg curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/Zg3XY7P.gif" alt="Seated leg curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated leg curl machine</div>
+      <div class="ex-note">Controlled tempo: 2s up, 3s down.</div>
+      <div class="ex-breathing">Exhale: curl heels toward glutes | Inhale: lower slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Standing calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ykUOVze.gif" alt="Standing calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/dPmaUaU.gif" alt="DB calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB standing calf raise</div>
+      <div class="ex-note">Full stretch at bottom, pause at top.</div>
+      <div class="ex-breathing">Exhale: rise up on toes | Inhale: lower heels slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 4 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Shoulders (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine shoulder press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/PzQanLE.gif" alt="Machine shoulder press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/znQUdHY.gif" alt="Seated DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated DB press (light)</div>
+      <div class="ex-note">Machine = stable for collarbone. No barbell overhead.</div>
+      <div class="ex-breathing">Inhale: lower handles to shoulder level | Exhale: press overhead</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable lateral raise</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/goJ6ezq.gif" alt="Cable lateral raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/DsgkuIt.gif" alt="DB lateral raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB lateral raise (light)</div>
+      <div class="ex-note">Light weight, control the negative.</div>
+      <div class="ex-breathing">Exhale: raise arm out to side | Inhale: lower slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Abs (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Dead bug</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/iny3m5y.gif" alt="Dead bug" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/nCU1Ekp.gif" alt="Reverse crunch" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse crunch</div>
+      <div class="ex-note">Great for deep core activation. No spinal stress.</div>
+      <div class="ex-breathing">Exhale: extend opposite arm and leg out | Inhale: return to start</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10 each side</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10 each side</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10 each side</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable Pallof press</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/9pa4H5m.gif" alt="Cable Pallof press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/G7PXMlT.gif" alt="Banded Pallof press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Banded Pallof press</div>
+      <div class="ex-note">Anti-rotation. Builds core stability.</div>
+      <div class="ex-breathing">Exhale: press cable straight out | Inhale: bring hands back to chest</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10 each side</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10 each side</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10 each side</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 12% incline, 5.5 km/h, 10 min | Great quad/glute finisher + fat burn<br><small class="breathing-hint">Breathe through nose, steady rhythm. Exhale through mouth if pace feels hard.</small></span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/tFGKm99.gif" alt="Standing quad stretch" loading="lazy"><span>Standing quad stretch - 30s each side<br><small class="breathing-hint">Inhale: stand tall | Exhale: pull heel closer to glute</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/17bqEXD.gif" alt="Calf stretch" loading="lazy"><span>Calf stretch against wall - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: press heel into floor to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/yRYyfdA.gif" alt="Seated hamstring stretch" loading="lazy"><span>Seated hamstring stretch - 30s each side<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/wfotm7S.gif" alt="Deep squat hold" loading="lazy"><span>Deep squat hold (no weight) - 30s<br><small class="breathing-hint">Breathe deeply, exhale to sink hips lower</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uL9CsKm.gif" alt="Ankle circles" loading="lazy"><span>Ankle circles - 10 each direction<br><small class="breathing-hint">Breathe naturally, steady and relaxed</small></span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== WEDNESDAY ==================== -->
+<div class="day-section day-wed" id="day-wed">
+  <div class="day-header" onclick="toggle(this)">Wednesday - Back + Biceps (Strength) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Rowing machine (easy pace) - 5 min<br><small class="breathing-hint">Exhale: pull handle to chest | Inhale: extend arms forward</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/VtTbiP3.gif" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps<br><small class="breathing-hint">Exhale: arms go overhead and behind | Inhale: return to front</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps<br><small class="breathing-hint">Exhale: protract (push shoulder blades apart) | Inhale: retract</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/FWdVhcW.gif" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm<br><small class="breathing-hint">Exhale: rotate arm outward | Inhale: return to start</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/JbC2iaV.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps<br><small class="breathing-hint">Inhale: arch back, look up (cow) | Exhale: round spine, tuck chin (cat)</small></span></div>
+    </div>
+
+    <div class="sub-header muscle">Back (4 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rkg41Fb.gif" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/r1XNRYB.gif" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
+      <div class="ex-note">No wide grip - protect collarbone. Squeeze shoulder blades.</div>
+      <div class="ex-breathing">Exhale: pull bar down to upper chest | Inhale: let bar rise slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Seated cable row (neutral grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Seated cable row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Machine row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine row</div>
+      <div class="ex-note">Neutral grip = low elbow stress. Pull to lower chest.</div>
+      <div class="ex-breathing">Exhale: pull handle to lower chest | Inhale: extend arms forward</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">DB single-arm row</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/C0MA9bC.gif" alt="DB single-arm row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/7vG5o25.gif" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Chest-supported DB row</div>
+      <div class="ex-note">Support on bench. Start light on right arm.</div>
+      <div class="ex-breathing">Exhale: pull dumbbell to hip | Inhale: lower dumbbell slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10 each arm</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10 each arm</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10 each arm</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ZfyAGhK.gif" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
+      <div class="ex-note">Pull to forehead. Great for posture + rear delts.</div>
+      <div class="ex-breathing">Exhale: pull rope to forehead, rotate hands out | Inhale: return slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Biceps (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB hammer curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/IGtBdNT.gif" alt="DB hammer curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/HPlPoQA.gif" alt="Cable rope hammer curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable rope hammer curls</div>
+      <div class="ex-note">Neutral grip = safest for right elbow. No swinging.</div>
+      <div class="ex-breathing">Exhale: curl dumbbells up | Inhale: lower slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/F3xgbjF.gif" alt="Incline DB curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ye84CTU.gif" alt="Machine preacher curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine preacher curl</div>
+      <div class="ex-note">Light weight, full stretch. Skip if elbow pain.</div>
+      <div class="ex-breathing">Exhale: curl dumbbells up | Inhale: lower with full stretch</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (12 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Elliptical</strong> (moderate pace) - 12 min | RPE 5-6/10. Low impact. Light grip.<br><small class="breathing-hint">Breathe through nose, steady rhythm. Exhale through mouth if pace feels hard.</small></span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s<br><small class="breathing-hint">Inhale: lengthen body | Exhale: sink into the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/VtTbiP3.gif" alt="Tricep overhead stretch" loading="lazy"><span>Tricep overhead stretch - 30s each side<br><small class="breathing-hint">Inhale: reach tall | Exhale: pull elbow deeper behind head</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/bWlZvXh.gif" alt="Child's pose" loading="lazy"><span>Child's pose - 45s<br><small class="breathing-hint">Inhale: expand ribcage into back | Exhale: sink hips deeper toward heels</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/oQRJYkC.gif" alt="Neck stretches" loading="lazy"><span>Neck stretches (side tilt + rotation) - 20s each direction<br><small class="breathing-hint">Inhale: return to center | Exhale: tilt head gently to side</small></span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== THURSDAY ==================== -->
+<div class="day-section day-thu" id="day-thu">
+  <div class="day-header" onclick="toggle(this)">Thursday - Chest + Triceps (Volume) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Brisk treadmill walk (slight incline) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/3uj0Ozg.gif" alt="Arm circles" loading="lazy"><span>Arm circles (forward + backward) - 15 each direction<br><small class="breathing-hint">Breathe naturally, exhale on each full rotation</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/sTfvVsG.gif" alt="Band pull-aparts" loading="lazy"><span>Band pull-aparts - 15 reps<br><small class="breathing-hint">Exhale: pull band apart | Inhale: return to start</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Wall slides" loading="lazy"><span>Wall slides (scapular activation) - 10 reps<br><small class="breathing-hint">Exhale: slide arms up | Inhale: slide arms down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/01qpYSe.gif" alt="Push-up to downward dog" loading="lazy"><span>Push-up to downward dog - 8 reps<br><small class="breathing-hint">Exhale: push up from floor | Inhale: transition into downward dog</small></span></div>
+    </div>
+
+    <div class="sub-header muscle">Chest (4 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine chest press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/DOoWcnA.gif" alt="Machine chest press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/SpYC0Kp.gif" alt="DB flat bench press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB flat bench press</div>
+      <div class="ex-note">Machine = controlled movement for volume day.</div>
+      <div class="ex-breathing">Inhale: let handles come back to chest | Exhale: press forward</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline machine press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/jHAnWmT.gif" alt="Incline machine press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ns0SIbU.gif" alt="Incline DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Incline DB press (30 deg)</div>
+      <div class="ex-note">Focus on squeeze, not weight.</div>
+      <div class="ex-breathing">Inhale: lower handles to upper chest | Exhale: press up</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Pec deck machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/v3xmPAR.gif" alt="Pec deck machine" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/UKWTJWR.gif" alt="Cable crossover low-to-high" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable crossover (low-to-high)</div>
+      <div class="ex-note">Isolation focus. Full stretch and squeeze.</div>
+      <div class="ex-breathing">Inhale: open arms wide | Exhale: squeeze arms together</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Push-ups (knees if needed)</div><div class="ex-meta"><span class="tag sets">3 x AMRAP</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Push-ups" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/7gdLIXa.gif" alt="DB floor press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB floor press</div>
+      <div class="ex-note">Burnout set. Go to failure safely.</div>
+      <div class="ex-breathing">Inhale: lower chest to floor | Exhale: push up</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - AMRAP</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - AMRAP</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - AMRAP</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Triceps (2 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">V-bar pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/gAwDzB3.gif" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/dU605di.gif" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable rope pushdowns</div>
+      <div class="ex-note">Higher reps, focus on squeeze.</div>
+      <div class="ex-breathing">Inhale: let bar rise slowly | Exhale: push bar down</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">DB kickbacks</div><div class="ex-meta"><span class="tag sets">3 x 12 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/W6PxUkg.gif" alt="DB kickbacks" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Close-grip push-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Close-grip push-up</div>
+      <div class="ex-note">Light weight, full extension.</div>
+      <div class="ex-breathing">Exhale: extend arm back fully | Inhale: lower dumbbell</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 each arm</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 each arm</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 each arm</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 10-12% incline, 5.5 km/h, 10 min | HR: 130-145 BPM<br><small class="breathing-hint">Breathe through nose, steady rhythm. Exhale through mouth if pace feels hard.</small></span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/QoHIhPl.gif" alt="Doorway chest stretch" loading="lazy"><span>Doorway chest stretch - 30s each side<br><small class="breathing-hint">Inhale deeply | Exhale: lean in to deepen the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2zNKRUB.gif" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/JbC2iaV.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow spinal mobilization - 10 reps<br><small class="breathing-hint">Inhale: arch back (cow) | Exhale: round spine (cat)</small></span></div>
+      <div class="check-item"><input type="checkbox"><span>Deep breathing (diaphragmatic) - 1 min<br><small class="breathing-hint">Inhale 4s through nose (belly rises) | Exhale 6s through mouth (belly falls)</small></span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== FRIDAY ==================== -->
+<div class="day-section day-fri" id="day-fri">
+  <div class="day-header" onclick="toggle(this)">Friday - Legs (Ham/Glute) + Shoulders + Abs <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8-10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Treadmill walk (moderate incline) - 5 min<br><small class="breathing-hint">Breathe naturally through nose, steady rhythm</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/c8f5cSY.gif" alt="Banded lateral walks" loading="lazy"><span>Banded lateral walks - 15 each direction<br><small class="breathing-hint">Breathe naturally, steady pace throughout</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/rmEukuS.gif" alt="Single-leg glute bridge" loading="lazy"><span>Single-leg glute bridge - 10 each side<br><small class="breathing-hint">Exhale: lift hips and squeeze glute | Inhale: lower hips</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/ZgsNQ6d.gif" alt="Inchworms" loading="lazy"><span>Inchworms - 8 reps<br><small class="breathing-hint">Exhale: walk hands out to plank | Inhale: walk hands back to feet</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/XlZ4lAC.gif" alt="Good mornings" loading="lazy"><span>Bodyweight good mornings - 10 reps<br><small class="breathing-hint">Inhale: hinge forward at hips | Exhale: stand back up</small></span></div>
+    </div>
+
+    <div class="sub-header muscle">Legs - Hamstrings + Glutes (5 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Romanian deadlift (DBs)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rR0LJzx.gif" alt="Romanian deadlift" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/OM46QHm.gif" alt="Cable pull-through" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Cable pull-through</div>
+      <div class="ex-note">DBs = easier grip for right elbow. Hinge at hips.</div>
+      <div class="ex-breathing">Inhale: hinge hips back, lower dumbbells | Exhale: drive hips forward, stand up</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10-12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10-12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Hip thrust (barbell/Smith)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/SNFfUff.gif" alt="Hip thrust" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/u0cNiij.gif" alt="Glute bridge" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Glute bridge (DB on hips)</div>
+      <div class="ex-note">Pad the bar. Full glute squeeze at top.</div>
+      <div class="ex-breathing">Exhale: thrust hips up and squeeze glutes | Inhale: lower hips down</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 90s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable hip abduction</div><div class="ex-meta"><span class="tag sets">3 x 15 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/c8f5cSY.gif" alt="Cable hip abduction" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/O95afRA.gif" alt="Monster walk" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Monster walk (banded)</div>
+      <div class="ex-note">Targets GLUTE MED/MIN. Key for hip stability.</div>
+      <div class="ex-breathing">Exhale: lift leg out to side | Inhale: return leg slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 each leg</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 each leg</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 each leg</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Walking lunges (BW or light DB)</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Walking lunges" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/SSsBDwB.gif" alt="Reverse lunge" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse lunge</div>
+      <div class="ex-note">Bodyweight if grip bothers elbow.</div>
+      <div class="ex-breathing">Inhale: step forward and lower into lunge | Exhale: drive up to next step</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10 each leg</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10 each leg</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10 each leg</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Seated calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/bOOdeyc.gif" alt="Seated calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ykHcWme.gif" alt="Leg press calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Leg press calf raise</div>
+      <div class="ex-note">Targets soleus. Slow and controlled.</div>
+      <div class="ex-breathing">Exhale: rise up on toes | Inhale: lower heels slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 4 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Shoulders (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Seated DB press (light)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/znQUdHY.gif" alt="Seated DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/PzQanLE.gif" alt="Machine shoulder press" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Machine shoulder press</div>
+      <div class="ex-note">Lighter than Tuesday, higher reps.</div>
+      <div class="ex-breathing">Inhale: lower dumbbells to shoulder level | Exhale: press overhead</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Rear delt cable fly</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Rear delt cable fly" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/mu5Guxt.gif" alt="Seated rear delt raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated rear delt raise</div>
+      <div class="ex-note">Balances shoulder. Rear delts often neglected.</div>
+      <div class="ex-breathing">Exhale: pull cables apart and back | Inhale: return slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Abs (2 exercises)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Hanging knee raise</div><div class="ex-meta"><span class="tag sets">3 x 10</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/I3tsCnC.gif" alt="Hanging knee raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/WhuFnR7.gif" alt="Captain's chair knee raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Captain's chair knee raise</div>
+      <div class="ex-note">Controlled - no swinging.</div>
+      <div class="ex-breathing">Exhale: raise knees toward chest | Inhale: lower legs slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 10 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 10 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 10 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable crunch (kneeling)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/WW95auq.gif" alt="Cable crunch" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/Wgaz7pm.gif" alt="Ab crunch machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Ab crunch machine</div>
+      <div class="ex-note">Targets UPPER ABS. Squeeze at bottom.</div>
+      <div class="ex-breathing">Exhale: crunch down, curl spine | Inhale: return to start slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 45s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Stairclimber</strong> (moderate pace) - 10 min | RPE 5-6. Great glute/hamstring finisher.<br><small class="breathing-hint">Breathe steadily through nose. Exhale through mouth on harder steps.</small></span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (5-7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/99rWm7w.gif" alt="Standing hamstring stretch" loading="lazy"><span>Standing hamstring stretch (foot on bench) - 30s each side<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper over leg</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/tFGKm99.gif" alt="Pigeon pose" loading="lazy"><span>Pigeon pose (hip flexor/glute) - 30s each side<br><small class="breathing-hint">Inhale: lift chest | Exhale: fold forward and sink deeper</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/v3xmPAR.gif" alt="Seated butterfly stretch" loading="lazy"><span>Seated butterfly stretch - 30s<br><small class="breathing-hint">Inhale: sit tall | Exhale: gently press knees toward floor</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2LQkNPW.gif" alt="Hip flexor lunge stretch" loading="lazy"><span>Hip flexor lunge stretch - 30s each side<br><small class="breathing-hint">Inhale: stand tall in lunge | Exhale: sink hips forward and down</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/01qpYSe.gif" alt="Downward dog" loading="lazy"><span>Downward dog - 30s<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: press heels toward floor</small></span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== SATURDAY ==================== -->
+<div class="day-section day-sat" id="day-sat">
+  <div class="day-header" onclick="toggle(this)">Saturday - Back + Biceps (Volume) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+
+    <div class="sub-header warmup">Warm-Up (8 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Jump rope (or pretend) - 3 min<br><small class="breathing-hint">Breathe naturally, steady rhythm through nose</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/VtTbiP3.gif" alt="Band dislocates" loading="lazy"><span>Band dislocates (shoulder mobility) - 10 reps<br><small class="breathing-hint">Exhale: arms go overhead and behind | Inhale: return to front</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/uTBt1HV.gif" alt="Scapular push-ups" loading="lazy"><span>Scapular push-ups - 10 reps<br><small class="breathing-hint">Exhale: protract (push shoulder blades apart) | Inhale: retract</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/FWdVhcW.gif" alt="DB external rotation" loading="lazy"><span>Light DB external rotation - 10 each arm<br><small class="breathing-hint">Exhale: rotate arm outward | Inhale: return to start</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/JbC2iaV.gif" alt="Cat-cow" loading="lazy"><span>Cat-cow - 10 reps<br><small class="breathing-hint">Inhale: arch back, look up (cow) | Exhale: round spine, tuck chin (cat)</small></span></div>
+    </div>
+
+    <div class="sub-header muscle">Back (4 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Chest-supported DB row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/7vG5o25.gif" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/C0MA9bC.gif" alt="DB single-arm row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB single-arm row</div>
+      <div class="ex-note">Chest support eliminates momentum.</div>
+      <div class="ex-breathing">Exhale: pull dumbbells up to sides | Inhale: lower slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Machine row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Machine row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Seated cable row" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Seated cable row (neutral grip)</div>
+      <div class="ex-note">Higher reps, focus on contraction.</div>
+      <div class="ex-breathing">Exhale: pull handle to lower chest | Inhale: extend arms forward</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rkg41Fb.gif" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/r1XNRYB.gif" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
+      <div class="ex-note">Lighter weight, slow negative.</div>
+      <div class="ex-breathing">Exhale: pull bar down to upper chest | Inhale: let bar rise slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12-15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12-15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ZfyAGhK.gif" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
+      <div class="ex-note">Rear delt + posture work.</div>
+      <div class="ex-breathing">Exhale: pull rope to forehead, rotate hands out | Inhale: return slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 15 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 15 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header muscle">Biceps (2 exercises - Volume)</div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable curl (EZ-bar)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/G08RZcQ.gif" alt="Cable curl EZ-bar" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/3s4NnTh.gif" alt="DB standing curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> DB standing curl</div>
+      <div class="ex-note">Constant tension. Don't hyperextend elbow.</div>
+      <div class="ex-breathing">Exhale: curl bar up | Inhale: lower bar slowly</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Spider curls (incline bench)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/2kattbR.gif" alt="Spider curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/qOgPVf6.gif" alt="Preacher curl machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
+      <div class="ex-alt"><strong>Alt:</strong> Preacher curl machine</div>
+      <div class="ex-note">Strict form, no momentum.</div>
+      <div class="ex-breathing">Exhale: curl dumbbells up | Inhale: lower with control</div>
+      <div class="set-tracker">
+        <div class="check-item"><input type="checkbox"><span>Set 1 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 2 - 12 reps</span></div>
+        <div class="set-rest">Rest 60s</div>
+        <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
+      </div>
+    </div>
+
+    <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span><strong>Incline treadmill walk</strong> - 10% incline, 6 km/h, 10 min | Light finish to end the week.<br><small class="breathing-hint">Breathe through nose, steady rhythm. Exhale through mouth if pace feels hard.</small></span></div>
+    </div>
+
+    <div class="sub-header cooldown">Post-Workout Stretching (7 min)</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Lat stretch" loading="lazy"><span>Lat stretch (hang from bar lightly) - 30s<br><small class="breathing-hint">Inhale: lengthen body | Exhale: sink into the stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/xifhB5W.gif" alt="Cross-body shoulder stretch" loading="lazy"><span>Cross-body shoulder stretch - 30s each side<br><small class="breathing-hint">Inhale: relax arm | Exhale: pull arm closer across body</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/2zNKRUB.gif" alt="Wrist stretch" loading="lazy"><span>Wrist flexor/extensor stretch - 20s each position<br><small class="breathing-hint">Breathe steadily through each hold, exhale to deepen</small></span></div>
+      <div class="check-item"><input type="checkbox"><img class="ref-img" src="https://static.exercisedb.dev/media/yRYyfdA.gif" alt="Seated forward fold" loading="lazy"><span>Seated forward fold - 30s<br><small class="breathing-hint">Inhale: lengthen spine | Exhale: fold forward deeper</small></span></div>
+      <div class="check-item"><input type="checkbox"><span>Foam roll - upper back - 2 min<br><small class="breathing-hint">Breathe deeply, exhale on tender spots to release tension</small></span></div>
+      <div class="check-item"><input type="checkbox"><span>Deep breathing (box breathing) - 1 min<br><small class="breathing-hint">Inhale 4s | Hold 4s | Exhale 4s | Hold 4s - repeat</small></span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- ==================== SUNDAY ==================== -->
+<div class="day-section day-sun" id="day-sun">
+  <div class="day-header" onclick="toggle(this)">Sunday - Rest & Active Recovery <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 0 completed</div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox"><span>Walk 20-30 min at easy pace (outdoors preferred)<br><small class="breathing-hint">Breathe naturally through nose, enjoy the fresh air</small></span></div>
+      <div class="check-item"><input type="checkbox"><span>Foam roll any sore areas - 5-10 min<br><small class="breathing-hint">Breathe deeply, exhale on tender spots to release tension</small></span></div>
+      <div class="check-item"><input type="checkbox"><span>Stretch - repeat any cool-down stretches that felt good during the week<br><small class="breathing-hint">Inhale to prepare | Exhale to deepen each stretch</small></span></div>
+      <div class="check-item"><input type="checkbox"><span>Hydrate - 3+ liters of water</span></div>
+      <div class="check-item"><input type="checkbox"><span>Sleep - aim for 7-8 hours</span></div>
+      <div class="check-item"><input type="checkbox"><span>No gym work</span></div>
+    </div>
+    <button class="reset-btn" onclick="resetDay(this)">Reset Day</button>
+  </div>
+</div>
+
+<!-- PROGRESSIVE OVERLOAD -->
+<div class="day-section">
+  <div class="day-header" style="background:#374151" onclick="toggle(this)">Progressive Overload (Weeks 1-8) <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="info-table">
+      <tr><th>Weeks</th><th>What to Do</th></tr>
+      <tr><td>1-2</td><td>Learn all movements. Light weights (RPE 5-6). Focus 100% on form.</td></tr>
+      <tr><td>3-4</td><td>Increase weight by ~2 kg per DB exercise, ~5 kg per machine.</td></tr>
+      <tr><td>5-6</td><td>Add 1 set to compound lifts (to 4 sets). Increase planks to 40-45s.</td></tr>
+      <tr><td>7-8</td><td>Increase weight again. Reduce rest by 10-15s. Add 2 min to cardio.</td></tr>
+      <tr><td>Every 4 wks</td><td>Deload week - drop weights 40%, keep all movements.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- NUTRITION -->
+<div class="day-section">
+  <div class="day-header" style="background:#374151" onclick="toggle(this)">Nutrition Guidelines <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="info-table">
+      <tr><th>Macro</th><th>Daily Target</th><th>Notes</th></tr>
+      <tr><td>Calories</td><td>1,700-1,850 kcal</td><td>Slight deficit (~300-400 below maintenance)</td></tr>
+      <tr><td>Protein</td><td>120-130g</td><td>Critical for muscle growth + fat loss (~2g/kg)</td></tr>
+      <tr><td>Carbs</td><td>150-180g</td><td>Fuel workouts. Prioritize around training.</td></tr>
+      <tr><td>Fats</td><td>45-55g</td><td>Don't go below 40g - hormone health</td></tr>
+      <tr><td>Water</td><td>3-3.5 liters</td><td>More on training days</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- WARNING SIGNS -->
+<div class="day-section">
+  <div class="day-header" style="background:#c0392b" onclick="toggle(this)">When to Stop & Switch to Alternate <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <table class="info-table">
+      <tr><th>Warning Sign</th><th>Action</th></tr>
+      <tr><td>Sharp pain at right elbow</td><td>Stop immediately - use the alternate exercise</td></tr>
+      <tr><td>Collarbone ache during press</td><td>Switch to floor press or machine variant</td></tr>
+      <tr><td>Joint clicking with pain</td><td>Stop that exercise for the day</td></tr>
+      <tr><td>Numbness/tingling in arm/hand</td><td>Stop workout, consult doctor if persists</td></tr>
+      <tr><td>Muscle soreness (DOMS)</td><td>Normal - continue with lighter weight</td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div id="imgModal" class="img-modal" role="dialog">
+  <img id="imgModalImg" src="" alt="Exercise reference">
+</div>
+
+<div id="floatingTimer" class="floating-timer">
+  <div class="timer-label" id="timerLabel">Timer</div>
+  <div class="timer-display" id="timerDisplay">0:00</div>
+  <div class="timer-controls">
+    <button class="timer-play" id="timerPlayBtn" onclick="timerToggle()">Start</button>
+    <button class="timer-stop" onclick="timerStop()">Close</button>
+  </div>
+</div>
+
+<script>
+function toggle(header) {
+  var content = header.nextElementSibling;
+  header.classList.toggle('collapsed');
+  content.classList.toggle('hidden');
+}
+
+function updateCheckedClass(checkbox) {
+  var item = checkbox.closest('.check-item');
+  if (item) {
+    if (checkbox.checked) {
+      item.classList.add('checked');
+    } else {
+      item.classList.remove('checked');
+    }
+  }
+}
+
+function updateProgress(section) {
+  var checkboxes = section.querySelectorAll('.day-content input[type="checkbox"]');
+  var checked = 0;
+  for (var i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) checked++;
+  }
+  var total = checkboxes.length;
+  var bar = section.querySelector('.progress-fill');
+  var text = section.querySelector('.progress-text');
+  if (bar && text) {
+    bar.style.width = total ? (checked / total * 100) + '%' : '0%';
+    text.textContent = checked + ' / ' + total + ' completed';
+  }
+}
+
+function resetDay(btn) {
+  var section = btn.closest('.day-section');
+  var checkboxes = section.querySelectorAll('input[type="checkbox"]');
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = false;
+    updateCheckedClass(checkboxes[i]);
+  }
+  updateProgress(section);
+  saveState();
+}
+
+function saveState() {
+  var state = {};
+  var sections = document.querySelectorAll('.day-section[id]');
+  for (var s = 0; s < sections.length; s++) {
+    var section = sections[s];
+    var id = section.id;
+    var checks = [];
+    var cbs = section.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < cbs.length; i++) {
+      checks.push(cbs[i].checked);
+    }
+    state[id] = checks;
+  }
+  try { localStorage.setItem('workout-checklist-v3', JSON.stringify(state)); } catch(e) {}
+}
+
+function loadState() {
+  try {
+    var state = JSON.parse(localStorage.getItem('workout-checklist-v3'));
+    if (!state) return;
+    var sections = document.querySelectorAll('.day-section[id]');
+    for (var s = 0; s < sections.length; s++) {
+      var section = sections[s];
+      var id = section.id;
+      if (state[id]) {
+        var checkboxes = section.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < state[id].length; i++) {
+          if (checkboxes[i]) {
+            checkboxes[i].checked = state[id][i];
+            updateCheckedClass(checkboxes[i]);
+          }
+        }
+        updateProgress(section);
+      }
+    }
+  } catch(e) {}
+}
+
+function autoStartTimer(checkbox) {
+  if (!checkbox.checked) return;
+  var item = checkbox.closest('.check-item');
+  if (!item) return;
+
+  // Case 1: Set completed inside exercise card
+  var setTracker = item.closest('.set-tracker');
+  if (setTracker) {
+    var next = item.nextElementSibling;
+    // If there's a rest row after this set, start that timer (rest between sets)
+    if (next && next.classList.contains('set-rest')) {
+      var btn = next.querySelector('.timer-btn');
+      if (btn) btn.click();
+      return;
+    }
+    // Last set of exercise — start rest timer before next exercise
+    var card = setTracker.closest('.exercise-card');
+    if (card) {
+      var restTag = card.querySelector('.tag.rest');
+      var restSecs = restTag ? parseSeconds(restTag.textContent) : 0;
+      if (restSecs > 0) {
+        var nextCard = card.nextElementSibling;
+        while (nextCard && !nextCard.classList.contains('exercise-card')) {
+          nextCard = nextCard.nextElementSibling;
+        }
+        if (nextCard) {
+          var nextName = nextCard.querySelector('.ex-name');
+          var label = 'Rest before ' + (nextName ? nextName.textContent : 'next exercise');
+          startTimer(restSecs, label);
+        }
+      }
+    }
+    return;
+  }
+
+  // Case 2: Cooldown/stretch/cardio item → find its own timer or next item's timer
+  var ownBtn = item.querySelector('.timer-btn');
+  if (ownBtn) {
+    ownBtn.click();
+    return;
+  }
+  // If this item has no timer, check the next check-item sibling
+  var checklist = item.closest('.checklist');
+  if (checklist) {
+    var next = item.nextElementSibling;
+    while (next) {
+      if (next.classList.contains('check-item')) {
+        var nextBtn = next.querySelector('.timer-btn');
+        if (nextBtn) { nextBtn.click(); return; }
+        break;
+      }
+      next = next.nextElementSibling;
+    }
+  }
+}
+
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.type === 'checkbox') {
+    updateCheckedClass(e.target);
+    var section = e.target.closest('.day-section[id]');
+    if (section) updateProgress(section);
+    saveState();
+    autoStartTimer(e.target);
+  }
+}, false);
+
+document.addEventListener('click', function(e) {
+  if (e.target.tagName === 'IMG') return;
+  if (e.target.type === 'number') return;
+  if (e.target.tagName === 'LABEL') return;
+  if (e.target.tagName === 'BUTTON') return;
+  if (e.target.closest('.set-inputs')) return;
+  var item = e.target.closest('.check-item');
+  if (!item) return;
+  if (e.target.type === 'checkbox') return;
+  var cb = item.querySelector('input[type="checkbox"]');
+  if (cb) {
+    cb.checked = !cb.checked;
+    updateCheckedClass(cb);
+    var section = item.closest('.day-section[id]');
+    if (section) updateProgress(section);
+    saveState();
+    autoStartTimer(cb);
+  }
+}, false);
+
+function expandToday() {
+  var days = ['day-sun','day-mon','day-tue','day-wed','day-thu','day-fri','day-sat'];
+  var today = days[new Date().getDay()];
+  var allSections = document.querySelectorAll('.day-section');
+  for (var i = 0; i < allSections.length; i++) {
+    var section = allSections[i];
+    var header = section.querySelector('.day-header');
+    var content = section.querySelector('.day-content');
+    if (section.id === today) {
+      header.classList.remove('collapsed');
+      content.classList.remove('hidden');
+    } else {
+      header.classList.add('collapsed');
+      content.classList.add('hidden');
+    }
+  }
+}
+
+function initProgress() {
+  var sections = document.querySelectorAll('.day-section[id]');
+  for (var i = 0; i < sections.length; i++) {
+    updateProgress(sections[i]);
+  }
+}
+
+loadState();
+initProgress();
+expandToday();
+
+var modal = document.getElementById('imgModal');
+var modalImg = document.getElementById('imgModalImg');
+
+var allImages = document.querySelectorAll('.ref-img, .ex-img-wrap img');
+for (var i = 0; i < allImages.length; i++) {
+  allImages[i].addEventListener('click', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    modalImg.src = this.src;
+    modal.classList.add('active');
+  }, false);
+}
+
+modal.addEventListener('click', function() {
+  modal.classList.remove('active');
+  modalImg.src = '';
+}, false);
+
+// === FLOATING TIMER ===
+var timerInterval = null;
+var timerSeconds = 0;
+var timerRunning = false;
+var timerTarget = 0;
+var timerWidget = document.getElementById('floatingTimer');
+var timerDisplay = document.getElementById('timerDisplay');
+var timerLabel = document.getElementById('timerLabel');
+var timerPlayBtn = document.getElementById('timerPlayBtn');
+var timerAudio = null;
+
+function startTimer(seconds, label) {
+  clearInterval(timerInterval);
+  timerTarget = seconds;
+  timerSeconds = seconds;
+  timerRunning = true;
+  timerLabel.textContent = label || 'Timer';
+  timerPlayBtn.textContent = 'Pause';
+  timerPlayBtn.className = 'timer-pause';
+  timerDisplay.className = 'timer-display';
+  timerWidget.classList.add('active');
+  renderTimer();
+  timerInterval = setInterval(tickTimer, 1000);
+}
+
+function tickTimer() {
+  if (!timerRunning) return;
+  timerSeconds--;
+  renderTimer();
+  if (timerSeconds <= 5 && timerSeconds > 0) {
+    timerDisplay.className = 'timer-display warning';
+  }
+  if (timerSeconds <= 0) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerDisplay.className = 'timer-display done';
+    timerDisplay.textContent = 'DONE!';
+    timerPlayBtn.textContent = 'Restart';
+    timerPlayBtn.className = 'timer-play';
+    try {
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var o = ac.createOscillator();
+      var g = ac.createGain();
+      o.connect(g); g.connect(ac.destination);
+      o.frequency.value = 800;
+      g.gain.value = 0.3;
+      o.start(); o.stop(ac.currentTime + 0.3);
+      setTimeout(function() {
+        var o2 = ac.createOscillator();
+        var g2 = ac.createGain();
+        o2.connect(g2); g2.connect(ac.destination);
+        o2.frequency.value = 1000;
+        g2.gain.value = 0.3;
+        o2.start(); o2.stop(ac.currentTime + 0.3);
+      }, 350);
+    } catch(e) {}
+  }
+}
+
+function renderTimer() {
+  var m = Math.floor(timerSeconds / 60);
+  var s = timerSeconds % 60;
+  timerDisplay.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function timerToggle() {
+  if (timerDisplay.textContent === 'DONE!') {
+    startTimer(timerTarget, timerLabel.textContent);
+    return;
+  }
+  if (timerRunning) {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    timerPlayBtn.textContent = 'Start';
+    timerPlayBtn.className = 'timer-play';
+  } else {
+    timerRunning = true;
+    timerPlayBtn.textContent = 'Pause';
+    timerPlayBtn.className = 'timer-pause';
+    timerInterval = setInterval(tickTimer, 1000);
+  }
+}
+
+function timerStop() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 0;
+  timerWidget.classList.remove('active');
+}
+
+function parseSeconds(text) {
+  var m;
+  m = text.match(/(\d+)\s*min/);
+  if (m) return parseInt(m[1]) * 60;
+  m = text.match(/(\d+)\s*s/);
+  if (m) return parseInt(m[1]);
+  return 0;
+}
+
+// === PROGRESSIVE OVERLOAD ===
+var PO_KEY = 'workout-overload-v1';
+var PO_HISTORY_KEY = 'workout-overload-history';
+
+function getWeekNumber() {
+  var start = localStorage.getItem('workout-week-start');
+  if (!start) {
+    var d = new Date();
+    d.setDate(d.getDate() - d.getDay() + 1);
+    start = d.toISOString().split('T')[0];
+    localStorage.setItem('workout-week-start', start);
+  }
+  var startDate = new Date(start);
+  var now = new Date();
+  var diff = Math.floor((now - startDate) / (7 * 24 * 60 * 60 * 1000));
+  return diff + 1;
+}
+
+function getCycleWeek() {
+  return ((getWeekNumber() - 1) % 3) + 1;
+}
+
+function getTargetReps(cycleWeek) {
+  if (cycleWeek === 1) return 10;
+  if (cycleWeek === 2) return 11;
+  return 12;
+}
+
+function loadOverloadData() {
+  try { return JSON.parse(localStorage.getItem(PO_KEY)) || {}; } catch(e) { return {}; }
+}
+
+function saveOverloadData(data) {
+  try { localStorage.setItem(PO_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadOverloadHistory() {
+  try { return JSON.parse(localStorage.getItem(PO_HISTORY_KEY)) || {}; } catch(e) { return {}; }
+}
+
+function saveOverloadHistory(data) {
+  try { localStorage.setItem(PO_HISTORY_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function buildExerciseKey(card) {
+  var name = card.querySelector('.ex-name');
+  var section = card.closest('.day-section');
+  var dayId = section ? section.id : 'unknown';
+  return dayId + '::' + (name ? name.textContent.trim() : 'ex');
+}
+
+function injectOverloadInputs() {
+  var weekNum = getWeekNumber();
+  var cycleWeek = getCycleWeek();
+  var targetReps = getTargetReps(cycleWeek);
+  var data = loadOverloadData();
+  var history = loadOverloadHistory();
+  var cycleNum = Math.floor((weekNum - 1) / 3) + 1;
+
+  var cards = document.querySelectorAll('.exercise-card');
+  for (var c = 0; c < cards.length; c++) {
+    var card = cards[c];
+    var exKey = buildExerciseKey(card);
+    if (!data[exKey]) data[exKey] = {};
+
+    var prevCycleKey = 'cycle' + (cycleNum - 1);
+    var prev = (history[exKey] && history[exKey][prevCycleKey]) ? history[exKey][prevCycleKey] : null;
+
+    var sets = card.querySelectorAll('.set-tracker .check-item');
+    for (var s = 0; s < sets.length; s++) {
+      var setItem = sets[s];
+      var setKey = exKey + '::set' + (s + 1);
+
+      var row = document.createElement('div');
+      row.className = 'set-inputs';
+
+      var weightLabel = document.createElement('label');
+      weightLabel.innerHTML = 'kg';
+      var weightInput = document.createElement('input');
+      weightInput.type = 'number';
+      weightInput.min = '0';
+      weightInput.step = '0.5';
+      weightInput.placeholder = '—';
+      weightInput.setAttribute('data-key', setKey + '::weight');
+      if (data[setKey + '::weight'] !== undefined) weightInput.value = data[setKey + '::weight'];
+      weightLabel.insertBefore(weightInput, weightLabel.firstChild);
+
+      var repsLabel = document.createElement('label');
+      repsLabel.innerHTML = 'reps';
+      var repsInput = document.createElement('input');
+      repsInput.type = 'number';
+      repsInput.min = '0';
+      repsInput.step = '1';
+      repsInput.placeholder = targetReps;
+      repsInput.setAttribute('data-key', setKey + '::reps');
+      if (data[setKey + '::reps'] !== undefined) repsInput.value = data[setKey + '::reps'];
+      repsLabel.insertBefore(repsInput, repsLabel.firstChild);
+
+      var rirLabel = document.createElement('label');
+      rirLabel.innerHTML = 'RIR';
+      var rirInput = document.createElement('input');
+      rirInput.type = 'number';
+      rirInput.min = '0';
+      rirInput.max = '5';
+      rirInput.step = '1';
+      rirInput.placeholder = '2';
+      rirInput.setAttribute('data-key', setKey + '::rir');
+      if (data[setKey + '::rir'] !== undefined) rirInput.value = data[setKey + '::rir'];
+      rirLabel.insertBefore(rirInput, rirLabel.firstChild);
+
+      row.appendChild(weightLabel);
+      row.appendChild(repsLabel);
+      row.appendChild(rirLabel);
+
+      if (prev && prev['set' + (s+1)]) {
+        var prevInfo = document.createElement('span');
+        prevInfo.className = 'set-prev';
+        prevInfo.textContent = 'Prev: ' + (prev['set'+(s+1)].weight || '—') + 'kg × ' + (prev['set'+(s+1)].reps || '—');
+        row.appendChild(prevInfo);
+      }
+
+      setItem.appendChild(row);
+    }
+
+    var tagSets = card.querySelector('.tag.sets');
+    if (tagSets) {
+      var original = tagSets.textContent;
+      var match = original.match(/^(\d+)\s*x\s*/);
+      if (match) {
+        tagSets.textContent = match[1] + ' x ' + targetReps;
+      }
+    }
+  }
+
+  saveOverloadData(data);
+
+  document.addEventListener('input', function(e) {
+    if (e.target.type === 'number' && e.target.getAttribute('data-key')) {
+      var d = loadOverloadData();
+      d[e.target.getAttribute('data-key')] = e.target.value === '' ? undefined : parseFloat(e.target.value);
+      saveOverloadData(d);
+    }
+  }, false);
+}
+
+function addWeekBanner() {
+  var weekNum = getWeekNumber();
+  var cycleWeek = getCycleWeek();
+  var targetReps = getTargetReps(cycleWeek);
+  var cycleNum = Math.floor((weekNum - 1) / 3) + 1;
+
+  var banner = document.createElement('div');
+  banner.style.cssText = 'background:linear-gradient(135deg,#7c3aed,#2d6cdf);color:#fff;padding:12px 20px;border-radius:12px;margin:0 0 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:13px;';
+  banner.innerHTML = '<div><strong>Week ' + weekNum + '</strong> (Cycle ' + cycleNum + ', Week ' + cycleWeek + '/3)</div>' +
+    '<div style="display:flex;gap:12px;align-items:center;">' +
+    '<span style="background:rgba(255,255,255,0.2);padding:3px 10px;border-radius:8px;font-weight:700;">Target: ' + targetReps + ' reps</span>' +
+    '<span style="font-size:11px;opacity:0.85;">' +
+    (cycleWeek === 3 ? 'Next week: increase weight, reset to 10 reps' : 'Next week: ' + getTargetReps(cycleWeek + 1) + ' reps') +
+    '</span></div>';
+  var container = document.querySelector('.container');
+  var firstSection = container.querySelector('.day-section');
+  container.insertBefore(banner, firstSection);
+}
+
+function archiveCycleIfNeeded() {
+  var weekNum = getWeekNumber();
+  var cycleNum = Math.floor((weekNum - 1) / 3) + 1;
+  var lastArchived = localStorage.getItem('workout-last-archived-cycle');
+  if (lastArchived && parseInt(lastArchived) >= cycleNum - 1) return;
+  if (cycleNum <= 1) return;
+
+  var data = loadOverloadData();
+  var history = loadOverloadHistory();
+  var prevCycleKey = 'cycle' + (cycleNum - 1);
+  var cards = document.querySelectorAll('.exercise-card');
+  for (var c = 0; c < cards.length; c++) {
+    var card = cards[c];
+    var exKey = buildExerciseKey(card);
+    var sets = card.querySelectorAll('.set-tracker .check-item');
+    if (!history[exKey]) history[exKey] = {};
+    if (!history[exKey][prevCycleKey]) history[exKey][prevCycleKey] = {};
+    for (var s = 0; s < sets.length; s++) {
+      var setKey = exKey + '::set' + (s + 1);
+      history[exKey][prevCycleKey]['set' + (s + 1)] = {
+        weight: data[setKey + '::weight'] || null,
+        reps: data[setKey + '::reps'] || null,
+        rir: data[setKey + '::rir'] || null
+      };
+    }
+  }
+  saveOverloadHistory(history);
+  localStorage.setItem('workout-last-archived-cycle', '' + (cycleNum - 1));
+}
+
+archiveCycleIfNeeded();
+injectOverloadInputs();
+addWeekBanner();
+
+function exportCSV() {
+  var weekNum = getWeekNumber();
+  var cycleWeek = getCycleWeek();
+  var cycleNum = Math.floor((weekNum - 1) / 3) + 1;
+  var data = loadOverloadData();
+  var rows = [['Day', 'Exercise', 'Set', 'Weight (kg)', 'Reps', 'RIR', 'Week', 'Cycle']];
+
+  var dayNames = {
+    'day-mon': 'Monday', 'day-tue': 'Tuesday', 'day-wed': 'Wednesday',
+    'day-thu': 'Thursday', 'day-fri': 'Friday', 'day-sat': 'Saturday'
+  };
+
+  var cards = document.querySelectorAll('.exercise-card');
+  for (var c = 0; c < cards.length; c++) {
+    var card = cards[c];
+    var section = card.closest('.day-section');
+    var dayId = section ? section.id : '';
+    var dayName = dayNames[dayId] || dayId;
+    var exName = card.querySelector('.ex-name');
+    var name = exName ? exName.textContent.trim() : '';
+    var exKey = buildExerciseKey(card);
+    var sets = card.querySelectorAll('.set-tracker .check-item');
+    for (var s = 0; s < sets.length; s++) {
+      var setKey = exKey + '::set' + (s + 1);
+      var w = data[setKey + '::weight'];
+      var r = data[setKey + '::reps'];
+      var ri = data[setKey + '::rir'];
+      if (w !== undefined || r !== undefined || ri !== undefined) {
+        rows.push([dayName, name, 'Set ' + (s+1), w || '', r || '', ri || '', weekNum, cycleNum]);
+      }
+    }
+  }
+
+  if (rows.length === 1) {
+    alert('No workout data to export yet. Enter some weights/reps first!');
+    return;
+  }
+
+  var csv = rows.map(function(r) {
+    return r.map(function(v) {
+      return '"' + String(v).replace(/"/g, '""') + '"';
+    }).join(',');
+  }).join('\n');
+
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'workout_week' + weekNum + '_cycle' + cycleNum + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportFullHistory() {
+  var data = loadOverloadData();
+  var history = loadOverloadHistory();
+  var weekNum = getWeekNumber();
+
+  var dayNames = {
+    'day-mon': 'Monday', 'day-tue': 'Tuesday', 'day-wed': 'Wednesday',
+    'day-thu': 'Thursday', 'day-fri': 'Friday', 'day-sat': 'Saturday'
+  };
+
+  var rows = [['Day', 'Exercise', 'Set', 'Cycle', 'Weight (kg)', 'Reps', 'RIR']];
+
+  var cards = document.querySelectorAll('.exercise-card');
+  for (var c = 0; c < cards.length; c++) {
+    var card = cards[c];
+    var section = card.closest('.day-section');
+    var dayId = section ? section.id : '';
+    var dayName = dayNames[dayId] || dayId;
+    var exName = card.querySelector('.ex-name');
+    var name = exName ? exName.textContent.trim() : '';
+    var exKey = buildExerciseKey(card);
+    var sets = card.querySelectorAll('.set-tracker .check-item');
+
+    var exHistory = history[exKey] || {};
+    var cycleKeys = Object.keys(exHistory).sort();
+    for (var ck = 0; ck < cycleKeys.length; ck++) {
+      var cycleData = exHistory[cycleKeys[ck]];
+      var cycleLabel = cycleKeys[ck].replace('cycle', 'Cycle ');
+      for (var s = 0; s < sets.length; s++) {
+        var sd = cycleData['set' + (s + 1)];
+        if (sd) {
+          rows.push([dayName, name, 'Set ' + (s+1), cycleLabel, sd.weight || '', sd.reps || '', sd.rir || '']);
+        }
+      }
+    }
+
+    var currentCycle = Math.floor((weekNum - 1) / 3) + 1;
+    for (var s2 = 0; s2 < sets.length; s2++) {
+      var setKey = exKey + '::set' + (s2 + 1);
+      var w = data[setKey + '::weight'];
+      var r = data[setKey + '::reps'];
+      var ri = data[setKey + '::rir'];
+      if (w !== undefined || r !== undefined || ri !== undefined) {
+        rows.push([dayName, name, 'Set ' + (s2+1), 'Cycle ' + currentCycle + ' (current)', w || '', r || '', ri || '']);
+      }
+    }
+  }
+
+  if (rows.length === 1) {
+    alert('No workout data to export yet!');
+    return;
+  }
+
+  var csv = rows.map(function(r) {
+    return r.map(function(v) {
+      return '"' + String(v).replace(/"/g, '""') + '"';
+    }).join(',');
+  }).join('\n');
+
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'workout_full_history.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function addExportButtons() {
+  var bar = document.createElement('div');
+  bar.className = 'export-bar';
+  bar.innerHTML = '<button class="export-btn" onclick="exportCSV()">&#128229; Export This Week</button>' +
+    '<button class="export-btn secondary" onclick="exportFullHistory()">&#128202; Export All History</button>';
+  var container = document.querySelector('.container');
+  var firstSection = container.querySelector('.day-section');
+  container.insertBefore(bar, firstSection);
+}
+
+addExportButtons();
+
+function injectTimerButtons() {
+  // Cooldown / stretch / cardio checklist items that mention time (skip warm-ups)
+  var checkItems = document.querySelectorAll('.checklist .check-item span');
+  for (var i = 0; i < checkItems.length; i++) {
+    var span = checkItems[i];
+    var prev = span.closest('.checklist').previousElementSibling;
+    if (prev && prev.classList.contains('warmup')) continue;
+    var text = span.textContent || '';
+    var secs = parseSeconds(text);
+    if (secs > 0) {
+      var btn = document.createElement('button');
+      btn.className = 'timer-btn';
+      btn.textContent = secs >= 60 ? Math.floor(secs/60) + 'm' : secs + 's';
+      btn.setAttribute('data-seconds', secs);
+      var labelText = text.split('\n')[0].trim();
+      if (labelText.length > 40) labelText = labelText.substring(0, 40) + '...';
+      btn.setAttribute('data-label', labelText);
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        startTimer(parseInt(this.getAttribute('data-seconds')), this.getAttribute('data-label'));
+      }, false);
+      var breathing = span.querySelector('.breathing-hint');
+      if (breathing) {
+        span.insertBefore(btn, breathing);
+      } else {
+        span.appendChild(btn);
+      }
+    }
+  }
+
+  // Set rest indicators
+  var restItems = document.querySelectorAll('.set-rest');
+  for (var j = 0; j < restItems.length; j++) {
+    var rest = restItems[j];
+    var restText = rest.textContent || '';
+    var restSecs = parseSeconds(restText);
+    if (restSecs > 0) {
+      var rbtn = document.createElement('button');
+      rbtn.className = 'timer-btn';
+      rbtn.textContent = restSecs + 's';
+      rbtn.setAttribute('data-seconds', restSecs);
+      rbtn.setAttribute('data-label', 'Rest between sets');
+      rbtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        startTimer(parseInt(this.getAttribute('data-seconds')), this.getAttribute('data-label'));
+      }, false);
+      rest.appendChild(rbtn);
+    }
+  }
+}
+
+injectTimerButtons();
+</script>
+
+</body>
+</html>
