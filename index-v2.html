@@ -124,6 +124,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .set-inputs input[type="number"]:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
 .set-inputs input[type="number"]::placeholder { color: #c0c7d0; font-size: 11px; }
 .set-prev { font-size: 10px; color: #7c3aed; font-weight: 600; margin-left: auto; white-space: nowrap; }
+.gear-tag { font-size: 9px; padding: 1px 6px; border-radius: 8px; font-weight: 700; display: inline-block; margin-left: 4px; vertical-align: middle; letter-spacing: 0.3px; }
+.gear-tag.wrist { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+.gear-tag.elbow { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+.gear-tag.belt { background: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; }
+
 .export-bar { display: flex; gap: 8px; justify-content: center; margin: 0 0 16px; flex-wrap: wrap; }
 .export-btn { background: linear-gradient(135deg,#1e3c78,#2d6cdf); color: #fff; border: none; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 .export-btn:active { opacity: 0.85; }
@@ -1834,6 +1839,70 @@ function addExportButtons() {
 }
 
 addExportButtons();
+
+// === GEAR TAGS ===
+function injectGearTags() {
+  var gearMap = {
+    'DB flat bench press': ['wrist', 'elbow'],
+    'Incline DB press (30 deg)': ['wrist', 'elbow'],
+    'Cable crossover (high-to-low)': ['elbow'],
+    'DB floor press': ['wrist', 'elbow'],
+    'Cable rope pushdowns': ['elbow'],
+    'Overhead cable extension (rope)': ['elbow'],
+    'Goblet squat (DB)': ['wrist', 'belt'],
+    'Bulgarian split squat (DB)': ['belt'],
+    'Lat pulldown (neutral/close grip)': ['elbow'],
+    'Seated cable row (neutral grip)': ['elbow'],
+    'DB single-arm row': ['wrist', 'elbow'],
+    'Face pulls (rope attachment)': ['elbow'],
+    'DB hammer curls': ['elbow'],
+    'Incline DB curls': ['elbow'],
+    'Machine chest press': ['elbow'],
+    'Incline machine press': ['elbow'],
+    'Pec deck machine': ['elbow'],
+    'Push-ups (knees if needed)': ['wrist', 'elbow'],
+    'V-bar pushdowns': ['elbow'],
+    'DB kickbacks': ['elbow'],
+    'Romanian deadlift (DBs)': ['wrist', 'belt'],
+    'Hip thrust (barbell/Smith)': ['belt'],
+    'Walking lunges (BW or light DB)': ['belt'],
+    'Seated DB press (light)': ['wrist', 'elbow'],
+    'Rear delt cable fly': ['elbow'],
+    'Chest-supported DB row': ['wrist', 'elbow'],
+    'Machine row': ['elbow'],
+    'Cable curl (EZ-bar)': ['elbow'],
+    'Spider curls (incline bench)': ['elbow'],
+    'Cable lateral raise': ['elbow'],
+    'Cable Pallof press': ['elbow'],
+    'Dead bug': [],
+    'Machine shoulder press': ['elbow'],
+    'Seated calf raise (machine)': [],
+    'Standing calf raise (machine)': []
+  };
+
+  var labels = {
+    'wrist': 'WRIST WRAP',
+    'elbow': 'ELBOW SLEEVE',
+    'belt': 'BELT'
+  };
+
+  var cards = document.querySelectorAll('.exercise-card');
+  for (var i = 0; i < cards.length; i++) {
+    var nameEl = cards[i].querySelector('.ex-name');
+    if (!nameEl) continue;
+    var name = nameEl.textContent.trim();
+    var gear = gearMap[name];
+    if (!gear || gear.length === 0) continue;
+    for (var g = 0; g < gear.length; g++) {
+      var tag = document.createElement('span');
+      tag.className = 'gear-tag ' + gear[g];
+      tag.textContent = labels[gear[g]];
+      nameEl.appendChild(tag);
+    }
+  }
+}
+
+injectGearTags();
 
 function injectTimerButtons() {
   // Cooldown / stretch / cardio checklist items that mention time (skip warm-ups)
