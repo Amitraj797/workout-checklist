@@ -62,6 +62,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .tag { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
 .tag.sets { background: #d1fae5; color: #065f46; }
 .tag.rest { background: #f3f4f6; color: #6b7280; }
+.tag.rir { background: #fee2e2; color: #991b1b; }
+.tag.technique-drop { background: #f59e0b; color: #fff; font-size: 9px; padding: 1px 6px; }
+.tag.technique-failure { background: #dc2626; color: #fff; font-size: 9px; padding: 1px 6px; }
+.tag.technique-superset { background: #7c3aed; color: #fff; font-size: 9px; padding: 1px 6px; }
+.superset-block { border-left: 4px solid #7c3aed; background: #f5f3ff; border-radius: 10px; padding: 4px 0 4px 8px; margin: 8px 0; }
+.superset-label { font-size: 10px; font-weight: 700; color: #7c3aed; padding: 4px 8px; display: inline-block; }
 
 .ex-images { display: flex; gap: 8px; margin: 10px 0; justify-content: center; }
 .ex-img-wrap { text-align: center; flex: 1; max-width: 180px; }
@@ -88,6 +94,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
 .ref-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 2px solid var(--border); flex-shrink: 0; cursor: pointer; pointer-events: auto; }
 
+.confirm-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center; }
+.confirm-modal.active { display: flex; }
+.confirm-box { background: #fff; border-radius: 16px; padding: 24px; max-width: 320px; width: 90%; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+.confirm-box h3 { font-size: 16px; color: #c0392b; margin-bottom: 8px; }
+.confirm-box p { font-size: 13px; color: #4a5568; margin-bottom: 20px; line-height: 1.5; }
+.confirm-btns { display: flex; gap: 10px; justify-content: center; }
+.confirm-btns button { padding: 10px 28px; border-radius: 10px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; }
+.confirm-yes { background: #ef4444; color: #fff; }
+.confirm-yes:active { background: #dc2626; }
+.confirm-no { background: #e2e8f0; color: #1a1a2e; }
+.confirm-no:active { background: #cbd5e1; }
 .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .img-modal.active { display: flex; }
 .img-modal img { max-width: 98vw; max-height: 95vh; object-fit: contain; border-radius: 12px; background: #fff; padding: 10px; }
@@ -206,26 +223,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
       <tr><td>Schedule</td><td>Mon-Sat training, Sunday rest</td></tr>
     </table>
 
-    <div class="sub-header muscle">Weekly Split</div>
-    <table class="info-table">
-      <tr><th>Day</th><th>Muscle 1</th><th>Muscle 2</th><th>Time</th></tr>
-      <tr><td>Monday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
-      <tr><td>Tuesday</td><td>Legs (Quad)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
-      <tr><td>Wednesday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
-      <tr><td>Thursday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
-      <tr><td>Friday</td><td>Legs (Ham/Glute)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
-      <tr><td>Saturday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
-      <tr><td>Sunday</td><td colspan="3">REST / Active Recovery</td></tr>
-    </table>
-
-    <div class="sub-header muscle">Training Approach</div>
-    <table class="info-table">
-      <tr><th>Days</th><th>Focus</th><th>Reps</th><th>Rest</th></tr>
-      <tr><td>Mon / Wed</td><td>Strength (heavier)</td><td>10-12</td><td>90s</td></tr>
-      <tr><td>Thu / Sat</td><td>Volume (lighter)</td><td>12-15</td><td>60s</td></tr>
-      <tr><td>Tue</td><td>Quad-focused legs</td><td>10-15</td><td>60-90s</td></tr>
-      <tr><td>Fri</td><td>Ham/Glute-focused legs</td><td>10-15</td><td>60-90s</td></tr>
-    </table>
   </div>
 </div>
 
@@ -250,6 +247,51 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   </div>
 </div>
 
+<!-- TRAINING GUIDE -->
+<div class="day-section">
+  <div class="day-header" style="background:#1e3a5f" onclick="toggle(this)">Training Guide — Weekly Split, Approach & Intensity <span class="arrow">&#9660;</span></div>
+  <div class="day-content">
+    <div class="sub-header muscle">Weekly Split</div>
+    <table class="info-table">
+      <tr><th>Day</th><th>Muscle 1</th><th>Muscle 2</th><th>Time</th></tr>
+      <tr><td>Monday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
+      <tr><td>Tuesday</td><td>Legs (Quad)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
+      <tr><td>Wednesday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
+      <tr><td>Thursday</td><td>Chest</td><td>Triceps</td><td>~60 min</td></tr>
+      <tr><td>Friday</td><td>Legs (Ham/Glute)</td><td>Shoulders + Abs</td><td>~65 min</td></tr>
+      <tr><td>Saturday</td><td>Back</td><td>Biceps</td><td>~60 min</td></tr>
+      <tr><td>Sunday</td><td colspan="3">REST / Active Recovery</td></tr>
+    </table>
+
+    <div class="sub-header muscle">Training Approach</div>
+    <table class="info-table">
+      <tr><th>Days</th><th>Focus</th><th>Reps</th><th>Rest</th></tr>
+      <tr><td>Mon / Wed</td><td>Strength (heavier)</td><td>10-12</td><td>90s</td></tr>
+      <tr><td>Thu / Sat</td><td>Volume (lighter)</td><td>12-15</td><td>60s</td></tr>
+      <tr><td>Tue</td><td>Quad-focused legs</td><td>10-15</td><td>60-90s</td></tr>
+      <tr><td>Fri</td><td>Ham/Glute-focused legs</td><td>10-15</td><td>60-90s</td></tr>
+    </table>
+
+    <div class="sub-header muscle" style="margin-top:20px">Intensity Technique Guide</div>
+    <table class="info-table">
+      <tr><th>Element</th><th>What It Means</th></tr>
+      <tr><td><span class="tag rir">RIR: 2</span></td><td>Reps In Reserve — stop 2 reps before failure</td></tr>
+      <tr><td><span class="tag technique-drop">DROP</span></td><td>Drop Set — last set, reduce weight 30-40%, immediately do more reps</td></tr>
+      <tr><td><span class="tag technique-failure">FAILURE</span></td><td>Go to Failure — last set, keep going until you can't with good form</td></tr>
+      <tr><td><span class="tag technique-superset">SUPERSET</span></td><td>Superset — do both exercises back-to-back, no rest between them</td></tr>
+    </table>
+
+    <div class="sub-header muscle" style="margin-top:12px">Simple Intensity Rule</div>
+    <table class="info-table">
+      <tr><th>Exercise Type</th><th>Techniques</th><th>Days</th></tr>
+      <tr><td><strong>Compound lifts</strong> (Bench, Squat, Row, RDL)</td><td>NONE — just progressive overload</td><td>All days</td></tr>
+      <tr><td><strong>Isolation lifts</strong> (Curls, Flys, Pushdowns)</td><td>DROP / FAILURE / SUPERSET OK</td><td>Volume + Leg days</td></tr>
+      <tr><td><strong>Strength days</strong> (Mon, Wed)</td><td>Heavy + clean, RIR 1-2</td><td>Mon, Wed</td></tr>
+      <tr><td><strong>Volume days</strong> (Thu, Sat)</td><td>Pump + intensity, last sets</td><td>Thu, Sat</td></tr>
+    </table>
+  </div>
+</div>
+
 <!-- ==================== MONDAY ==================== -->
 <div class="day-section day-mon" id="day-mon">
   <div class="day-header" onclick="toggle(this)">Monday - Chest + Triceps (Strength) <span class="arrow">&#9660;</span></div>
@@ -270,7 +312,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Chest (4 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB flat bench press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB flat bench press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/SpYC0Kp.gif" alt="DB flat bench press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/DOoWcnA.gif" alt="Machine chest press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine chest press</div>
       <div class="ex-note">Neutral grip option. Floor press if collarbone discomfort.</div>
@@ -285,7 +327,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB press (30 deg)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB press (30 deg)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ns0SIbU.gif" alt="Incline DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/jHAnWmT.gif" alt="Incline machine press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Incline machine press</div>
       <div class="ex-note">Light weight - don't press above shoulder height.</div>
@@ -300,7 +342,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable crossover (high-to-low)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable crossover (high-to-low)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/UKWTJWR.gif" alt="Cable crossover" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/xXm4nYq.gif" alt="Decline DB fly" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Decline DB fly</div>
       <div class="ex-note">Targets LOWER chest. Squeeze at bottom.</div>
@@ -315,7 +357,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">DB floor press</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">DB floor press</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/7gdLIXa.gif" alt="DB floor press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Push-ups" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Push-ups (knees if needed)</div>
       <div class="ex-note">Shorter ROM = safest for collarbone.</div>
@@ -332,7 +374,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Triceps (2 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable rope pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable rope pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/dU605di.gif" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/gAwDzB3.gif" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> V-bar pushdowns</div>
       <div class="ex-note">Elbows pinned to sides. Low elbow stress.</div>
@@ -347,7 +389,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Overhead cable extension (rope)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Overhead cable extension (rope)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/2IxROQ1.gif" alt="Overhead cable extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/qRZ5S1N.gif" alt="Single-arm cable pushdown" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Single-arm cable pushdown</div>
       <div class="ex-note">Controlled movement. Stop if elbow aches.</div>
@@ -398,7 +440,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Legs - Quads + Glutes + Hamstrings (5 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Goblet squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Goblet squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/wfotm7S.gif" alt="Goblet squat" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/10Z2DXU.gif" alt="Leg press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Leg press machine</div>
       <div class="ex-note">Hold DB at chest. Depth over weight.</div>
@@ -413,7 +455,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Bulgarian split squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12 each leg</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Bulgarian split squat (DB)</div><div class="ex-meta"><span class="tag sets">3 x 10-12 each leg</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/qx4fgX7.gif" alt="Bulgarian split squat" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/RRWFUcw.gif" alt="DB lunges" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Walking lunges (DB)</div>
       <div class="ex-note">Rear foot on bench. Keep torso upright. Go deep for glute activation.</div>
@@ -428,7 +470,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Leg extension machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Leg extension machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1</span><span class="tag technique-drop">DROP</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/my33uHU.gif" alt="Leg extension" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Walking lunges" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Walking lunges (BW or light DB)</div>
       <div class="ex-note">Squeeze at top for 1 second.</div>
@@ -443,7 +485,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Lying leg curl machine</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Lying leg curl machine</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/17lJ1kr.gif" alt="Lying leg curl" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/Zg3XY7P.gif" alt="Seated leg curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated leg curl machine</div>
       <div class="ex-note">Controlled tempo: 2s up, 3s down.</div>
@@ -458,7 +500,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Standing calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Standing calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ykUOVze.gif" alt="Standing calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/dPmaUaU.gif" alt="DB calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB standing calf raise</div>
       <div class="ex-note">Full stretch at bottom, pause at top.</div>
@@ -477,7 +519,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Shoulders (2 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine shoulder press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine shoulder press</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/PzQanLE.gif" alt="Machine shoulder press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/znQUdHY.gif" alt="Seated DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated DB press (light)</div>
       <div class="ex-note">Machine = stable for collarbone. No barbell overhead.</div>
@@ -492,7 +534,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable lateral raise</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable lateral raise</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1</span><span class="tag technique-drop">DROP</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/goJ6ezq.gif" alt="Cable lateral raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/DsgkuIt.gif" alt="DB lateral raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB lateral raise (light)</div>
       <div class="ex-note">Light weight, control the negative.</div>
@@ -509,7 +551,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Abs (2 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Dead bug</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Dead bug</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/iny3m5y.gif" alt="Dead bug" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/nCU1Ekp.gif" alt="Reverse crunch" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse crunch</div>
       <div class="ex-note">Great for deep core activation. No spinal stress.</div>
@@ -524,7 +566,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable Pallof press</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable Pallof press</div><div class="ex-meta"><span class="tag sets">3 x 10 each side</span><span class="tag rest">Rest: 45s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/9pa4H5m.gif" alt="Cable Pallof press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/G7PXMlT.gif" alt="Banded Pallof press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Banded Pallof press</div>
       <div class="ex-note">Anti-rotation. Builds core stability.</div>
@@ -575,7 +617,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Back (4 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rkg41Fb.gif" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/r1XNRYB.gif" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
       <div class="ex-note">No wide grip - protect collarbone. Squeeze shoulder blades.</div>
@@ -590,7 +632,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Seated cable row (neutral grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Seated cable row (neutral grip)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Seated cable row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Machine row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine row</div>
       <div class="ex-note">Neutral grip = low elbow stress. Pull to lower chest.</div>
@@ -605,7 +647,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">DB single-arm row</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">DB single-arm row</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/C0MA9bC.gif" alt="DB single-arm row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/7vG5o25.gif" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Chest-supported DB row</div>
       <div class="ex-note">Support on bench. Start light on right arm.</div>
@@ -620,7 +662,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ZfyAGhK.gif" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
       <div class="ex-note">Pull to forehead. Great for posture + rear delts.</div>
@@ -637,7 +679,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Biceps (2 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB hammer curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">DB hammer curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/IGtBdNT.gif" alt="DB hammer curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/HPlPoQA.gif" alt="Cable rope hammer curls" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable rope hammer curls</div>
       <div class="ex-note">Neutral grip = safest for right elbow. No swinging.</div>
@@ -652,7 +694,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline DB curls</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/F3xgbjF.gif" alt="Incline DB curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ye84CTU.gif" alt="Machine preacher curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine preacher curl</div>
       <div class="ex-note">Light weight, full stretch. Skip if elbow pain.</div>
@@ -703,7 +745,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Chest (4 exercises - Volume)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine chest press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Machine chest press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2-3</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/DOoWcnA.gif" alt="Machine chest press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/SpYC0Kp.gif" alt="DB flat bench press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB flat bench press</div>
       <div class="ex-note">Machine = controlled movement for volume day.</div>
@@ -718,7 +760,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline machine press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Incline machine press</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2-3</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/jHAnWmT.gif" alt="Incline machine press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ns0SIbU.gif" alt="Incline DB press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Incline DB press (30 deg)</div>
       <div class="ex-note">Focus on squeeze, not weight.</div>
@@ -733,7 +775,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Pec deck machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Pec deck machine</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 0</span><span class="tag technique-drop">DROP</span><span class="tag technique-failure">FAILURE</span><span class="tag technique-superset">SUPERSET</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/v3xmPAR.gif" alt="Pec deck machine" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/UKWTJWR.gif" alt="Cable crossover low-to-high" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable crossover (low-to-high)</div>
       <div class="ex-note">Isolation focus. Full stretch and squeeze.</div>
@@ -748,7 +790,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Push-ups (knees if needed)</div><div class="ex-meta"><span class="tag sets">3 x AMRAP</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Push-ups (knees if needed)</div><div class="ex-meta"><span class="tag sets">3 x AMRAP</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 0</span><span class="tag technique-failure">FAILURE</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Push-ups" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/7gdLIXa.gif" alt="DB floor press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB floor press</div>
       <div class="ex-note">Burnout set. Go to failure safely.</div>
@@ -765,7 +807,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Triceps (2 exercises - Volume)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">V-bar pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">V-bar pushdowns</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1</span><span class="tag technique-drop">DROP</span><span class="tag technique-superset">SUPERSET</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/gAwDzB3.gif" alt="V-bar pushdowns" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/dU605di.gif" alt="Cable rope pushdowns" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable rope pushdowns</div>
       <div class="ex-note">Higher reps, focus on squeeze.</div>
@@ -780,7 +822,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">DB kickbacks</div><div class="ex-meta"><span class="tag sets">3 x 12 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">DB kickbacks</div><div class="ex-meta"><span class="tag sets">3 x 12 each</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2-3</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/W6PxUkg.gif" alt="DB kickbacks" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/x6KpKpq.gif" alt="Close-grip push-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Close-grip push-up</div>
       <div class="ex-note">Light weight, full extension.</div>
@@ -831,7 +873,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Legs - Hamstrings + Glutes (5 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Romanian deadlift (DBs)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Romanian deadlift (DBs)</div><div class="ex-meta"><span class="tag sets">3 x 10-12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rR0LJzx.gif" alt="Romanian deadlift" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/OM46QHm.gif" alt="Cable pull-through" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Cable pull-through</div>
       <div class="ex-note">DBs = easier grip for right elbow. Hinge at hips.</div>
@@ -846,7 +888,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Hip thrust (barbell/Smith)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 90s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Hip thrust (barbell/Smith)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 90s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/SNFfUff.gif" alt="Hip thrust" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/u0cNiij.gif" alt="Glute bridge" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Glute bridge (DB on hips)</div>
       <div class="ex-note">Pad the bar. Full glute squeeze at top.</div>
@@ -861,7 +903,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable hip abduction</div><div class="ex-meta"><span class="tag sets">3 x 15 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Cable hip abduction</div><div class="ex-meta"><span class="tag sets">3 x 15 each</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/c8f5cSY.gif" alt="Cable hip abduction" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/O95afRA.gif" alt="Monster walk" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Monster walk (banded)</div>
       <div class="ex-note">Targets GLUTE MED/MIN. Key for hip stability.</div>
@@ -876,7 +918,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Walking lunges (BW or light DB)</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Walking lunges (BW or light DB)</div><div class="ex-meta"><span class="tag sets">3 x 10 each</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/IZVHb27.gif" alt="Walking lunges" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/SSsBDwB.gif" alt="Reverse lunge" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse lunge</div>
       <div class="ex-note">Bodyweight if grip bothers elbow.</div>
@@ -891,7 +933,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Seated calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">5</span><div class="ex-info"><div class="ex-name">Seated calf raise (machine)</div><div class="ex-meta"><span class="tag sets">4 x 15</span><span class="tag rest">Rest: 45s</span><span class="tag rir">RIR: 1-2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/bOOdeyc.gif" alt="Seated calf raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/ykHcWme.gif" alt="Leg press calf raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Leg press calf raise</div>
       <div class="ex-note">Targets soleus. Slow and controlled.</div>
@@ -910,7 +952,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Shoulders (2 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Seated DB press (light)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Seated DB press (light)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2-3</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/znQUdHY.gif" alt="Seated DB press" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/PzQanLE.gif" alt="Machine shoulder press" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Machine shoulder press</div>
       <div class="ex-note">Lighter than Tuesday, higher reps.</div>
@@ -925,7 +967,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Rear delt cable fly</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Rear delt cable fly</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1</span><span class="tag technique-drop">DROP</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Rear delt cable fly" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/mu5Guxt.gif" alt="Seated rear delt raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated rear delt raise</div>
       <div class="ex-note">Balances shoulder. Rear delts often neglected.</div>
@@ -942,7 +984,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Abs (2 exercises)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Hanging knee raise</div><div class="ex-meta"><span class="tag sets">3 x 10</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Hanging knee raise</div><div class="ex-meta"><span class="tag sets">3 x 10</span><span class="tag rest">Rest: 45s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/I3tsCnC.gif" alt="Hanging knee raise" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/WhuFnR7.gif" alt="Captain's chair knee raise" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Captain's chair knee raise</div>
       <div class="ex-note">Controlled - no swinging.</div>
@@ -957,7 +999,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable crunch (kneeling)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 45s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Cable crunch (kneeling)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 45s</span><span class="tag rir">RIR: 2</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/WW95auq.gif" alt="Cable crunch" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/Wgaz7pm.gif" alt="Ab crunch machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Ab crunch machine</div>
       <div class="ex-note">Targets UPPER ABS. Squeeze at bottom.</div>
@@ -1008,7 +1050,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="sub-header muscle">Back (4 exercises - Volume)</div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Chest-supported DB row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Chest-supported DB row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2-3</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/7vG5o25.gif" alt="Chest-supported DB row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/C0MA9bC.gif" alt="DB single-arm row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB single-arm row</div>
       <div class="ex-note">Chest support eliminates momentum.</div>
@@ -1023,7 +1065,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Machine row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Machine row</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1</span><span class="tag technique-drop">DROP</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Machine row" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/fUBheHs.gif" alt="Seated cable row" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Seated cable row (neutral grip)</div>
       <div class="ex-note">Higher reps, focus on contraction.</div>
@@ -1038,7 +1080,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">3</span><div class="ex-info"><div class="ex-name">Lat pulldown (neutral/close grip)</div><div class="ex-meta"><span class="tag sets">3 x 12-15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 0</span><span class="tag technique-failure">FAILURE</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/rkg41Fb.gif" alt="Lat pulldown" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/r1XNRYB.gif" alt="Assisted pull-up" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Assisted pull-up machine</div>
       <div class="ex-note">Lighter weight, slow negative.</div>
@@ -1053,7 +1095,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">4</span><div class="ex-info"><div class="ex-name">Face pulls (rope attachment)</div><div class="ex-meta"><span class="tag sets">3 x 15</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2-3</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/ZfyAGhK.gif" alt="Face pulls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/P5p0j8B.gif" alt="Reverse pec deck" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Reverse pec deck</div>
       <div class="ex-note">Rear delt + posture work.</div>
@@ -1069,8 +1111,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="sub-header muscle">Biceps (2 exercises - Volume)</div>
 
+    <div class="superset-block"><span class="superset-label">SUPERSET</span>
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable curl (EZ-bar)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">1</span><div class="ex-info"><div class="ex-name">Cable curl (EZ-bar)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 1</span><span class="tag technique-superset">SUPERSET</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/G08RZcQ.gif" alt="Cable curl EZ-bar" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/3s4NnTh.gif" alt="DB standing curl" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> DB standing curl</div>
       <div class="ex-note">Constant tension. Don't hyperextend elbow.</div>
@@ -1085,7 +1128,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="exercise-card">
-      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Spider curls (incline bench)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span></div></div></div>
+      <div class="ex-header"><span class="ex-num">2</span><div class="ex-info"><div class="ex-name">Spider curls (incline bench)</div><div class="ex-meta"><span class="tag sets">3 x 12</span><span class="tag rest">Rest: 60s</span><span class="tag rir">RIR: 2-3</span><span class="tag technique-superset">SUPERSET</span></div></div></div>
       <div class="ex-images"><div class="ex-img-wrap"><img src="https://static.exercisedb.dev/media/2kattbR.gif" alt="Spider curls" loading="lazy"><span class="img-label">Primary</span></div><div class="ex-img-wrap alt"><img src="https://static.exercisedb.dev/media/qOgPVf6.gif" alt="Preacher curl machine" loading="lazy"><span class="img-label">Alternate</span></div></div>
       <div class="ex-alt"><strong>Alt:</strong> Preacher curl machine</div>
       <div class="ex-note">Strict form, no momentum.</div>
@@ -1097,6 +1140,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
         <div class="set-rest">Rest 60s</div>
         <div class="check-item"><input type="checkbox"><span>Set 3 - 12 reps</span></div>
       </div>
+    </div>
     </div>
 
     <div class="sub-header cardio">Fat Loss Cardio Finisher (10 min)</div>
@@ -1184,6 +1228,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
 <div id="imgModal" class="img-modal" role="dialog">
   <img id="imgModalImg" src="" alt="Exercise reference">
+</div>
+
+<div id="confirmModal" class="confirm-modal" role="dialog">
+  <div class="confirm-box">
+    <h3>Timer Still Running!</h3>
+    <p>Are you sure you want to uncheck this? The rest timer is still counting down.</p>
+    <div class="confirm-btns">
+      <button class="confirm-no" id="confirmNo">No, Keep It</button>
+      <button class="confirm-yes" id="confirmYes">Yes, Stop Timer</button>
+    </div>
+  </div>
+</div>
+
+<div id="setOrderModal" class="confirm-modal" role="dialog">
+  <div class="confirm-box">
+    <h3>Complete Previous Set First!</h3>
+    <p id="setOrderMsg">You need to finish Set 1 before moving to the next set.</p>
+    <div class="confirm-btns">
+      <button class="confirm-no" id="setOrderOk" style="background:#1e3c78;color:#fff;">Got It</button>
+    </div>
+  </div>
 </div>
 
 <div id="floatingTimer" class="floating-timer">
@@ -1277,6 +1342,12 @@ function loadState() {
   } catch(e) {}
 }
 
+function startTimerFromBtn(btn) {
+  var secs = parseInt(btn.getAttribute('data-seconds'));
+  var label = btn.getAttribute('data-label') || 'Timer';
+  if (secs > 0) startTimer(secs, label);
+}
+
 function autoStartTimer(checkbox) {
   if (!checkbox.checked) return;
   var item = checkbox.closest('.check-item');
@@ -1286,21 +1357,22 @@ function autoStartTimer(checkbox) {
   var setTracker = item.closest('.set-tracker');
   if (setTracker) {
     var next = item.nextElementSibling;
-    // If there's a rest row after this set, start that timer (rest between sets)
     if (next && next.classList.contains('set-rest')) {
       var btn = next.querySelector('.timer-btn');
-      if (btn) btn.click();
+      if (btn) startTimerFromBtn(btn);
       return;
     }
-    // Last set of exercise — start rest timer before next exercise
     var card = setTracker.closest('.exercise-card');
     if (card) {
       var restTag = card.querySelector('.tag.rest');
       var restSecs = restTag ? parseSeconds(restTag.textContent) : 0;
       if (restSecs > 0) {
         var nextCard = card.nextElementSibling;
-        while (nextCard && !nextCard.classList.contains('exercise-card')) {
+        while (nextCard && !nextCard.classList.contains('exercise-card') && !nextCard.classList.contains('superset-block')) {
           nextCard = nextCard.nextElementSibling;
+        }
+        if (nextCard && nextCard.classList.contains('superset-block')) {
+          nextCard = nextCard.querySelector('.exercise-card');
         }
         if (nextCard) {
           var nextName = nextCard.querySelector('.ex-name');
@@ -1312,20 +1384,19 @@ function autoStartTimer(checkbox) {
     return;
   }
 
-  // Case 2: Cooldown/stretch/cardio item → find its own timer or next item's timer
+  // Case 2: Cooldown/stretch/cardio item
   var ownBtn = item.querySelector('.timer-btn');
   if (ownBtn) {
-    ownBtn.click();
+    startTimerFromBtn(ownBtn);
     return;
   }
-  // If this item has no timer, check the next check-item sibling
   var checklist = item.closest('.checklist');
   if (checklist) {
     var next = item.nextElementSibling;
     while (next) {
       if (next.classList.contains('check-item')) {
         var nextBtn = next.querySelector('.timer-btn');
-        if (nextBtn) { nextBtn.click(); return; }
+        if (nextBtn) { startTimerFromBtn(nextBtn); return; }
         break;
       }
       next = next.nextElementSibling;
@@ -1333,33 +1404,107 @@ function autoStartTimer(checkbox) {
   }
 }
 
-document.addEventListener('change', function(e) {
-  if (e.target && e.target.type === 'checkbox') {
-    updateCheckedClass(e.target);
-    var section = e.target.closest('.day-section[id]');
+var confirmModal = document.getElementById('confirmModal');
+var confirmYes = document.getElementById('confirmYes');
+var confirmNo = document.getElementById('confirmNo');
+var pendingUncheckCb = null;
+
+var setOrderModal = document.getElementById('setOrderModal');
+var setOrderMsg = document.getElementById('setOrderMsg');
+var setOrderOk = document.getElementById('setOrderOk');
+
+function showUncheckWarning(cb) {
+  pendingUncheckCb = cb;
+  cb.checked = true;
+  updateCheckedClass(cb);
+  confirmModal.classList.add('active');
+}
+
+function checkSetOrder(cb) {
+  if (!cb.checked) return true;
+  var item = cb.closest('.check-item');
+  if (!item) return true;
+  var tracker = item.closest('.set-tracker');
+  if (!tracker) return true;
+  var sets = tracker.querySelectorAll('.check-item');
+  for (var i = 0; i < sets.length; i++) {
+    if (sets[i] === item) break;
+    var prevCb = sets[i].querySelector('input[type="checkbox"]');
+    if (prevCb && !prevCb.checked) {
+      cb.checked = false;
+      updateCheckedClass(cb);
+      var setNum = i + 1;
+      setOrderMsg.textContent = 'You need to finish Set ' + setNum + ' before moving to the next set.';
+      setOrderModal.classList.add('active');
+      return false;
+    }
+  }
+  return true;
+}
+
+setOrderOk.addEventListener('click', function() {
+  setOrderModal.classList.remove('active');
+}, false);
+
+confirmYes.addEventListener('click', function() {
+  confirmModal.classList.remove('active');
+  if (pendingUncheckCb) {
+    pendingUncheckCb.checked = false;
+    updateCheckedClass(pendingUncheckCb);
+    var section = pendingUncheckCb.closest('.day-section[id]');
     if (section) updateProgress(section);
     saveState();
-    autoStartTimer(e.target);
+    timerStop();
+    pendingUncheckCb = null;
+  }
+}, false);
+
+confirmNo.addEventListener('click', function() {
+  confirmModal.classList.remove('active');
+  if (pendingUncheckCb) {
+    var section = pendingUncheckCb.closest('.day-section[id]');
+    if (section) updateProgress(section);
+    saveState();
+    pendingUncheckCb = null;
+  }
+}, false);
+
+function handleCheckbox(cb) {
+  if (cb.checked && !checkSetOrder(cb)) {
+    return;
+  }
+  if (!cb.checked && timerRunning) {
+    showUncheckWarning(cb);
+    return;
+  }
+  updateCheckedClass(cb);
+  var section = cb.closest('.day-section[id]');
+  if (section) updateProgress(section);
+  saveState();
+  autoStartTimer(cb);
+}
+
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.type === 'checkbox') {
+    handleCheckbox(e.target);
   }
 }, false);
 
 document.addEventListener('click', function(e) {
+  if (e.target.type === 'checkbox') return;
+  var span = e.target.closest('.check-item > span');
+  if (!span) return;
   if (e.target.tagName === 'IMG') return;
   if (e.target.type === 'number') return;
   if (e.target.tagName === 'LABEL') return;
   if (e.target.tagName === 'BUTTON') return;
   if (e.target.closest('.set-inputs')) return;
-  var item = e.target.closest('.check-item');
+  var item = span.closest('.check-item');
   if (!item) return;
-  if (e.target.type === 'checkbox') return;
   var cb = item.querySelector('input[type="checkbox"]');
   if (cb) {
     cb.checked = !cb.checked;
-    updateCheckedClass(cb);
-    var section = item.closest('.day-section[id]');
-    if (section) updateProgress(section);
-    saveState();
-    autoStartTimer(cb);
+    handleCheckbox(cb);
   }
 }, false);
 
@@ -1905,7 +2050,6 @@ function injectGearTags() {
 injectGearTags();
 
 function injectTimerButtons() {
-  // Cooldown / stretch / cardio checklist items that mention time (skip warm-ups)
   var checkItems = document.querySelectorAll('.checklist .check-item span');
   for (var i = 0; i < checkItems.length; i++) {
     var span = checkItems[i];
@@ -1914,18 +2058,15 @@ function injectTimerButtons() {
     var text = span.textContent || '';
     var secs = parseSeconds(text);
     if (secs > 0) {
-      var btn = document.createElement('button');
+      var btn = document.createElement('span');
       btn.className = 'timer-btn';
+      btn.style.cursor = 'default';
+      btn.style.opacity = '0.7';
       btn.textContent = secs >= 60 ? Math.floor(secs/60) + 'm' : secs + 's';
       btn.setAttribute('data-seconds', secs);
       var labelText = text.split('\n')[0].trim();
       if (labelText.length > 40) labelText = labelText.substring(0, 40) + '...';
       btn.setAttribute('data-label', labelText);
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        startTimer(parseInt(this.getAttribute('data-seconds')), this.getAttribute('data-label'));
-      }, false);
       var breathing = span.querySelector('.breathing-hint');
       if (breathing) {
         span.insertBefore(btn, breathing);
@@ -1935,23 +2076,19 @@ function injectTimerButtons() {
     }
   }
 
-  // Set rest indicators
   var restItems = document.querySelectorAll('.set-rest');
   for (var j = 0; j < restItems.length; j++) {
     var rest = restItems[j];
     var restText = rest.textContent || '';
     var restSecs = parseSeconds(restText);
     if (restSecs > 0) {
-      var rbtn = document.createElement('button');
+      var rbtn = document.createElement('span');
       rbtn.className = 'timer-btn';
+      rbtn.style.cursor = 'default';
+      rbtn.style.opacity = '0.7';
       rbtn.textContent = restSecs + 's';
       rbtn.setAttribute('data-seconds', restSecs);
       rbtn.setAttribute('data-label', 'Rest between sets');
-      rbtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        startTimer(parseInt(this.getAttribute('data-seconds')), this.getAttribute('data-label'));
-      }, false);
       rest.appendChild(rbtn);
     }
   }
