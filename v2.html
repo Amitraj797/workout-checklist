@@ -89,6 +89,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .set-tag.drop { background: #f59e0b; color: #fff; }
 .set-tag.failure { background: #dc2626; color: #fff; }
 .set-tag.superset { background: #7c3aed; color: #fff; }
+.add-set-btn { display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 6px; padding: 6px; background: #f0fdf4; border: 1px dashed #86efac; border-radius: 8px; color: #16a34a; font-size: 12px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.add-set-btn:hover { background: #dcfce7; }
+.add-set-btn svg { width: 16px; height: 16px; }
 
 .checklist { margin: 8px 0; }
 .check-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 13px; cursor: pointer; border-bottom: 1px solid #f1f5f9; -webkit-tap-highlight-color: transparent; }
@@ -2242,6 +2245,156 @@ function injectSetTags() {
   }
 }
 injectSetTags();
+
+function addSetToExercise(btn) {
+  var tracker = btn.closest('.set-tracker');
+  if (!tracker) return;
+  var card = tracker.closest('.exercise-card');
+  if (!card) return;
+
+  var checkItems = tracker.querySelectorAll('.check-item');
+  var lastItem = checkItems[checkItems.length - 1];
+  if (!lastItem) return;
+  var newNum = checkItems.length + 1;
+
+  var lastSpan = lastItem.querySelector('span');
+  var lastText = lastSpan ? lastSpan.textContent.replace(/Set \d+/, '').trim() : '';
+  var repsText = lastText.replace(/^-\s*/, '');
+
+  var restDivs = tracker.querySelectorAll('.set-rest');
+  var restText = 'Rest 60s';
+  if (restDivs.length > 0) {
+    var lastRest = restDivs[restDivs.length - 1];
+    restText = lastRest.childNodes[0].textContent.trim();
+  }
+
+  var meta = card.querySelector('.ex-meta');
+  var rirEl = meta ? meta.querySelector('.tag.rir') : null;
+  var rir = rirEl ? rirEl.textContent.trim() : '';
+  var hasDrop = meta ? !!meta.querySelector('.tag.technique-drop') : false;
+  var hasFailure = meta ? !!meta.querySelector('.tag.technique-failure') : false;
+  var hasSuperset = meta ? !!meta.querySelector('.tag.technique-superset') : false;
+
+  var oldLastTags = lastItem.querySelectorAll('.set-tag.drop, .set-tag.failure');
+  for (var t = 0; t < oldLastTags.length; t++) oldLastTags[t].remove();
+
+  var newRest = document.createElement('div');
+  newRest.className = 'set-rest';
+  newRest.textContent = restText;
+  var restSecs = parseSeconds(restText);
+  if (restSecs > 0) {
+    var rbtn = document.createElement('span');
+    rbtn.className = 'timer-btn';
+    rbtn.style.cursor = 'default';
+    rbtn.style.opacity = '0.7';
+    rbtn.textContent = restSecs + 's';
+    rbtn.setAttribute('data-seconds', restSecs);
+    rbtn.setAttribute('data-label', 'Rest between sets');
+    newRest.appendChild(rbtn);
+  }
+
+  var tags = '';
+  if (rir) tags += ' <span class="set-tag rir">' + rir + '</span>';
+  if (hasSuperset) tags += ' <span class="set-tag superset">SUPERSET</span>';
+  if (hasDrop) tags += ' <span class="set-tag drop">DROP</span>';
+  if (hasFailure) tags += ' <span class="set-tag failure">FAILURE</span>';
+
+  var newItem = document.createElement('div');
+  newItem.className = 'check-item';
+  newItem.innerHTML = '<input type="checkbox"><span>Set ' + newNum + ' - ' + repsText + tags + '</span>';
+
+  var exKey = buildExerciseKey(card);
+  var setKey = exKey + '::set' + newNum;
+  var data = loadOverloadData();
+  var weekNum = getWeekNumber();
+  var cycleWeek = getCycleWeek();
+  var targetReps = getTargetReps(cycleWeek);
+  var cycleNum = Math.floor((weekNum - 1) / 3) + 1;
+  var history = loadOverloadHistory();
+  var prevCycleKey = 'cycle' + (cycleNum - 1);
+  var prev = (history[exKey] && history[exKey][prevCycleKey]) ? history[exKey][prevCycleKey] : null;
+
+  var row = document.createElement('div');
+  row.className = 'set-inputs';
+
+  var weightLabel = document.createElement('label');
+  weightLabel.innerHTML = 'kg';
+  var weightInput = document.createElement('input');
+  weightInput.type = 'number'; weightInput.min = '0'; weightInput.step = '0.5';
+  weightInput.placeholder = '—';
+  weightInput.setAttribute('data-key', setKey + '::weight');
+  weightLabel.insertBefore(weightInput, weightLabel.firstChild);
+
+  var repsLabel = document.createElement('label');
+  repsLabel.innerHTML = 'reps';
+  var repsInput = document.createElement('input');
+  repsInput.type = 'number'; repsInput.min = '0'; repsInput.step = '1';
+  repsInput.placeholder = targetReps;
+  repsInput.setAttribute('data-key', setKey + '::reps');
+  repsLabel.insertBefore(repsInput, repsLabel.firstChild);
+
+  var rirLabel = document.createElement('label');
+  rirLabel.innerHTML = 'RIR';
+  var rirInput = document.createElement('input');
+  rirInput.type = 'number'; rirInput.min = '0'; rirInput.max = '5'; rirInput.step = '1';
+  rirInput.placeholder = '2';
+  rirInput.setAttribute('data-key', setKey + '::rir');
+  rirLabel.insertBefore(rirInput, rirLabel.firstChild);
+
+  row.appendChild(weightLabel);
+  row.appendChild(repsLabel);
+  row.appendChild(rirLabel);
+
+  if (prev && prev['set' + newNum]) {
+    var prevInfo = document.createElement('span');
+    prevInfo.className = 'set-prev';
+    prevInfo.textContent = 'Prev: ' + (prev['set' + newNum].weight || '—') + 'kg × ' + (prev['set' + newNum].reps || '—');
+    row.appendChild(prevInfo);
+  }
+
+  newItem.querySelector('span').appendChild(row);
+
+  tracker.insertBefore(newRest, btn);
+  tracker.insertBefore(newItem, btn);
+
+  var cb = newItem.querySelector('input[type="checkbox"]');
+  cb.addEventListener('change', function() { handleCheckbox(this); }, false);
+
+  newItem.querySelector('span').addEventListener('click', function(e) {
+    if (e.target.tagName === 'INPUT') return;
+    var checkbox = this.closest('.check-item').querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
+    handleCheckbox(checkbox);
+  }, false);
+
+  [weightInput, repsInput, rirInput].forEach(function(inp) {
+    inp.addEventListener('input', function() {
+      var d = loadOverloadData();
+      d[this.getAttribute('data-key')] = this.value;
+      saveOverloadData(d);
+    });
+  });
+
+  var tagSets = card.querySelector('.tag.sets');
+  if (tagSets) {
+    var match = tagSets.textContent.match(/^(\d+)(\s*x\s*)(.*)/);
+    if (match) tagSets.textContent = newNum + match[2] + match[3];
+  }
+
+  updateProgress(card.closest('.day-section'));
+}
+
+function injectAddSetButtons() {
+  var trackers = document.querySelectorAll('.set-tracker');
+  for (var i = 0; i < trackers.length; i++) {
+    var addBtn = document.createElement('div');
+    addBtn.className = 'add-set-btn';
+    addBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add Set';
+    addBtn.addEventListener('click', function() { addSetToExercise(this); });
+    trackers[i].appendChild(addBtn);
+  }
+}
+injectAddSetButtons();
 
 // === GEAR TAGS ===
 function injectGearTags() {
