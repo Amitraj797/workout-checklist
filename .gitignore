@@ -1,0 +1,5 @@
+.DS_Store
+exercise_images/
+index.html.bak
+__pycache__/
+*.pyc
